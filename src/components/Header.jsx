@@ -22,7 +22,7 @@ const Header = ({ onFileUpload }) => {
   };
 
   const handleNav = (section) => {
-    if (section === 'files') {
+    if (section === 'contracts') {
       setShowContractsModal(true);
     } else {
       console.log('Navigate to', section);
@@ -59,8 +59,8 @@ const Header = ({ onFileUpload }) => {
           <span className="logo-text">Procurement Assistant</span>
         </div>
         <nav className="main-nav">
-          <button onClick={() => handleNav('files')}>Contracts</button>
-          <button onClick={() => handleNav('reports')}>Negotiations</button>
+          <button onClick={() => handleNav('contracts')}>Contracts</button>
+          <button onClick={() => handleNav('administration')}>Administration</button>
           <button onClick={() => handleNav('settings')}>Settings</button>
         </nav>
       </div>

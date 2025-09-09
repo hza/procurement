@@ -4,12 +4,12 @@ import { FaTimes, FaFileAlt, FaDownload, FaTrash } from 'react-icons/fa';
 const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
   // Sample contract files data
   const contractFiles = [
-    { id: 1, name: 'Office_Supply_Contract_2025.pdf', size: '2.4 MB', date: '2025-09-08', status: 'Active' },
-    { id: 2, name: 'IT_Services_Agreement.docx', size: '1.8 MB', date: '2025-09-05', status: 'Under Review' },
-    { id: 3, name: 'Facility_Lease_Contract.pdf', size: '3.2 MB', date: '2025-09-01', status: 'Active' },
-    { id: 4, name: 'Vendor_Partnership_Agreement.pdf', size: '1.5 MB', date: '2025-08-28', status: 'Expired' },
-    { id: 5, name: 'Software_License_Contract.docx', size: '956 KB', date: '2025-08-25', status: 'Active' },
-    { id: 6, name: 'Consulting_Services_Agreement.pdf', size: '2.1 MB', date: '2025-08-20', status: 'Under Review' }
+    { id: 1, name: 'Office Supply Contract', date: '2025-09-08', status: 'Done' },
+    { id: 2, name: 'IT Services Agreement', date: '2025-09-05', status: 'Negotiations' },
+    { id: 3, name: 'Facility Lease Contract', date: '2025-09-01', status: 'Review' },
+    { id: 4, name: 'Vendor Partnership Agreement', date: '2025-08-28', status: 'Done' },
+    { id: 5, name: 'Software License Contract', date: '2025-08-25', status: 'Negotiations' },
+    { id: 6, name: 'Consulting Services Agreement', date: '2025-08-20', status: 'Review' }
   ];
 
   // Handle Escape key to close modal
@@ -50,8 +50,8 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
                 <div className="file-info">
                   <div className="file-name">{file.name}</div>
                   <div className="file-details">
-                    {file.size} • {file.date} •
-                    <span className={`status ${file.status.toLowerCase().replace(' ', '-')}`}>
+                    {file.date} •
+                    <span className={`status ${file.status.toLowerCase()}`}>
                       {file.status}
                     </span>
                   </div>
