@@ -20,6 +20,7 @@ const reviewItems = [
 
 function App() {
   const editorRef = useRef(null)
+  const chatInputRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [content, setContent] = React.useState(`
       <h1>Procurement Contract Agreement</h1>
@@ -116,9 +117,12 @@ function App() {
   }, [])
 
   const handleFix = (reviewId) => {
-    // Placeholder function for fixing contract issues
-    console.log(`Fixing issue: ${reviewId}`);
-    alert(`Fix applied for: ${reviewId}`);
+    // Find the review item and set it in the chat input
+    const reviewItem = reviewItems.find(item => item.id === reviewId);
+    if (reviewItem && chatInputRef.current) {
+      const fixText = `Fix this: ${reviewItem.title} - ${reviewItem.description}`;
+      chatInputRef.current(fixText);
+    }
   }
 
   const scrollToSection = (sectionId, reviewId) => {
@@ -213,7 +217,7 @@ function App() {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
-        <AIChat />
+        <AIChat setInputText={(fn) => { chatInputRef.current = fn; }} />
       </div>
     </div>
   )

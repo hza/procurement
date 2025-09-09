@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AIChat = () => {
+const AIChat = ({ setInputText }) => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
   ]);
   const [inputValue, setInputValue] = useState('');
+
+  // Effect to handle external input setting
+  useEffect(() => {
+    if (setInputText) {
+      setInputText((text) => {
+        setInputValue(text);
+      });
+    }
+  }, [setInputText]);
 
   const handleSendMessage = () => {
     if (inputValue.trim()) {
