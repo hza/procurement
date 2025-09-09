@@ -115,45 +115,43 @@ function App() {
   }, [])
 
   const scrollToSection = (sectionId, reviewId) => {
-    // Remove previous highlights
-    const allHighlighted = document.querySelectorAll('.highlight-section');
-    allHighlighted.forEach(el => el.classList.remove('highlight-section'));
-    
-    // Update selected section
-    setSelectedSection(reviewId);
-
-    // Find the element in the editor
-    const editorElement = editorRef.current;
-    const targetElement = editorElement?.querySelector(`#${sectionId}`);
-    
-    if (targetElement && editorElement) {
-      // Add highlight to the heading
-      targetElement.classList.add('highlight-section');
+    // Use setTimeout to delay the DOM manipulation and scrolling
+    setTimeout(() => {
+      // Find the element in the editor
+      const editorElement = editorRef.current;
+      const targetElement = editorElement?.querySelector(`#${sectionId}`);
       
-      // Highlight the following content until next heading
-      let nextElement = targetElement.nextElementSibling;
-      let count = 0;
-      while (nextElement && nextElement.tagName !== 'H2' && count < 10) {
-        nextElement.classList.add('highlight-section');
-        nextElement = nextElement.nextElementSibling;
-        count++;
-      }
-      
-      // Get the editor main container for scrolling
-      const editorContainer = document.querySelector('.editor-main');
-      if (editorContainer) {
-        // Calculate scroll position relative to the editor container
-        const containerRect = editorContainer.getBoundingClientRect();
-        const targetRect = targetElement.getBoundingClientRect();
-        const scrollTop = editorContainer.scrollTop + targetRect.top - containerRect.top - 20;
+      if (targetElement && editorElement) {
+        // Add highlight to the heading
+        targetElement.classList.add('highlight-section');
         
-        // Scroll to the element
-        editorContainer.scrollTo({
-          top: scrollTop,
-          behavior: 'smooth'
-        });
+        // Highlight the following content until next heading
+        let nextElement = targetElement.nextElementSibling;
+        let count = 0;
+        while (nextElement && nextElement.tagName !== 'H2' && count < 10) {
+          nextElement.classList.add('highlight-section');
+          nextElement = nextElement.nextElementSibling;
+          count++;
+        }
+        
+        // Get the editor main container for scrolling
+        const editorContainer = document.querySelector('.editor-main');
+        if (editorContainer) {
+          // Calculate scroll position relative to the editor container
+          const containerRect = editorContainer.getBoundingClientRect();
+          const targetRect = targetElement.getBoundingClientRect();
+          const scrollTop = editorContainer.scrollTop + targetRect.top - containerRect.top - 20;
+          
+          // Scroll to the element
+          editorContainer.scrollTo({
+            top: scrollTop,
+            behavior: 'smooth'
+          });
+        }
       }
-    }
+    }, 0);
+
+    setSelectedSection(reviewId);
   }
 
   return (
