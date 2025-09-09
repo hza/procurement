@@ -19,15 +19,16 @@ const Header = ({ onFileUpload }) => {
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '10px 20px',
-      backgroundColor: '#f8f9fa',
-      borderBottom: '1px solid #e9ecef',
+      padding: '12px 24px',
+      backgroundColor: '#ffffff',
+      borderBottom: '1px solid #dfe1e6',
       height: '60px',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      boxShadow: '0 2px 4px rgba(9, 30, 66, 0.06)'
     }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <img src="/vite.svg" alt="Logo" style={{ height: '40px', width: '40px' }} />
-        <span style={{ marginLeft: '10px', fontSize: '20px', fontWeight: 'bold' }}>Procurement Review</span>
+        <span style={{ marginLeft: '12px', fontSize: '18px', fontWeight: '600', color: '#172b4d' }}>Procurement Review</span>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <button
@@ -35,20 +36,24 @@ const Header = ({ onFileUpload }) => {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '5px',
-            padding: '8px 12px',
-            backgroundColor: '#007bff',
+            gap: '6px',
+            padding: '6px 12px',
+            backgroundColor: '#0052cc',
             color: 'white',
             border: 'none',
-            borderRadius: '4px',
+            borderRadius: '3px',
             cursor: 'pointer',
-            fontSize: '14px'
+            fontSize: '14px',
+            fontWeight: '500',
+            transition: 'background-color 0.2s ease'
           }}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#0747a6'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#0052cc'}
         >
           <FaUpload />
           Upload Contract
         </button>
-        <FaUserCircle size={30} />
+        <FaUserCircle size={32} color="#5e6c84" />
         <input
           type="file"
           ref={fileInputRef}
