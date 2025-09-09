@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaFileContract, FaFileAlt, FaHandshake, FaBuilding, FaTools } from 'react-icons/fa';
+import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs } from 'react-icons/fa';
 
 const NewContract = ({ isOpen, onClose, onContractCreate }) => {
   const [showModal, setShowModal] = useState(isOpen);
@@ -35,123 +35,219 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
     handleClose();
     // Create contract from template
     const templates = {
-      'service-agreement': {
-        title: 'Service Agreement Contract',
-        content: `# Service Agreement Contract
+      'it-procurement': {
+        title: 'IT Procurement Contract',
+        content: `# IT Procurement Contract
 
-## Parties Involved
-- **Service Provider:** [Provider Name]
-- **Client:** [Client Name]
+## Procurement Parties
+- **Procuring Entity:** [Organization Name]
+- **Vendor/Supplier:** [Vendor Name]
+- **Contract Reference:** [Contract Number]
 
-## Services Provided
-[Describe the services to be provided]
+## Scope of Procurement
+### IT Services/Products Required:
+- Hardware procurement and installation
+- Software licensing and deployment
+- System integration and testing
+- Training and knowledge transfer
+- Maintenance and support services
 
-## Term and Termination
-- **Effective Date:** [Start Date]
-- **Term Length:** [Duration]
-- **Termination Conditions:** [Conditions]
+## Technical Specifications
+### Minimum Requirements:
+- System compatibility and interoperability
+- Performance benchmarks and SLAs
+- Security and compliance standards
+- Scalability and future-proofing requirements
 
-## Payment Terms
-- **Rate:** [Payment Amount]
-- **Frequency:** [Payment Schedule]
-- **Method:** [Payment Method]
+## Procurement Terms
+- **Contract Period:** [Start Date] to [End Date]
+- **Total Contract Value:** [Amount]
+- **Payment Schedule:** [Milestone-based payments]
+- **Delivery Timeline:** [Key milestones and deadlines]
+
+## Vendor Qualifications
+- **Experience:** [Years in relevant field]
+- **Certifications:** [Required industry certifications]
+- **Financial Stability:** [Proof of financial capability]
+- **References:** [Previous similar projects]
+
+## Risk Management
+- **Performance Bonds:** [Amount/Percentage]
+- **Insurance Requirements:** [Types and coverage]
+- **Penalty Clauses:** [For delays/non-performance]
+- **Force Majeure:** [Exemption conditions]
+
+## Compliance and Legal
+- **Data Protection:** [GDPR/CCPA compliance requirements]
+- **Intellectual Property:** [Ownership and licensing terms]
+- **Confidentiality:** [NDA requirements]
+- **Dispute Resolution:** [Arbitration/jurisdiction]
 
 ## Signatures
-Service Provider: ___________________________ Date: __________
+Procuring Entity: ___________________________ Date: __________
 
-Client: ___________________________ Date: __________`
+Vendor/Supplier: ___________________________ Date: __________`
       },
-      'supply-contract': {
-        title: 'Supply Contract',
-        content: `# Supply Contract
+      'construction-procurement': {
+        title: 'Construction Procurement Contract',
+        content: `# Construction Procurement Contract
 
-## Parties
-- **Supplier:** [Supplier Name]
-- **Buyer:** [Buyer Name]
+## Procurement Parties
+- **Procuring Authority:** [Government/Organization Name]
+- **Contractor:** [Construction Company Name]
+- **Project Reference:** [Project ID/Number]
 
-## Products/Services
-[Detail the products or services to be supplied]
+## Project Scope
+### Construction Works Required:
+- Site preparation and earthworks
+- Building construction (foundation, structure, finishes)
+- Infrastructure development (roads, utilities, landscaping)
+- Quality control and testing
+- Project management and supervision
 
-## Delivery Terms
-- **Delivery Schedule:** [Timeline]
-- **Shipping Method:** [Method]
-- **Delivery Location:** [Address]
+## Technical Specifications
+### Construction Standards:
+- Building codes and regulations compliance
+- Material specifications and quality standards
+- Safety and environmental requirements
+- Energy efficiency and sustainability standards
 
-## Pricing and Payment
-- **Unit Price:** [Price per unit]
-- **Total Value:** [Total amount]
-- **Payment Terms:** [Net 30, etc.]
+## Procurement Terms
+- **Contract Period:** [Start Date] to [End Date]
+- **Total Contract Value:** [Amount including contingencies]
+- **Payment Schedule:** [Progress-based payments]
+- **Project Timeline:** [Critical path milestones]
 
-## Quality Standards
-[Specify quality requirements and inspection procedures]
+## Contractor Qualifications
+- **Licensing:** [Required construction licenses]
+- **Experience:** [Similar project experience]
+- **Financial Capacity:** [Bank guarantees, bonding capacity]
+- **Technical Expertise:** [Qualified personnel and equipment]
+
+## Risk Management
+- **Performance Security:** [Bank guarantee amount]
+- **Insurance Coverage:** [Construction all-risk, liability]
+- **Liquidated Damages:** [Daily/weekly penalty rates]
+- **Variation Orders:** [Change management procedures]
+
+## Quality Assurance
+- **Inspection Points:** [Quality checkpoints]
+- **Testing Requirements:** [Material and workmanship tests]
+- **Defect Liability Period:** [Warranty duration]
+- **Maintenance Obligations:** [Post-construction support]
 
 ## Signatures
-Supplier: ___________________________ Date: __________
+Procuring Authority: ___________________________ Date: __________
 
-Buyer: ___________________________ Date: __________`
+Contractor: ___________________________ Date: __________`
       },
-      'facility-lease': {
-        title: 'Facility Lease Agreement',
-        content: `# Facility Lease Agreement
+      'professional-services': {
+        title: 'Professional Services Procurement Contract',
+        content: `# Professional Services Procurement Contract
 
-## Landlord and Tenant
-- **Landlord:** [Landlord Name]
-- **Tenant:** [Tenant Name]
+## Procurement Parties
+- **Client Organization:** [Organization Name]
+- **Service Provider:** [Consulting Firm/Individual]
+- **Engagement Reference:** [Project/Contract Number]
 
-## Premises
-- **Address:** [Facility Address]
-- **Square Footage:** [Size]
-- **Permitted Use:** [Usage description]
+## Scope of Services
+### Professional Services Required:
+- Consulting and advisory services
+- Project management and coordination
+- Technical expertise and specialized knowledge
+- Training and capacity building
+- Documentation and reporting
 
-## Lease Term
-- **Commencement Date:** [Start Date]
-- **Expiration Date:** [End Date]
-- **Renewal Options:** [Renewal terms]
+## Service Deliverables
+### Key Outputs:
+- Comprehensive assessment and analysis reports
+- Strategic recommendations and implementation plans
+- Training materials and knowledge transfer
+- Progress reports and final documentation
+- Performance metrics and evaluation reports
 
-## Rent and Additional Charges
-- **Monthly Rent:** [Amount]
-- **Security Deposit:** [Amount]
-- **Utilities:** [Responsibility]
+## Procurement Terms
+- **Contract Period:** [Start Date] to [End Date]
+- **Total Contract Value:** [Amount including reimbursables]
+- **Payment Terms:** [Time/materials or fixed-price]
+- **Service Level Agreements:** [Response times, deliverables]
 
-## Maintenance and Repairs
-[Specify maintenance responsibilities]
+## Service Provider Qualifications
+- **Professional Certifications:** [Relevant licenses/certifications]
+- **Experience Requirements:** [Years of experience, similar projects]
+- **Team Composition:** [Key personnel qualifications]
+- **Methodology:** [Approach and work processes]
+
+## Performance Management
+- **KPIs and Metrics:** [Measurable performance indicators]
+- **Reporting Requirements:** [Frequency and format]
+- **Quality Assurance:** [Review and approval processes]
+- **Change Management:** [Scope modification procedures]
+
+## Legal and Compliance
+- **Intellectual Property:** [Ownership of deliverables]
+- **Confidentiality:** [Information protection requirements]
+- **Data Security:** [Privacy and protection standards]
+- **Termination Clauses:** [Early termination conditions]
 
 ## Signatures
-Landlord: ___________________________ Date: __________
+Client Organization: ___________________________ Date: __________
 
-Tenant: ___________________________ Date: __________`
+Service Provider: ___________________________ Date: __________`
       },
-      'vendor-partnership': {
-        title: 'Vendor Partnership Agreement',
-        content: `# Vendor Partnership Agreement
+      'equipment-procurement': {
+        title: 'Equipment Procurement Contract',
+        content: `# Equipment Procurement Contract
 
-## Parties
-- **Vendor:** [Vendor Name]
-- **Partner:** [Partner Name]
+## Procurement Parties
+- **Procuring Organization:** [Organization Name]
+- **Equipment Supplier:** [Manufacturer/Distributor Name]
+- **Purchase Order Reference:** [PO Number]
 
-## Partnership Scope
-[Define the scope and objectives of the partnership]
+## Equipment Specifications
+### Items to be Procured:
+- Equipment make, model, and specifications
+- Quantity and configuration requirements
+- Accessories, spare parts, and consumables
+- Installation and commissioning requirements
+- Training and documentation needs
 
-## Responsibilities
-- **Vendor Responsibilities:** [List]
-- **Partner Responsibilities:** [List]
+## Technical Requirements
+### Performance Specifications:
+- Operating parameters and capacity
+- Efficiency and energy consumption ratings
+- Safety and compliance standards
+- Environmental impact considerations
+- Maintenance and serviceability requirements
 
-## Revenue Sharing
-- **Commission Structure:** [Percentage/Amount]
-- **Payment Schedule:** [Frequency]
+## Procurement Terms
+- **Delivery Schedule:** [Required delivery dates]
+- **Total Contract Value:** [Equipment + installation + training]
+- **Payment Terms:** [Deposit, progress, final payments]
+- **Warranty Period:** [Equipment warranty duration]
 
-## Term and Termination
-- **Effective Date:** [Start Date]
-- **Duration:** [Length]
-- **Termination Rights:** [Conditions]
+## Supplier Qualifications
+- **Manufacturing Standards:** [ISO certifications, quality systems]
+- **Technical Support:** [Local service capabilities]
+- **Supply Chain:** [Reliability and backup suppliers]
+- **Financial Stability:** [Company financial health]
 
-## Confidentiality
-[Confidentiality and non-disclosure terms]
+## Delivery and Installation
+- **Shipping and Logistics:** [Delivery terms, insurance, customs]
+- **Installation Services:** [On-site installation and commissioning]
+- **Training Requirements:** [Operator and maintenance training]
+- **Documentation:** [User manuals, maintenance guides]
+
+## Maintenance and Support
+- **Warranty Terms:** [Coverage, response times, parts availability]
+- **Service Contracts:** [Optional extended support agreements]
+- **Spare Parts:** [Availability and pricing for 5+ years]
+- **Technical Support:** [Help desk, remote assistance]
 
 ## Signatures
-Vendor: ___________________________ Date: __________
+Procuring Organization: ___________________________ Date: __________
 
-Partner: ___________________________ Date: __________`
+Equipment Supplier: ___________________________ Date: __________`
       }
     };
 
@@ -201,53 +297,53 @@ Partner: ___________________________ Date: __________`
               <div className="templates-grid">
                 <button
                   className="contract-option template-option"
-                  onClick={() => handleCreateFromTemplate('service-agreement')}
+                  onClick={() => handleCreateFromTemplate('it-procurement')}
                 >
                   <div className="option-icon">
-                    <FaHandshake />
+                    <FaLaptop />
                   </div>
                   <div className="option-content">
-                    <h4>Service Agreement</h4>
-                    <p>Professional services, consulting, and maintenance contracts</p>
+                    <h4>IT Procurement</h4>
+                    <p>Hardware, software, and IT services procurement contracts</p>
                   </div>
                 </button>
 
                 <button
                   className="contract-option template-option"
-                  onClick={() => handleCreateFromTemplate('supply-contract')}
+                  onClick={() => handleCreateFromTemplate('construction-procurement')}
                 >
                   <div className="option-icon">
-                    <FaTools />
+                    <FaHardHat />
                   </div>
                   <div className="option-content">
-                    <h4>Supply Contract</h4>
-                    <p>Equipment, materials, and goods procurement agreements</p>
+                    <h4>Construction Procurement</h4>
+                    <p>Building, infrastructure, and construction project contracts</p>
                   </div>
                 </button>
 
                 <button
                   className="contract-option template-option"
-                  onClick={() => handleCreateFromTemplate('facility-lease')}
+                  onClick={() => handleCreateFromTemplate('professional-services')}
                 >
                   <div className="option-icon">
-                    <FaBuilding />
+                    <FaUserTie />
                   </div>
                   <div className="option-content">
-                    <h4>Facility Lease</h4>
-                    <p>Office space, warehouse, and property rental agreements</p>
+                    <h4>Professional Services</h4>
+                    <p>Consulting, advisory, and specialized service contracts</p>
                   </div>
                 </button>
 
                 <button
                   className="contract-option template-option"
-                  onClick={() => handleCreateFromTemplate('vendor-partnership')}
+                  onClick={() => handleCreateFromTemplate('equipment-procurement')}
                 >
                   <div className="option-icon">
-                    <FaFileContract />
+                    <FaCogs />
                   </div>
                   <div className="option-content">
-                    <h4>Vendor Partnership</h4>
-                    <p>Strategic partnerships and long-term supplier relationships</p>
+                    <h4>Equipment Procurement</h4>
+                    <p>Machinery, tools, and equipment purchase agreements</p>
                   </div>
                 </button>
               </div>
