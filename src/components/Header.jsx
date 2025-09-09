@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { FaUserCircle, FaUpload, FaBars } from 'react-icons/fa';
+import React, { useRef, useState, useEffect } from 'react';
+import { FaUserCircle, FaUpload, FaBars, FaChevronDown } from 'react-icons/fa';
 import ContractsModal from './ContractsModal';
 
 const Header = ({ onFileUpload }) => {
   const fileInputRef = useRef(null);
   const [showContractsModal, setShowContractsModal] = useState(false);
+  const [showWorkflowMenu, setShowWorkflowMenu] = useState(false);
+  const workflowMenuRef = useRef(null);
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -43,6 +45,30 @@ const Header = ({ onFileUpload }) => {
     // In a real app, this would show a confirmation and delete
   };
 
+  // Close workflow menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (workflowMenuRef.current && !workflowMenuRef.current.contains(event.target)) {
+        setShowWorkflowMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleStartNegotiation = () => {
+    console.log('Starting negotiation...');
+    setShowWorkflowMenu(false);
+    // Add negotiation logic here
+  };
+
+  const handleCloseContract = () => {
+    console.log('Closing contract...');
+    setShowWorkflowMenu(false);
+    // Add contract closure logic here
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -65,12 +91,25 @@ const Header = ({ onFileUpload }) => {
         </nav>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <button
-          onClick={handleUploadClick}
-          className="upload-button"
-        >
-          Start Negotiations
-        </button>
+        <div className="workflow-menu-container" ref={workflowMenuRef}>
+          <button
+            onClick={() => setShowWorkflowMenu(!showWorkflowMenu)}
+            className="workflow-button"
+          >
+            Workflow
+            <FaChevronDown size={12} style={{ marginLeft: '6px' }} />
+          </button>
+          {showWorkflowMenu && (
+            <div className="workflow-dropdown">
+              <button onClick={handleStartNegotiation} className="workflow-option">
+                Start Negotiation
+              </button>
+              <button onClick={handleCloseContract} className="workflow-option">
+                Close Contract
+              </button>
+            </div>
+          )}
+        </div>
         <FaUserCircle size={28} color="#5e6c84" />
         <input
           type="file"

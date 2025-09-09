@@ -897,6 +897,81 @@
   box-shadow: 0 2px 4px rgba(9, 30, 66, 0.06);
 }
 
+/* Workflow Menu Styles */
+.workflow-menu-container {
+  position: relative;
+}
+
+.workflow-button {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #42526e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  gap: 4px;
+}
+
+.workflow-button:hover {
+  background: #f4f5f7;
+  border-color: #0052cc;
+  color: #172b4d;
+}
+
+.workflow-button:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: 2px;
+}
+
+.workflow-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+  min-width: 160px;
+  z-index: 1000;
+  margin-top: 4px;
+}
+
+.workflow-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  color: #42526e;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.workflow-option:hover {
+  background-color: #f4f5f7;
+  color: #172b4d;
+}
+
+.workflow-option:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.workflow-option:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.workflow-option:only-child {
+  border-radius: 4px;
+}
+
 /* AI Chat Thinking Indicator */
 .thinking-indicator {
   display: flex;
