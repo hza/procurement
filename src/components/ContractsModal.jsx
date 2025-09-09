@@ -18,8 +18,8 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   // Sort state
   const [sortBy, setSortBy] = useState('date');
 
-  // Status filter state
-  const [statusFilter, setStatusFilter] = useState('all');
+  // Status filter dropdown state
+  const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +29,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   const filteredContracts = contractFiles.filter(contract => {
     const matchesSearch = contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          contract.status.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'all' || contract.status.toLowerCase() === statusFilter.toLowerCase();
+    const matchesStatus = statusFilter.includes('all') || statusFilter.includes(contract.status.toLowerCase());
     return matchesSearch && matchesStatus;
   });
 
@@ -58,6 +58,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   useEffect(() => {
     const handleEscapeKey = (event) => {
       if (event.key === 'Escape') {
+        setIsStatusDropdownOpen(false);
         onClose();
       }
     };
@@ -70,6 +71,23 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
       document.removeEventListener('keydown', handleEscapeKey);
     };
   }, [isOpen, onClose]);
+
+  // Handle click outside to close status dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isStatusDropdownOpen && !event.target.closest('.multiselect-container')) {
+        setIsStatusDropdownOpen(false);
+      }
+    };
+
+    if (isStatusDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isStatusDropdownOpen]);
 
   if (!isOpen) return null;
 
@@ -95,16 +113,63 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
               />
             </div>
             <div className="status-filter-wrapper">
-              <select
-                value={statusFilter}
-                onChange={(e) => setStatusFilter(e.target.value)}
-                className="status-filter-select"
-              >
-                <option value="all">All Status</option>
-                <option value="done">Done</option>
-                <option value="negotiations">Negotiations</option>
-                <option value="review">Review</option>
-              </select>
+              <div className="multiselect-container">
+                <button
+                  type="button"
+                  className="multiselect-button"
+                  onClick={() => setIsStatusDropdownOpen(!isStatusDropdownOpen)}
+                >
+                  <span className="multiselect-text">
+                    {statusFilter.includes('all') ? 'All Status' :
+                     statusFilter.length === 0 ? 'Select Status' :
+                     statusFilter.length === 1 ? statusFilter[0].charAt(0).toUpperCase() + statusFilter[0].slice(1) :
+                     `${statusFilter.length} Selected`}
+                  </span>
+                  <span className={`multiselect-arrow ${isStatusDropdownOpen ? 'open' : ''}`}>▼</span>
+                </button>
+
+                {isStatusDropdownOpen && (
+                  <div className="multiselect-dropdown">
+                    <label className="multiselect-option">
+                      <input
+                        type="checkbox"
+                        checked={statusFilter.includes('all')}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setStatusFilter(['all']);
+                          } else {
+                            setStatusFilter([]);
+                          }
+                        }}
+                      />
+                      <span>All Status</span>
+                    </label>
+
+                    {['done', 'negotiations', 'review'].map(status => (
+                      <label key={status} className="multiselect-option">
+                        <input
+                          type="checkbox"
+                          checked={statusFilter.includes(status)}
+                          onChange={(e) => {
+                            if (statusFilter.includes('all')) {
+                              // If "all" was selected, replace with specific status
+                              setStatusFilter([status]);
+                            } else if (e.target.checked) {
+                              // Add status to selection
+                              setStatusFilter([...statusFilter, status]);
+                            } else {
+                              // Remove status from selection
+                              const newFilter = statusFilter.filter(s => s !== status);
+                              setStatusFilter(newFilter.length === 0 ? ['all'] : newFilter);
+                            }
+                          }}
+                        />
+                        <span>{status.charAt(0).toUpperCase() + status.slice(1)}</span>
+                      </label>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
             <div className="sort-wrapper">
               <select
