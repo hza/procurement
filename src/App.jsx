@@ -9,6 +9,7 @@ function App() {
   const chatResetRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [showRecommendation, setShowRecommendation] = React.useState(true)
+  const [recommendationFading, setRecommendationFading] = React.useState(false)
   const [reviewItems, setReviewItems] = React.useState([
     { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.' },
     { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.' },
@@ -212,6 +213,23 @@ function App() {
     }
   }, [content]);
 
+  // Auto-hide recommendation after 3 seconds with fade effect
+  useEffect(() => {
+    if (showRecommendation && !recommendationFading) {
+      const fadeTimer = setTimeout(() => {
+        setRecommendationFading(true);
+        // Hide completely after fade animation (1 second)
+        setTimeout(() => {
+          setShowRecommendation(false);
+          setRecommendationFading(false);
+        }, 1000);
+      }, 3000); // Start fade after 3 seconds
+
+      // Cleanup timer if component unmounts or showRecommendation changes
+      return () => clearTimeout(fadeTimer);
+    }
+  }, [showRecommendation, recommendationFading]);
+
   const handleFix = (reviewId) => {
     // Find the review item and set it in the chat input
     const reviewItem = reviewItems.find(item => item.id === reviewId);
@@ -222,7 +240,12 @@ function App() {
   }
 
   const handleCloseRecommendation = () => {
-    setShowRecommendation(false);
+    setRecommendationFading(true);
+    // Hide completely after fade animation
+    setTimeout(() => {
+      setShowRecommendation(false);
+      setRecommendationFading(false);
+    }, 1000);
   }
 
   const handleRefreshReview = () => {
@@ -488,7 +511,7 @@ function App() {
             )}
           </ul>
           {showRecommendation && (
-            <div className="recommendation-box">
+            <div className={`recommendation-box ${recommendationFading ? 'fading' : ''}`}>
               <button 
                 onClick={handleCloseRecommendation}
                 className="close-button"

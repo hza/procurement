@@ -708,6 +708,12 @@
   box-shadow: 0 4px 12px rgba(9, 30, 66, 0.12);
 }
 
+.recommendation-box.fading {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 1s ease-out;
+}
+
 .recommendation-box p {
   margin: 0;
   color: #495057;
