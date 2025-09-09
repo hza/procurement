@@ -31,11 +31,16 @@
 }
 
 .comments-sidebar ul {
-  padding-left: 20px;
+  list-style: none;
+  padding: 0;
 }
 
 .comments-sidebar li {
-  margin-bottom: 10px;
+  transition: background-color 0.2s;
+}
+
+.comments-sidebar li:hover {
+  background-color: #e9ecef !important;
 }
 
 .ProseMirror {
