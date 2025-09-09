@@ -593,3 +593,68 @@
   outline: 2px solid #4c9aff;
   outline-offset: 2px;
 }
+
+/* Menu button replacing logo */
+.menu-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #42526e;
+  transition: background .15s ease, color .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.menu-button:hover {
+  background: #f4f5f7;
+  color: #172b4d;
+  border-color: #c1c7d0;
+}
+
+.menu-button:active {
+  background: #e9ecef;
+}
+
+.menu-button:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: 2px;
+}
+
+/* Header navigation */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+}
+
+.main-nav button {
+  background: #ffffff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #42526e;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.main-nav button:hover {
+  background: #f4f5f7;
+  color: #172b4d;
+}
+
+.main-nav button:active {
+  background: #e9ecef;
+}
+
+.main-nav button:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: 2px;
+}

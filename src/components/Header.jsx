@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FaUserCircle, FaUpload } from 'react-icons/fa';
+import { FaUserCircle, FaUpload, FaBars } from 'react-icons/fa';
 
 const Header = ({ onFileUpload }) => {
   const fileInputRef = useRef(null);
@@ -14,23 +14,44 @@ const Header = ({ onFileUpload }) => {
     }
   };
 
+  const handleMenuClick = () => {
+    // Placeholder for future sidebar / navigation toggle
+    console.log('Menu button clicked');
+  };
+
+  const handleNav = (section) => {
+    console.log('Navigate to', section);
+  };
+
   return (
     <header style={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '12px 24px',
+      padding: '6px 16px',
       backgroundColor: '#ffffff',
       borderBottom: '1px solid #dfe1e6',
-      height: '60px',
+      height: '48px',
       boxSizing: 'border-box',
       boxShadow: '0 2px 4px rgba(9, 30, 66, 0.06)'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img src="/vite.svg" alt="Logo" style={{ height: '40px', width: '40px' }} />
-        <span style={{ marginLeft: '12px', fontSize: '18px', fontWeight: '600', color: '#172b4d' }}>Procurement Review</span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <button
+          onClick={handleMenuClick}
+          className="menu-button"
+          aria-label="Open menu"
+          title="Menu"
+        >
+          <FaBars />
+        </button>
+        <span style={{ fontSize: '16px', fontWeight: '600', color: '#172b4d' }}>Procurement Assistant</span>
+        <nav className="main-nav">
+          <button onClick={() => handleNav('files')}>Contracts</button>
+          <button onClick={() => handleNav('reports')}>Negotiations</button>
+          <button onClick={() => handleNav('settings')}>Settings</button>
+        </nav>
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <button
           onClick={handleUploadClick}
           className="upload-button"
@@ -38,7 +59,7 @@ const Header = ({ onFileUpload }) => {
           <FaUpload />
           Upload Contract
         </button>
-        <FaUserCircle size={32} color="#5e6c84" />
+        <FaUserCircle size={28} color="#5e6c84" />
         <input
           type="file"
           ref={fileInputRef}
