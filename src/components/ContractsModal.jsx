@@ -16,7 +16,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   const [searchTerm, setSearchTerm] = useState('');
 
   // Sort state
-  const [sortBy, setSortBy] = useState('name');
+  const [sortBy, setSortBy] = useState('date');
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -95,8 +95,8 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 onChange={(e) => setSortBy(e.target.value)}
                 className="sort-select"
               >
+                <option value="date">Newest first</option>
                 <option value="name">Sort by Name</option>
-                <option value="date">Sort by Date</option>
               </select>
             </div>
           </div>
