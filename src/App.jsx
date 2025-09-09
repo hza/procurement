@@ -114,8 +114,13 @@ function App() {
     }
   }, [])
 
+  const handleFix = (reviewId) => {
+    // Placeholder function for fixing contract issues
+    console.log(`Fixing issue: ${reviewId}`);
+    alert(`Fix applied for: ${reviewId}`);
+  }
+
   const scrollToSection = (sectionId, reviewId) => {
-    // Use setTimeout to delay the DOM manipulation and scrolling
     setTimeout(() => {
       // Find the element in the editor
       const editorElement = editorRef.current;
@@ -167,7 +172,31 @@ function App() {
                 onClick={() => scrollToSection(item.sectionId, item.id)} 
                 className={`review-item ${selectedSection === item.id ? 'selected' : ''}`}
               >
-                <strong>{item.title}:</strong> {item.description}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div style={{ flex: 1 }}>
+                    <strong>{item.title}:</strong> {item.description}
+                  </div>
+                  <button 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleFix(item.id);
+                    }}
+                    style={{
+                      marginLeft: '8px',
+                      padding: '2px 6px',
+                      fontSize: '11px',
+                      backgroundColor: '#28a745',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '3px',
+                      cursor: 'pointer',
+                      flexShrink: 0
+                    }}
+                    title="Apply fix"
+                  >
+                    Fix
+                  </button>
+                </div>
               </li>
             ))}
           </ul>

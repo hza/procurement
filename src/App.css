@@ -105,5 +105,13 @@
 .review-item.selected {
   background-color: #e3f2fd;
   border-left: 4px solid #2196f3;
-  background-color: #f9f9f9;
+}
+
+.review-item button {
+  transition: all 0.2s ease;
+}
+
+.review-item button:hover {
+  background-color: #218838 !important;
+  transform: scale(1.05);
 }
