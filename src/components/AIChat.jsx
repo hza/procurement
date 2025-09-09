@@ -5,6 +5,7 @@ const AIChat = ({ setInputText }) => {
     { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [isThinking, setIsThinking] = useState(false);
   const textareaRef = useRef(null);
 
   // Auto-resize textarea function
@@ -45,9 +46,11 @@ const AIChat = ({ setInputText }) => {
       };
       setMessages([...messages, newMessage]);
       setInputValue('');
+      setIsThinking(true);
 
       // Simulate AI response
       setTimeout(() => {
+        setIsThinking(false);
         const aiResponse = {
           id: messages.length + 2,
           text: "The system is not connected to an AI backend yet. This requires buying credits from OpenAI.",
@@ -55,7 +58,7 @@ const AIChat = ({ setInputText }) => {
           timestamp: new Date()
         };
         setMessages(prev => [...prev, aiResponse]);
-      }, 1000);
+      }, 2000); // Increased delay to show thinking effect
     }
   };
 
@@ -80,6 +83,18 @@ const AIChat = ({ setInputText }) => {
             </div>
           </div>
         ))}
+        {isThinking && (
+          <div className="chat-message ai thinking">
+            <div className="message-content">
+              <div className="thinking-indicator">
+                <span className="thinking-dot"></span>
+                <span className="thinking-dot"></span>
+                <span className="thinking-dot"></span>
+                <span className="thinking-text">AI is thinking...</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="chat-input-container">
         <div className="input-wrapper">
