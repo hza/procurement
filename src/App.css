@@ -28,16 +28,27 @@
   overflow-y: auto;
   font-size: 14px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comments-sidebar h3 {
   margin-top: 0;
-  color: #dc3545;
+  color: #453f3f;
+  flex-shrink: 0;
 }
 
 .comments-sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.comments-sidebar p {
+  margin-bottom: 30px;
+  flex-shrink: 0;
 }
 
 .comments-sidebar li {

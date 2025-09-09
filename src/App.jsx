@@ -164,7 +164,7 @@ function App() {
       <Header onFileUpload={handleFileUpload} />
       <div className="editor-container">
         <div className="comments-sidebar">
-          <h3>Contract Review</h3>
+          <h3>AI Contract Review</h3>
           <ul>
             {reviewItems.map((item) => (
               <li 
