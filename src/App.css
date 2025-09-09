@@ -102,10 +102,12 @@
 }
 
 .chat-message {
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  border-radius: 6px;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+  border-radius: 12px;
   max-width: 85%;
+  box-shadow: 0 1px 3px rgba(9, 30, 66, 0.08);
+  position: relative;
 }
 
 .chat-message.user {
@@ -113,60 +115,97 @@
   color: white;
   margin-left: auto;
   text-align: right;
+  border-bottom-right-radius: 4px;
 }
 
 .chat-message.ai {
-  background-color: #f4f5f7;
+  background-color: #ffffff;
   color: #172b4d;
   margin-right: auto;
+  border: 1px solid #dfe1e6;
+  border-bottom-left-radius: 4px;
 }
 
 .message-content {
-  margin-bottom: 4px;
-  line-height: 1.4;
+  margin-bottom: 6px;
+  line-height: 1.5;
+  font-size: 14px;
 }
 
 .message-timestamp {
-  font-size: 11px;
-  opacity: 0.7;
+  font-size: 10px;
+  opacity: 0.6;
+  font-weight: 500;
 }
 
 .chat-input-container {
+  padding: 8px 0;
+  margin-top: auto;
+  border-top: 1px solid #dfe1e6;
+}
+
+.input-wrapper {
+  position: relative;
   display: flex;
-  gap: 8px;
-  flex-shrink: 0;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #0052cc;
+  box-shadow: 0 0 0 1px #0052cc;
 }
 
 .chat-input {
   flex: 1;
-  padding: 8px 12px;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  padding: 12px 36px 12px 16px;
+  border: none;
+  border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
   resize: none;
   outline: none;
+  background-color: transparent;
+  line-height: 1.5;
+  min-height: 24px;
+  max-height: 150px;
 }
 
-.chat-input:focus {
-  border-color: #4c9aff;
-  box-shadow: 0 0 0 2px rgba(76, 154, 255, 0.2);
+.chat-input::placeholder {
+  color: #6b778c;
 }
 
 .send-button {
-  padding: 8px 16px;
-  background-color: #0052cc;
-  color: white;
+  position: absolute;
+  right: 6px;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  color: #6b778c;
   border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.send-button:hover {
-  background-color: #0747a6;
+.send-button:hover:not(:disabled) {
+  background-color: #f4f5f7;
+  color: #0052cc;
+}
+
+.send-button:disabled {
+  color: #d1d5db;
+  cursor: not-allowed;
+}
+
+.send-button:active:not(:disabled) {
+  background-color: #e3f2fd;
 }
 
 .comments-sidebar li {

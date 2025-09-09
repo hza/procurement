@@ -53,17 +53,25 @@ const AIChat = () => {
         ))}
       </div>
       <div className="chat-input-container">
-        <textarea
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Ask me about the contract..."
-          className="chat-input"
-          rows="2"
-        />
-        <button onClick={handleSendMessage} className="send-button">
-          Send
-        </button>
+        <div className="input-wrapper">
+          <textarea
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Ask me anything about ..."
+            className="chat-input"
+            rows="1"
+          />
+          <button 
+            onClick={handleSendMessage} 
+            className="send-button"
+            disabled={!inputValue.trim()}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
