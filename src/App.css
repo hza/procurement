@@ -788,7 +788,6 @@
   background: #f8f9fa;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
 }
 
@@ -796,6 +795,28 @@
   position: relative;
   flex: 1;
   max-width: 500px;
+}
+
+.sort-wrapper {
+  flex-shrink: 0;
+}
+
+.sort-select {
+  padding: 10px 12px;
+  border: 1px solid #dfe1e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #fff;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-width: 140px;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 2px #4c9aff33;
 }
 
 .search-icon {

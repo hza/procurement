@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaTimes, FaFileAlt, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract, onSelectContract }) => {
   // Sample contract files data
@@ -15,6 +15,9 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Sort state
+  const [sortBy, setSortBy] = useState('name');
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Show 4 contracts per page
@@ -25,11 +28,21 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
     contract.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Sort filtered contracts
+  const sortedContracts = [...filteredContracts].sort((a, b) => {
+    if (sortBy === 'name') {
+      return a.name.localeCompare(b.name);
+    } else if (sortBy === 'date') {
+      return new Date(b.date) - new Date(a.date); // Newest first
+    }
+    return 0;
+  });
+
   // Calculate pagination
-  const totalPages = Math.ceil(filteredContracts.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedContracts.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentContracts = filteredContracts.slice(startIndex, endIndex);
+  const currentContracts = sortedContracts.slice(startIndex, endIndex);
 
   // Reset to first page when search changes
   useEffect(() => {
@@ -76,14 +89,16 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 className="search-input"
               />
             </div>
-            <button 
-              className="new-contract-btn" 
-              onClick={onNewContract}
-              title="Create New Contract"
-            >
-              <FaPlus />
-              New Contract
-            </button>
+            <div className="sort-wrapper">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="sort-select"
+              >
+                <option value="name">Sort by Name</option>
+                <option value="date">Sort by Date</option>
+              </select>
+            </div>
           </div>
           <div className="files-list">
             {currentContracts.map(file => (
@@ -103,28 +118,6 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                       {file.status}
                     </span>
                   </div>
-                </div>
-                <div className="file-actions">
-                  <button
-                    className="file-action-btn download"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDownloadFile(file.id);
-                    }}
-                    title="Download"
-                  >
-                    <FaDownload />
-                  </button>
-                  <button
-                    className="file-action-btn delete"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onDeleteFile(file.id);
-                    }}
-                    title="Delete"
-                  >
-                    <FaTrash />
-                  </button>
                 </div>
               </div>
             ))}
@@ -151,7 +144,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
             <div className="pagination-info">
               <span>Page {currentPage} of {totalPages}</span>
               <span className="pagination-count">
-                ({filteredContracts.length} contracts)
+                ({sortedContracts.length} contracts)
               </span>
             </div>
 

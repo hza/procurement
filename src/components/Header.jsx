@@ -54,7 +54,7 @@ const Header = ({ onFileUpload }) => {
       if (workflowMenuRef.current && !workflowMenuRef.current.contains(event.target)) {
         setShowWorkflowMenu(false);
       }
-      
+
       // Check if click is outside contracts menu
       if (contractsMenuRef.current && !contractsMenuRef.current.contains(event.target)) {
         setShowContractsMenu(false);
@@ -64,7 +64,7 @@ const Header = ({ onFileUpload }) => {
     // Add both mouse and touch event listeners for better mobile support
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleClickOutside);
-    
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
@@ -156,6 +156,12 @@ const Header = ({ onFileUpload }) => {
                 </button>
                 <button onClick={handleOpenContractFromMenu} className="contracts-option">
                   Open Contract ...
+                </button>
+                <button onClick={handleNewContractFromMenu} className="contracts-option">
+                  Download Contract
+                </button>
+                <button onClick={handleNewContractFromMenu} className="contracts-option">
+                  Manage Contracts
                 </button>
               </div>
             )}
