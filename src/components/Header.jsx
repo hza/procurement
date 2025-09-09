@@ -33,22 +33,7 @@ const Header = ({ onFileUpload }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <button
           onClick={handleUploadClick}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            padding: '6px 12px',
-            backgroundColor: '#0052cc',
-            color: 'white',
-            border: 'none',
-            borderRadius: '3px',
-            cursor: 'pointer',
-            fontSize: '14px',
-            fontWeight: '500',
-            transition: 'background-color 0.2s ease'
-          }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#0747a6'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#0052cc'}
+          className="upload-button"
         >
           <FaUpload />
           Upload Contract
