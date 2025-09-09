@@ -60,19 +60,9 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
       <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Contracts</h2>
-          <div className="modal-actions">
-            <button 
-              className="new-contract-btn" 
-              onClick={onNewContract}
-              title="Create New Contract"
-            >
-              <FaPlus />
-              New Contract
-            </button>
-            <button className="modal-close" onClick={onClose}>
-              <FaTimes />
-            </button>
-          </div>
+          <button className="modal-close" onClick={onClose}>
+            <FaTimes />
+          </button>
         </div>
         <div className="modal-body">
           <div className="search-container">
@@ -86,6 +76,14 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 className="search-input"
               />
             </div>
+            <button 
+              className="new-contract-btn" 
+              onClick={onNewContract}
+              title="Create New Contract"
+            >
+              <FaPlus />
+              New Contract
+            </button>
           </div>
           <div className="files-list">
             {currentContracts.map(file => (
