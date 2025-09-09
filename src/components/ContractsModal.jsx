@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
 
 const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract }) => {
   // Sample contract files data
@@ -11,6 +11,15 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
     { id: 5, name: 'Software License Contract', date: '2025-08-25', status: 'Negotiations' },
     { id: 6, name: 'Consulting Services Agreement', date: '2025-08-20', status: 'Review' }
   ];
+
+  // Search state
+  const [searchTerm, setSearchTerm] = useState('');
+
+  // Filter contracts based on search term
+  const filteredContracts = contractFiles.filter(contract =>
+    contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    contract.status.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -51,8 +60,20 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
           </div>
         </div>
         <div className="modal-body">
+          <div className="search-container">
+            <div className="search-input-wrapper">
+              <FaSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder="Search contracts by name or status..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+            </div>
+          </div>
           <div className="files-list">
-            {contractFiles.map(file => (
+            {filteredContracts.map(file => (
               <div key={file.id} className="file-item">
                 <div className="file-icon">
                   <FaFileAlt />
@@ -84,6 +105,11 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 </div>
               </div>
             ))}
+            {filteredContracts.length === 0 && searchTerm && (
+              <div className="no-results">
+                <p>No contracts found matching "{searchTerm}"</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

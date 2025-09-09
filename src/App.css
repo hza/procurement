@@ -777,6 +777,59 @@
   overflow-y: auto;
 }
 
+/* Search Container */
+.search-container {
+  padding: 20px 32px 16px;
+  border-bottom: 1px solid #e9ecef;
+  background: #f8f9fa;
+}
+
+.search-input-wrapper {
+  position: relative;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #dfe1e6;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #ffffff;
+  transition: all 0.15s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4c9aff;
+  box-shadow: 0 0 0 2px rgba(76, 154, 255, 0.2);
+}
+
+.search-input::placeholder {
+  color: #8e9297;
+}
+
+.no-results {
+  padding: 40px 32px;
+  text-align: center;
+  color: #6c757d;
+}
+
+.no-results p {
+  margin: 0;
+  font-size: 14px;
+  font-style: italic;
+}
+
 .files-list {
   padding: 0;
 }
