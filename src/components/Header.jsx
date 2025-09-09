@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { FaUserCircle, FaUpload, FaBars, FaChevronDown } from 'react-icons/fa';
-import ContractsModal from './ContractsModal';
+import ContractsModal from './OpenContract';
 import NewContract from './NewContract';
 
 const Header = ({ onFileUpload, onContractCreate }) => {

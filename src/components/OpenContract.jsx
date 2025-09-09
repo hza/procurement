@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaTimes, FaFileAlt, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract, onSelectContract }) => {
+const OpenContract = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract, onSelectContract }) => {
   // Sample contract files data
   const contractFiles = [
     { id: 1, name: 'Office Supply Contract', date: '2025-09-08', status: 'Done' },
@@ -248,4 +248,4 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   );
 };
 
-export default ContractsModal;
+export default OpenContract;
