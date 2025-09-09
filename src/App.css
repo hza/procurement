@@ -1001,9 +1001,9 @@
   color: #155724;
 }
 
-.status.under-review {
-  background: #fff3cd;
-  color: #856404;
+.status.review {
+  background: #e6e6fa;
+  color: #4b0082;
 }
 
 .status.expired {
