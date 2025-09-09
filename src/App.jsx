@@ -377,11 +377,11 @@ function App() {
       <div className="editor-container">
         <div className="comments-sidebar">
           <div className="ai-review-header">
-            <h3>AI Review</h3>
+            <h3>AI Analysis</h3>
             <button 
               onClick={handleRefreshReview}
               className="refresh-button"
-              title="Refresh AI review"
+              title="Refresh AI analysis"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="23 4 23 10 17 10"/>
@@ -391,99 +391,111 @@ function App() {
             </button>
           </div>
           <ul>
-            {reviewItems.map((item) => (
-              <li 
-                key={item.id}
-                onClick={() => scrollToSection(item.sectionId, item.id)} 
-                className={`review-item ${selectedSection === item.id ? 'selected' : ''}`}
-              >
-                <div style={{ position: 'relative' }}>
-                  <div>
-                    <strong>{item.title}:</strong> {item.description}
-                  </div>
-                  <button 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleFix(item.id);
-                    }}
-                    style={{
-                      position: 'absolute',
-                      bottom: '2px',
-                      right: '2px',
-                      padding: '2px 6px',
-                      fontSize: '10px',
-                      backgroundColor: '#6c757d',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '3px',
-                      cursor: 'pointer',
-                      zIndex: 10
-                    }}
-                    title="Apply fix"
-                  >
-                    Fix
-                  </button>
-                </div>
+            {reviewItems.length === 0 ? (
+              <li className="no-problems" style={{ 
+                textAlign: 'center', 
+                padding: '20px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                minHeight: '100%'
+              }}>
+                <em>No issues detected in this contract</em>
               </li>
-            ))}
+            ) : (
+              reviewItems.map((item) => (
+                <li 
+                  key={item.id}
+                  onClick={() => scrollToSection(item.sectionId, item.id)} 
+                  className={`review-item ${selectedSection === item.id ? 'selected' : ''}`}
+                >
+                  <div style={{ position: 'relative' }}>
+                    <div>
+                      <strong>{item.title}:</strong> {item.description}
+                    </div>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleFix(item.id);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        bottom: '2px',
+                        right: '2px',
+                        padding: '2px 6px',
+                        fontSize: '10px',
+                        backgroundColor: '#0066cc',
+                        color: 'white',
+                        border: 'none',
+                        borderRadius: '3px',
+                        cursor: 'pointer',
+                        zIndex: 10
+                      }}
+                      title="Get AI assistance to fix this issue"
+                    >
+                      Fix
+                    </button>
+                  </div>
+                </li>
+              ))
+            )}
           </ul>
           {showRecommendation && (
             <div className="recommendation-box">
               <button 
                 onClick={handleCloseRecommendation}
                 className="close-button"
-                title="Close recommendation"
+                title="Dismiss recommendation"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="18" y1="6" x2="6" y2="18"/>
                   <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
               </button>
-              <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
+              <p><em>⚠️ Warning: This contract contains numerous one-sided provisions that heavily favor the seller. We strongly recommend consulting with legal counsel before signing.</em></p>
             </div>
           )}
         </div>
         <div className="editor-main">
-          <div className="editor-toolbar confluence-like" role="toolbar" aria-label="Formatting options">
+          <div className="editor-toolbar confluence-like" role="toolbar" aria-label="Document formatting tools">
             <div className="group">
-              <select onChange={handleBlockChange} value={blockType} className="block-select" title="Paragraph / Heading size">
-                <option value="P">Paragraph</option>
-                <option value="H1">Heading 1</option>
-                <option value="H2">Heading 2</option>
-                <option value="H3">Heading 3</option>
+              <select onChange={handleBlockChange} value={blockType} className="block-select" title="Change text style">
+                <option value="P">Normal Text</option>
+                <option value="H1">Title</option>
+                <option value="H2">Heading</option>
+                <option value="H3">Subheading</option>
               </select>
             </div>
             <div className="group">
-              <button type="button" className={boldActive ? 'active' : ''} onClick={() => applyFormat('bold')} title="Bold"><strong>B</strong></button>
-              <button type="button" className={italicActive ? 'active' : ''} onClick={() => applyFormat('italic')} title="Italic" style={{ fontStyle: 'italic' }}>I</button>
-              <button type="button" className={underlineActive ? 'active' : ''} onClick={() => applyFormat('underline')} title="Underline" style={{ textDecoration: 'underline' }}>U</button>
-              <button type="button" className={strikeActive ? 'active' : ''} onClick={() => applyFormat('strikeThrough')} title="Strikethrough" style={{ textDecoration: 'line-through' }}>S</button>
-              <button type="button" className={codeActive ? 'active' : ''} onClick={toggleInlineCode} title="Inline code" style={{ fontFamily: 'monospace', fontSize: '12px' }}> {'</>'} </button>
+              <button type="button" className={boldActive ? 'active' : ''} onClick={() => applyFormat('bold')} title="Make text bold"><strong>B</strong></button>
+              <button type="button" className={italicActive ? 'active' : ''} onClick={() => applyFormat('italic')} title="Make text italic" style={{ fontStyle: 'italic' }}>I</button>
+              <button type="button" className={underlineActive ? 'active' : ''} onClick={() => applyFormat('underline')} title="Underline text" style={{ textDecoration: 'underline' }}>U</button>
+              <button type="button" className={strikeActive ? 'active' : ''} onClick={() => applyFormat('strikeThrough')} title="Strike through text" style={{ textDecoration: 'line-through' }}>S</button>
+              <button type="button" className={codeActive ? 'active' : ''} onClick={toggleInlineCode} title="Format as code" style={{ fontFamily: 'monospace', fontSize: '12px' }}> {'</>'} </button>
             </div>
             <div className="group">
-              <button type="button" className={blockquoteActive ? 'active' : ''} onClick={toggleBlockquote} title="Blockquote">❝</button>
-              <button type="button" className={ulActive ? 'active' : ''} onClick={() => applyFormat('insertUnorderedList')} title="Bulleted list">•</button>
-              <button type="button" className={olActive ? 'active' : ''} onClick={() => applyFormat('insertOrderedList')} title="Numbered list">1.</button>
+              <button type="button" className={blockquoteActive ? 'active' : ''} onClick={toggleBlockquote} title="Add quote block">❝</button>
+              <button type="button" className={ulActive ? 'active' : ''} onClick={() => applyFormat('insertUnorderedList')} title="Create bullet list">•</button>
+              <button type="button" className={olActive ? 'active' : ''} onClick={() => applyFormat('insertOrderedList')} title="Create numbered list">1.</button>
             </div>
             <div className="group">
-              <button type="button" className={align === 'left' ? 'active' : ''} onClick={() => { applyFormat('justifyLeft'); }} title="Align left">≡</button>
-              <button type="button" className={align === 'center' ? 'active' : ''} onClick={() => { applyFormat('justifyCenter'); }} title="Align center">≣</button>
-              <button type="button" className={align === 'right' ? 'active' : ''} onClick={() => { applyFormat('justifyRight'); }} title="Align right">≡</button>
-              <button type="button" className={align === 'justify' ? 'active' : ''} onClick={() => { applyFormat('justifyFull'); }} title="Justify">≣</button>
+              <button type="button" className={align === 'left' ? 'active' : ''} onClick={() => { applyFormat('justifyLeft'); }} title="Align text left">≡</button>
+              <button type="button" className={align === 'center' ? 'active' : ''} onClick={() => { applyFormat('justifyCenter'); }} title="Center text">≣</button>
+              <button type="button" className={align === 'right' ? 'active' : ''} onClick={() => { applyFormat('justifyRight'); }} title="Align text right">≡</button>
+              <button type="button" className={align === 'justify' ? 'active' : ''} onClick={() => { applyFormat('justifyFull'); }} title="Justify text">≣</button>
             </div>
             <div className="group">
-              {!linkActive && <button type="button" onClick={handleCreateLink} title="Insert link">🔗</button>}
-              {linkActive && <button type="button" className="active" onClick={handleRemoveLink} title="Remove link">🔗✕</button>}
+              {!linkActive && <button type="button" onClick={handleCreateLink} title="Insert hyperlink">🔗</button>}
+              {linkActive && <button type="button" className="active" onClick={handleRemoveLink} title="Remove hyperlink">🔗✕</button>}
             </div>
             <div className="group">
-              <button type="button" onClick={handleUndo} title="Undo">↺</button>
-              <button type="button" onClick={handleRedo} title="Redo">↻</button>
+              <button type="button" onClick={handleUndo} title="Undo last action">↺</button>
+              <button type="button" onClick={handleRedo} title="Redo last action">↻</button>
             </div>
             <div className="group">
-              <button type="button" onClick={() => applyFormat('removeFormat')} title="Clear formatting">⨂</button>
+              <button type="button" onClick={() => applyFormat('removeFormat')} title="Remove all formatting">⨂</button>
             </div>
           </div>
-          {/* Render editor without dangerouslySetInnerHTML each re-render to avoid caret jump. Initial content set via useEffect / file upload. */}
           <div
             ref={editorRef}
             contentEditable

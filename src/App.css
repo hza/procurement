@@ -285,12 +285,9 @@
 }
 
 .comments-sidebar p {
-  margin-top: 10px;
-  margin-bottom: 10px;
   flex-shrink: 0;
   font-size: 13px;
   line-height: 1.4;
-  padding: 12px;
   border-radius: 4px;
 }
 
@@ -715,8 +712,6 @@
 .recommendation-box p {
   margin: 0;
   color: #495057;
-  font-size: 14px;
-  line-height: 1.5;
   font-style: italic;
 }
 
