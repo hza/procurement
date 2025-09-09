@@ -85,7 +85,27 @@ function App() {
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header />
       <div className="editor-container">
-        <EditorContent editor={editor} />
+        <div className="editor-main">
+          <EditorContent editor={editor} />
+        </div>
+        <div className="comments-sidebar">
+          <h3>Contract Review</h3>
+          <ul>
+            <li><strong>Hidden Fees:</strong> Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.</li>
+            <li><strong>Non-refundable Deposits:</strong> 30% payment upon signing is non-refundable, even if contract is terminated.</li>
+            <li><strong>Automatic Renewal:</strong> Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.</li>
+            <li><strong>Vague Quality Standards:</strong> Quality "may vary based on market availability" - no guaranteed standards.</li>
+            <li><strong>Waived Inspection Rights:</strong> Buyer cannot inspect goods before acceptance, must accept whatever is delivered.</li>
+            <li><strong>Broad Force Majeure:</strong> Defined to include minor inconveniences, allowing seller to delay indefinitely.</li>
+            <li><strong>Unilateral Termination:</strong> Seller can terminate anytime for any reason, keeping all payments.</li>
+            <li><strong>Arbitration Clause:</strong> Disputes resolved in seller's chosen location, costs borne by buyer if seller wins.</li>
+            <li><strong>Data Sharing:</strong> Seller can use buyer's proprietary information for marketing without consent.</li>
+            <li><strong>IP Transfer:</strong> All intellectual property developed during contract becomes seller's property.</li>
+            <li><strong>Assignment Rights:</strong> Seller can assign contract to any third party without buyer's approval.</li>
+            <li><strong>Amendment Power:</strong> Only seller can amend terms with 30 days notice.</li>
+          </ul>
+          <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
+        </div>
       </div>
     </div>
   )
