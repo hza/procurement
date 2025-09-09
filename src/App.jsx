@@ -121,6 +121,16 @@ function App() {
     }
   }
 
+  const handleContractCreate = (newContract) => {
+    // Update the content with the new contract
+    setContent(newContract.content);
+    // Update the contentEditable div directly
+    if (editorRef.current) {
+      editorRef.current.innerHTML = newContract.content;
+    }
+    console.log('Created new contract:', newContract);
+  }
+
   // Initialize contentEditable with content on mount
   useEffect(() => {
     if (editorRef.current) {
@@ -355,7 +365,7 @@ function App() {
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header onFileUpload={handleFileUpload} />
+      <Header onFileUpload={handleFileUpload} onContractCreate={handleContractCreate} />
       <div className="editor-container">
         <div className="comments-sidebar">
           <div className="ai-review-header">

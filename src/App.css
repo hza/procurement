@@ -1,10 +1,198 @@
-#root {
-  height: 100vh;
-  width: 100vw;
+/* Header Styles */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dfe1e6;
+  height: 48px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(9, 30, 66, 0.06);
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(9, 30, 66, 0.54);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 0 24px;
+  border-bottom: 1px solid #dfe1e6;
+  margin-bottom: 0;
+}
+
+.modal-header h2 {
   margin: 0;
-  padding: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #6c757d;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
   background-color: #f4f5f7;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  color: #172b4d;
+}
+
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* New Contract Modal Styles */
+.new-contract-modal {
+  width: 700px;
+  max-height: 80vh;
+}
+
+.contract-options {
+  padding: 24px;
+}
+
+.contract-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.contract-option:hover {
+  border-color: #0052cc;
+  box-shadow: 0 4px 12px rgba(0, 82, 204, 0.15);
+  transform: translateY(-1px);
+}
+
+.contract-option.blank-contract {
+  border-color: #0052cc;
+  background: #f8f9fa;
+}
+
+.contract-option.blank-contract:hover {
+  border-color: #0747a6;
+  background: #e9f2ff;
+}
+
+.option-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 24px;
+  color: #0052cc;
+}
+
+.contract-option.blank-contract .option-icon {
+  background: #e6f0ff;
+  color: #0052cc;
+}
+
+.contract-option.template-option .option-icon {
+  background: #f8f9fa;
+  color: #6c757d;
+}
+
+.contract-option.template-option:hover .option-icon {
+  background: #e6f0ff;
+  color: #0052cc;
+}
+
+.option-content h3,
+.option-content h4 {
+  margin: 0 0 8px 0;
+  color: #172b4d;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.option-content p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.templates-section {
+  margin-top: 32px;
+}
+
+.templates-section h3 {
+  margin: 0 0 20px 0;
+  color: #172b4d;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contract-option.template-option {
+  margin-bottom: 0;
+  padding: 16px;
+}
+
+.contract-option.template-option .option-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.contract-option.template-option .option-content h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.contract-option.template-option .option-content p {
+  font-size: 13px;
 }
 
 .editor-container {
