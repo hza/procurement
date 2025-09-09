@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 import AIChat from './components/AIChat'
-
 const reviewItems = [
   { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.' },
   { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.' },
@@ -22,6 +21,7 @@ function App() {
   const editorRef = useRef(null)
   const chatInputRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
+  const [showRecommendation, setShowRecommendation] = React.useState(true)
   const [content, setContent] = React.useState(`
       <h1>Procurement Contract Agreement</h1>
       <p><strong>Contract Number:</strong> PC-2025-001</p>
@@ -125,6 +125,10 @@ function App() {
     }
   }
 
+  const handleCloseRecommendation = () => {
+    setShowRecommendation(false);
+  }
+
   const scrollToSection = (sectionId, reviewId) => {
     setTimeout(() => {
       // Find the element in the editor
@@ -207,7 +211,21 @@ function App() {
               </li>
             ))}
           </ul>
-          <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
+          {showRecommendation && (
+            <div className="recommendation-box">
+              <button 
+                onClick={handleCloseRecommendation}
+                className="close-button"
+                title="Close recommendation"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+              <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
+            </div>
+          )}
         </div>
         <div className="editor-main">
           <div 

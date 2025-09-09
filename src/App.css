@@ -64,12 +64,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
   flex-shrink: 0;
-  color: #5e6c84;
   font-size: 13px;
   line-height: 1.4;
   padding: 12px;
-  background-color: #ffffff;
-  border: 1px solid #dfe1e6;
   border-radius: 4px;
 }
 
@@ -355,5 +352,57 @@
 
 .review-item button:hover {
   background-color: #0747a6;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(240, 230, 230, 0.2);
+}
+
+.recommendation-box {
+  position: relative;
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #f3eeee;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(9, 30, 66, 0.08);
+  transition: all 0.2s ease;
+}
+
+.recommendation-box:hover {
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.12);
+}
+
+.recommendation-box p {
+  margin: 0;
+  color: #495057;
+  font-size: 14px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.close-button:hover {
+  background-color: rgba(108, 117, 125, 0.1);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.close-button svg {
+  stroke-width: 2.5;
 }
