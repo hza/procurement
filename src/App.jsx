@@ -120,9 +120,11 @@ function App() {
       
       // Highlight the following content until next heading
       let nextElement = targetElement.nextElementSibling;
-      while (nextElement && nextElement.tagName !== 'H2') {
+      let count = 0;
+      while (nextElement && nextElement.tagName !== 'H2' && count < 10) {
         nextElement.classList.add('highlight-section');
         nextElement = nextElement.nextElementSibling;
+        count++;
       }
       
       // Get the editor main container for scrolling
