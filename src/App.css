@@ -100,6 +100,8 @@
   border-radius: 4px;
   background-color: #f9f9f9;
   transition: all 0.2s ease-in-out;
+  position: relative;
+  min-height: 45px;
 }
 
 .review-item.selected {
@@ -112,6 +114,7 @@
 }
 
 .review-item button:hover {
-  background-color: #218838 !important;
-  transform: scale(1.05);
+  background-color: #007bff !important;
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

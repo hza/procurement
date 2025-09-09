@@ -172,8 +172,8 @@ function App() {
                 onClick={() => scrollToSection(item.sectionId, item.id)} 
                 className={`review-item ${selectedSection === item.id ? 'selected' : ''}`}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <div style={{ flex: 1 }}>
+                <div style={{ position: 'relative' }}>
+                  <div>
                     <strong>{item.title}:</strong> {item.description}
                   </div>
                   <button 
@@ -182,15 +182,17 @@ function App() {
                       handleFix(item.id);
                     }}
                     style={{
-                      marginLeft: '8px',
+                      position: 'absolute',
+                      bottom: '2px',
+                      right: '2px',
                       padding: '2px 6px',
-                      fontSize: '11px',
-                      backgroundColor: '#28a745',
+                      fontSize: '10px',
+                      backgroundColor: '#6c757d',
                       color: 'white',
                       border: 'none',
                       borderRadius: '3px',
                       cursor: 'pointer',
-                      flexShrink: 0
+                      zIndex: 10
                     }}
                     title="Apply fix"
                   >
