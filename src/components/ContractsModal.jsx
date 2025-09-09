@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { FaTimes, FaFileAlt, FaDownload, FaTrash } from 'react-icons/fa';
+import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus } from 'react-icons/fa';
 
-const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
+const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract }) => {
   // Sample contract files data
   const contractFiles = [
     { id: 1, name: 'Office Supply Contract', date: '2025-09-08', status: 'Done' },
@@ -36,9 +36,19 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
       <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Contracts</h2>
-          <button className="modal-close" onClick={onClose}>
-            <FaTimes />
-          </button>
+          <div className="modal-actions">
+            <button 
+              className="new-contract-btn" 
+              onClick={onNewContract}
+              title="Create New Contract"
+            >
+              <FaPlus />
+              New Contract
+            </button>
+            <button className="modal-close" onClick={onClose}>
+              <FaTimes />
+            </button>
+          </div>
         </div>
         <div className="modal-body">
           <div className="files-list">

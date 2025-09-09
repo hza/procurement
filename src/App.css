@@ -712,6 +712,42 @@
   background: #f8f9fa;
 }
 
+.modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.new-contract-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0052cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.new-contract-btn:hover {
+  background: #0747a6;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 82, 204, 0.3);
+}
+
+.new-contract-btn:active {
+  transform: translateY(0);
+}
+
+.new-contract-btn:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: 2px;
+}
+
 .modal-header h2 {
   margin: 0;
   font-size: 24px;

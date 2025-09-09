@@ -69,6 +69,13 @@ const Header = ({ onFileUpload }) => {
     // Add contract closure logic here
   };
 
+  const handleNewContract = () => {
+    console.log('Creating new contract...');
+    // Add new contract creation logic here
+    // For now, just close the modal
+    setShowContractsModal(false);
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -125,6 +132,7 @@ const Header = ({ onFileUpload }) => {
         onClose={handleCloseModal}
         onDownloadFile={handleDownloadFile}
         onDeleteFile={handleDeleteFile}
+        onNewContract={handleNewContract}
       />
     </header>
   );
