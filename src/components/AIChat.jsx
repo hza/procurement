@@ -67,8 +67,8 @@ const AIChat = () => {
             className="send-button"
             disabled={!inputValue.trim()}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 2L11 13M22 2L15 22M22 2L2 9"/>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff">
+              <path d="M16.3 11.3l-4.6-4.6c-.4-.4-1-.4-1.4 0s-.4 1 0 1.4l2.9 2.9H5c-.6 0-1 .4-1 1s.4 1 1 1h8.2l-2.9 2.9c-.4.4-.4 1 0 1.4.2.2.5.3.7.3.2 0 .5-.1.7-.3l4.6-4.6c.4-.4.4-1 0-1.4z"/>
             </svg>
           </button>
         </div>
