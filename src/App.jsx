@@ -22,6 +22,18 @@ function App() {
   const chatInputRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [showRecommendation, setShowRecommendation] = React.useState(true)
+  // Formatting state
+  const [boldActive, setBoldActive] = React.useState(false)
+  const [italicActive, setItalicActive] = React.useState(false)
+  const [underlineActive, setUnderlineActive] = React.useState(false)
+  const [ulActive, setUlActive] = React.useState(false)
+  const [olActive, setOlActive] = React.useState(false)
+  const [blockType, setBlockType] = React.useState('P')
+  const [strikeActive, setStrikeActive] = React.useState(false)
+  const [blockquoteActive, setBlockquoteActive] = React.useState(false)
+  const [codeActive, setCodeActive] = React.useState(false)
+  const [linkActive, setLinkActive] = React.useState(false)
+  const [align, setAlign] = React.useState('left')
   const [content, setContent] = React.useState(`
       <h1>Procurement Contract Agreement</h1>
       <p><strong>Contract Number:</strong> PC-2025-001</p>
@@ -116,6 +128,25 @@ function App() {
     }
   }, [])
 
+  // When content state changes externally (e.g. file upload), update editor only if different
+  useEffect(() => {
+    if (!editorRef.current) return;
+    if (editorRef.current.innerHTML !== content) {
+      // Try to preserve scroll position
+      const selection = document.getSelection();
+      const isFocused = document.activeElement === editorRef.current;
+      editorRef.current.innerHTML = content;
+      if (isFocused && selection) {
+        // Place caret at end after external change
+        const range = document.createRange();
+        range.selectNodeContents(editorRef.current);
+        range.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }
+    }
+  }, [content]);
+
   const handleFix = (reviewId) => {
     // Find the review item and set it in the chat input
     const reviewItem = reviewItems.find(item => item.id === reviewId);
@@ -134,6 +165,143 @@ function App() {
     setSelectedSection(null);
     // In a real implementation, this would trigger a new AI analysis
     console.log('Refreshing AI review...');
+  }
+
+  // Formatting helpers for the content editor
+  const applyFormat = (command, value = null) => {
+    if (editorRef.current) {
+      editorRef.current.focus();
+      document.execCommand(command, false, value);
+      // Defer update to allow command to apply
+      setTimeout(updateFormattingState, 0);
+    }
+  }
+
+  const handleBlockChange = (e) => {
+    const val = e.target.value;
+    applyFormat('formatBlock', val);
+    setBlockType(val);
+  }
+
+  const updateFormattingState = () => {
+    if (!editorRef.current) return;
+    try {
+      setBoldActive(document.queryCommandState('bold'));
+      setItalicActive(document.queryCommandState('italic'));
+      setUnderlineActive(document.queryCommandState('underline'));
+      setUlActive(document.queryCommandState('insertUnorderedList'));
+      setOlActive(document.queryCommandState('insertOrderedList'));
+      setStrikeActive(document.queryCommandState('strikeThrough'));
+      // Alignment
+      const center = document.queryCommandState('justifyCenter');
+      const right = document.queryCommandState('justifyRight');
+      const full = document.queryCommandState('justifyFull');
+      if (center) setAlign('center'); else if (right) setAlign('right'); else if (full) setAlign('justify'); else setAlign('left');
+      let block = document.queryCommandValue('formatBlock');
+      if (block) {
+        block = block.replace(/<|>/g, '').toUpperCase();
+        if (['P','H1','H2','H3'].includes(block)) {
+          setBlockType(block);
+        }
+      }
+      // Blockquote detection
+      const sel = document.getSelection();
+      if (sel && sel.anchorNode) {
+        let node = sel.anchorNode.nodeType === 3 ? sel.anchorNode.parentNode : sel.anchorNode;
+        let foundBQ = false; let foundCode = false; let foundLink = false;
+        while (node && node !== editorRef.current) {
+          const tag = node.tagName;
+            if (tag === 'BLOCKQUOTE') foundBQ = true;
+            if (tag === 'CODE') foundCode = true;
+            if (tag === 'A') foundLink = true;
+          node = node.parentNode;
+        }
+        setBlockquoteActive(foundBQ);
+        setCodeActive(foundCode);
+        setLinkActive(foundLink);
+      } else {
+        setBlockquoteActive(false); setCodeActive(false); setLinkActive(false);
+      }
+    } catch (e) {
+      // Silently ignore unsupported queryCommand in some browsers
+    }
+  }
+
+  // Listen to selection changes to update button states
+  useEffect(() => {
+    const handleSelectionChange = () => {
+      const sel = document.getSelection();
+      if (!sel || sel.rangeCount === 0) return;
+      const anchorNode = sel.anchorNode;
+      if (!anchorNode) return;
+      // Ensure selection is within editor
+      if (editorRef.current && editorRef.current.contains(anchorNode)) {
+        updateFormattingState();
+      }
+    }
+    document.addEventListener('selectionchange', handleSelectionChange);
+    return () => document.removeEventListener('selectionchange', handleSelectionChange);
+  }, []);
+
+  const toggleBlockquote = () => {
+    if (!editorRef.current) return;
+    const sel = document.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    // If already in blockquote, unwrap
+    if (blockquoteActive) {
+      document.execCommand('formatBlock', false, 'P');
+    } else {
+      document.execCommand('formatBlock', false, 'BLOCKQUOTE');
+    }
+    setTimeout(updateFormattingState, 0);
+  }
+
+  const toggleInlineCode = () => {
+    if (!editorRef.current) return;
+    const sel = document.getSelection();
+    if (!sel || sel.rangeCount === 0) return;
+    const range = sel.getRangeAt(0);
+    if (codeActive) {
+      // unwrap code
+      let node = sel.anchorNode;
+      if (node && node.nodeType === 3) node = node.parentNode;
+      while (node && node !== editorRef.current && node.tagName !== 'CODE') node = node.parentNode;
+      if (node && node.tagName === 'CODE') {
+        const parent = node.parentNode;
+        while (node.firstChild) parent.insertBefore(node.firstChild, node);
+        parent.removeChild(node);
+      }
+    } else {
+      const span = document.createElement('code');
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
+      // Move caret after code
+      range.setStartAfter(span);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    setTimeout(updateFormattingState, 0);
+  }
+
+  const handleCreateLink = () => {
+    let url = prompt('Enter URL');
+    if (!url) return;
+    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+    document.execCommand('createLink', false, url);
+    setTimeout(updateFormattingState, 0);
+  }
+
+  const handleRemoveLink = () => {
+    document.execCommand('unlink');
+    setTimeout(updateFormattingState, 0);
+  }
+
+  const handleUndo = () => {
+    document.execCommand('undo');
+  }
+  const handleRedo = () => {
+    document.execCommand('redo');
   }
 
   const scrollToSection = (sectionId, reviewId) => {
@@ -248,11 +416,56 @@ function App() {
           )}
         </div>
         <div className="editor-main">
-          <div 
+          <div className="editor-toolbar confluence-like" role="toolbar" aria-label="Formatting options">
+            <div className="group">
+              <select onChange={handleBlockChange} value={blockType} className="block-select" title="Paragraph / Heading size">
+                <option value="P">Paragraph</option>
+                <option value="H1">Heading 1</option>
+                <option value="H2">Heading 2</option>
+                <option value="H3">Heading 3</option>
+              </select>
+            </div>
+            <div className="group">
+              <button type="button" className={boldActive ? 'active' : ''} onClick={() => applyFormat('bold')} title="Bold"><strong>B</strong></button>
+              <button type="button" className={italicActive ? 'active' : ''} onClick={() => applyFormat('italic')} title="Italic" style={{ fontStyle: 'italic' }}>I</button>
+              <button type="button" className={underlineActive ? 'active' : ''} onClick={() => applyFormat('underline')} title="Underline" style={{ textDecoration: 'underline' }}>U</button>
+              <button type="button" className={strikeActive ? 'active' : ''} onClick={() => applyFormat('strikeThrough')} title="Strikethrough" style={{ textDecoration: 'line-through' }}>S</button>
+              <button type="button" className={codeActive ? 'active' : ''} onClick={toggleInlineCode} title="Inline code" style={{ fontFamily: 'monospace', fontSize: '12px' }}> {'</>'} </button>
+            </div>
+            <div className="group">
+              <button type="button" className={blockquoteActive ? 'active' : ''} onClick={toggleBlockquote} title="Blockquote">❝</button>
+              <button type="button" className={ulActive ? 'active' : ''} onClick={() => applyFormat('insertUnorderedList')} title="Bulleted list">•</button>
+              <button type="button" className={olActive ? 'active' : ''} onClick={() => applyFormat('insertOrderedList')} title="Numbered list">1.</button>
+            </div>
+            <div className="group">
+              <button type="button" className={align === 'left' ? 'active' : ''} onClick={() => { applyFormat('justifyLeft'); }} title="Align left">≡</button>
+              <button type="button" className={align === 'center' ? 'active' : ''} onClick={() => { applyFormat('justifyCenter'); }} title="Align center">≣</button>
+              <button type="button" className={align === 'right' ? 'active' : ''} onClick={() => { applyFormat('justifyRight'); }} title="Align right">≡</button>
+              <button type="button" className={align === 'justify' ? 'active' : ''} onClick={() => { applyFormat('justifyFull'); }} title="Justify">≣</button>
+            </div>
+            <div className="group">
+              {!linkActive && <button type="button" onClick={handleCreateLink} title="Insert link">🔗</button>}
+              {linkActive && <button type="button" className="active" onClick={handleRemoveLink} title="Remove link">🔗✕</button>}
+            </div>
+            <div className="group">
+              <button type="button" onClick={handleUndo} title="Undo">↺</button>
+              <button type="button" onClick={handleRedo} title="Redo">↻</button>
+            </div>
+            <div className="group">
+              <button type="button" onClick={() => applyFormat('removeFormat')} title="Clear formatting">⨂</button>
+            </div>
+          </div>
+          {/* Render editor without dangerouslySetInnerHTML each re-render to avoid caret jump. Initial content set via useEffect / file upload. */}
+          <div
             ref={editorRef}
             contentEditable
+            suppressContentEditableWarning={true}
             className="content-editable"
-            dangerouslySetInnerHTML={{ __html: content }}
+            onBlur={() => {
+              if (editorRef.current) {
+                setContent(editorRef.current.innerHTML);
+              }
+            }}
           />
         </div>
         <AIChat setInputText={(fn) => { chatInputRef.current = fn; }} />

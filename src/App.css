@@ -316,6 +316,124 @@
   color: #172b4d;
 }
 
+.editor-toolbar {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #dfe1e6;
+  background: #f8f9fa;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.editor-toolbar.confluence-like {
+  flex-wrap: wrap;
+  gap: 4px;
+  background: linear-gradient(#f8f9fa,#f4f5f7);
+  border-bottom: 1px solid #dfe1e6;
+}
+
+.editor-toolbar.confluence-like .group {
+  display: inline-flex;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 1px rgba(9,30,66,0.08);
+}
+
+.editor-toolbar.confluence-like .group button,
+.editor-toolbar.confluence-like .group select {
+  border: none;
+  border-right: 1px solid #edf0f3;
+  border-radius: 0;
+}
+
+.editor-toolbar.confluence-like .group button:last-child,
+.editor-toolbar.confluence-like .group select:last-child {
+  border-right: none;
+}
+
+.editor-toolbar.confluence-like button,
+.editor-toolbar.confluence-like select {
+  height: 32px;
+  padding: 0 10px;
+  background: #ffffff;
+  font-size: 13px;
+  color: #172b4d;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.editor-toolbar.confluence-like button:hover,
+.editor-toolbar.confluence-like select:hover {
+  background: #f0f4f8;
+}
+
+.editor-toolbar.confluence-like button.active {
+  background: #e6f0ff;
+  color: #0052cc;
+}
+
+.editor-toolbar.confluence-like .group select.block-select {
+  min-width: 130px;
+  font-weight: 500;
+}
+
+.editor-toolbar.confluence-like .group button {
+  font-weight: 500;
+}
+
+.editor-toolbar.confluence-like .group button:active {
+  background: #dbe9ff;
+}
+
+.editor-toolbar.confluence-like .group button:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: -2px;
+}
+
+.editor-toolbar button, .editor-toolbar select {
+  height: 32px;
+  padding: 0 10px;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  color: #172b4d;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.editor-toolbar button:hover, .editor-toolbar select:hover {
+  border-color: #0052cc;
+}
+
+.editor-toolbar button:active {
+  background: #e9f2ff;
+}
+
+.editor-toolbar button.active {
+  background: #e9f2ff;
+  border-color: #0052cc;
+  color: #0052cc;
+}
+
+.editor-toolbar select.block-select {
+  min-width: 140px;
+}
+
+.toolbar-separator {
+  width: 1px;
+  background: #dfe1e6;
+  margin: 0 4px;
+  align-self: stretch;
+}
+
 .content-editable h1 {
   font-size: 32px;
   font-weight: 600;
