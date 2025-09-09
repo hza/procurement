@@ -794,7 +794,6 @@
 .search-input-wrapper {
   position: relative;
   flex: 1;
-  max-width: 500px;
 }
 
 .sort-wrapper {
