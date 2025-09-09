@@ -794,15 +794,16 @@
 .search-input-wrapper {
   position: relative;
   flex: 1;
+  max-width: 360px;
 }
 
 .sort-wrapper {
   flex-shrink: 0;
-  margin-left: auto;
 }
 
 .status-filter-wrapper {
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .status-filter-select {
