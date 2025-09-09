@@ -36,15 +36,18 @@ const Header = ({ onFileUpload }) => {
       boxShadow: '0 2px 4px rgba(9, 30, 66, 0.06)'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
-          onClick={handleMenuClick}
-          className="menu-button"
-          aria-label="Open menu"
-          title="Menu"
-        >
-          <FaBars />
-        </button>
-        <span style={{ fontSize: '16px', fontWeight: '600', color: '#172b4d' }}>Procurement Assistant</span>
+        <div className="logo-container">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="6" width="24" height="20" rx="2" fill="#0052cc" stroke="#0052cc" strokeWidth="1"/>
+            <rect x="8" y="10" width="16" height="2" fill="#ffffff"/>
+            <rect x="8" y="14" width="12" height="2" fill="#ffffff"/>
+            <rect x="8" y="18" width="16" height="2" fill="#ffffff"/>
+            <rect x="8" y="22" width="8" height="2" fill="#ffffff"/>
+            <circle cx="20" cy="20" r="3" fill="#4c9aff"/>
+            <path d="M18 20L19.5 21.5L22 19" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <span className="logo-text">Procurement Assistant</span>
+        </div>
         <nav className="main-nav">
           <button onClick={() => handleNav('files')}>Contracts</button>
           <button onClick={() => handleNav('reports')}>Negotiations</button>
@@ -52,12 +55,11 @@ const Header = ({ onFileUpload }) => {
         </nav>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <button
+                <button
           onClick={handleUploadClick}
           className="upload-button"
         >
-          <FaUpload />
-          Upload Contract
+          Start Negotiations
         </button>
         <FaUserCircle size={28} color="#5e6c84" />
         <input
