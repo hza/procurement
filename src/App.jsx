@@ -2,10 +2,26 @@ import React, { useRef, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 
+const reviewItems = [
+  { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.' },
+  { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.' },
+  { id: 'auto-renewal', sectionId: 'renewal', title: 'Automatic Renewal', description: 'Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.' },
+  { id: 'vague-quality', sectionId: 'quality', title: 'Vague Quality Standards', description: 'Quality "may vary based on market availability" - no guaranteed standards.' },
+  { id: 'waived-inspection', sectionId: 'quality', title: 'Waived Inspection Rights', description: 'Buyer cannot inspect goods before acceptance, must accept whatever is delivered.' },
+  { id: 'force-majeure', sectionId: 'force-majeure', title: 'Broad Force Majeure', description: 'Defined to include minor inconveniences, allowing seller to delay indefinitely.' },
+  { id: 'unilateral-termination', sectionId: 'termination', title: 'Unilateral Termination', description: 'Seller can terminate anytime for any reason, keeping all payments.' },
+  { id: 'arbitration-clause', sectionId: 'dispute', title: 'Arbitration Clause', description: 'Disputes resolved in seller\'s chosen location, costs borne by buyer if seller wins.' },
+  { id: 'data-sharing', sectionId: 'confidentiality', title: 'Data Sharing', description: 'Seller can use buyer\'s proprietary information for marketing without consent.' },
+  { id: 'ip-transfer', sectionId: 'ip', title: 'IP Transfer', description: 'All intellectual property developed during contract becomes seller\'s property.' },
+  { id: 'assignment-rights', sectionId: 'misc', title: 'Assignment Rights', description: 'Seller can assign contract to any third party without buyer\'s approval.' },
+  { id: 'amendment-power', sectionId: 'misc', title: 'Amendment Power', description: 'Only seller can amend terms with 30 days notice.' }
+]
+
 function App() {
   const editorRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [content, setContent] = React.useState(`
+  const handleFileUpload = (event) => {
       <h1>Procurement Contract Agreement</h1>
       <p><strong>Contract Number:</strong> PC-2025-001</p>
       <p><strong>Effective Date:</strong> September 9, 2025</p>
@@ -99,17 +115,17 @@ function App() {
     }
   }, [])
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (sectionId, reviewId) => {
     // Remove previous highlights
     const allHighlighted = document.querySelectorAll('.highlight-section');
     allHighlighted.forEach(el => el.classList.remove('highlight-section'));
     
     // Update selected section
-    setSelectedSection(id);
+    setSelectedSection(reviewId);
 
     // Find the element in the editor
     const editorElement = editorRef.current;
-    const targetElement = editorElement?.querySelector(`#${id}`);
+    const targetElement = editorElement?.querySelector(`#${sectionId}`);
     
     if (targetElement && editorElement) {
       // Add highlight to the heading
@@ -148,42 +164,15 @@ function App() {
         <div className="comments-sidebar">
           <h3>Contract Review</h3>
           <ul>
-            <li onClick={() => scrollToSection('scope-of-work')} className={`review-item ${selectedSection === 'scope-of-work' ? 'selected' : ''}`}>
-              <strong>Hidden Fees:</strong> Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.
-            </li>
-            <li onClick={() => scrollToSection('pricing')} className={`review-item ${selectedSection === 'pricing' ? 'selected' : ''}`}>
-              <strong>Non-refundable Deposits:</strong> 30% payment upon signing is non-refundable, even if contract is terminated.
-            </li>
-            <li onClick={() => scrollToSection('renewal')} className={`review-item ${selectedSection === 'renewal' ? 'selected' : ''}`}>
-              <strong>Automatic Renewal:</strong> Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.
-            </li>
-            <li onClick={() => scrollToSection('quality')} className={`review-item ${selectedSection === 'quality' ? 'selected' : ''}`}>
-              <strong>Vague Quality Standards:</strong> Quality "may vary based on market availability" - no guaranteed standards.
-            </li>
-            <li onClick={() => scrollToSection('quality')} className={`review-item ${selectedSection === 'quality' ? 'selected' : ''}`}>
-              <strong>Waived Inspection Rights:</strong> Buyer cannot inspect goods before acceptance, must accept whatever is delivered.
-            </li>
-            <li onClick={() => scrollToSection('force-majeure')} className={`review-item ${selectedSection === 'force-majeure' ? 'selected' : ''}`}>
-              <strong>Broad Force Majeure:</strong> Defined to include minor inconveniences, allowing seller to delay indefinitely.
-            </li>
-            <li onClick={() => scrollToSection('termination')} className={`review-item ${selectedSection === 'termination' ? 'selected' : ''}`}>
-              <strong>Unilateral Termination:</strong> Seller can terminate anytime for any reason, keeping all payments.
-            </li>
-            <li onClick={() => scrollToSection('dispute')} className={`review-item ${selectedSection === 'dispute' ? 'selected' : ''}`}>
-              <strong>Arbitration Clause:</strong> Disputes resolved in seller's chosen location, costs borne by buyer if seller wins.
-            </li>
-            <li onClick={() => scrollToSection('confidentiality')} className={`review-item ${selectedSection === 'confidentiality' ? 'selected' : ''}`}>
-              <strong>Data Sharing:</strong> Seller can use buyer's proprietary information for marketing without consent.
-            </li>
-            <li onClick={() => scrollToSection('ip')} className={`review-item ${selectedSection === 'ip' ? 'selected' : ''}`}>
-              <strong>IP Transfer:</strong> All intellectual property developed during contract becomes seller's property.
-            </li>
-            <li onClick={() => scrollToSection('misc')} className={`review-item ${selectedSection === 'misc' ? 'selected' : ''}`}>
-              <strong>Assignment Rights:</strong> Seller can assign contract to any third party without buyer's approval.
-            </li>
-            <li onClick={() => scrollToSection('misc')} className={`review-item ${selectedSection === 'misc' ? 'selected' : ''}`}>
-              <strong>Amendment Power:</strong> Only seller can amend terms with 30 days notice.
-            </li>
+            {reviewItems.map((item) => (
+              <li 
+                key={item.id}
+                onClick={() => scrollToSection(item.sectionId, item.id)} 
+                className={`review-item ${selectedSection === item.id ? 'selected' : ''}`}
+              >
+                <strong>{item.title}:</strong> {item.description}
+              </li>
+            ))}
           </ul>
           <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
         </div>
