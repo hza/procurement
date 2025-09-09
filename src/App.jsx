@@ -115,8 +115,15 @@ function App() {
     const targetElement = editorElement?.querySelector(`#${id}`);
     
     if (targetElement && editorElement) {
-      // Add highlight
+      // Add highlight to the heading
       targetElement.classList.add('highlight-section');
+      
+      // Highlight the following content until next heading
+      let nextElement = targetElement.nextElementSibling;
+      while (nextElement && nextElement.tagName !== 'H2') {
+        nextElement.classList.add('highlight-section');
+        nextElement = nextElement.nextElementSibling;
+      }
       
       // Get the editor main container for scrolling
       const editorContainer = document.querySelector('.editor-main');
@@ -135,7 +142,8 @@ function App() {
       
       // Remove highlight after 3 seconds
       setTimeout(() => {
-        targetElement.classList.remove('highlight-section');
+        const highlightedElements = document.querySelectorAll('.highlight-section');
+        highlightedElements.forEach(el => el.classList.remove('highlight-section'));
       }, 3000);
     }
   }
