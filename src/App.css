@@ -217,6 +217,42 @@
   background-color: #e3f2fd;
 }
 
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.select-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-select {
+  height: 28px;
+  padding: 4px 8px;
+  background-color: #ffffff;
+  color: #6b778c;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.action-select:hover {
+  border-color: #0052cc;
+  color: #0052cc;
+}
+
+.action-select:focus {
+  border-color: #0052cc;
+  box-shadow: 0 0 0 1px #0052cc;
+}
+
 .comments-sidebar li {
   transition: background-color 0.2s;
 }

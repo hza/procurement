@@ -88,21 +88,33 @@ const AIChat = ({ setInputText }) => {
             value={inputValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            placeholder="Ask me anything about ..."
+            placeholder="Ask me anything about contract ..."
             className="chat-input"
             rows="1"
           />
         </div>
-        <button 
-          onClick={handleSendMessage} 
-          className="send-button"
-          disabled={!inputValue.trim()}
-          title="Send message"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffffff">
-            <path d="M12.7 5.3l4.6 4.6c.4.4.4 1 0 1.4s-1 .4-1.4 0L13 8.4V19c0 .6-.4 1-1 1s-1-.4-1-1V8.4l-2.9 2.9c-.4.4-1 .4-1.4 0-.2-.2-.3-.5-.3-.7 0-.2.1-.5.3-.7l4.6-4.6c.4-.4 1-.4 1.4 0z"/>
-          </svg>
-        </button>
+        <div className="button-row">
+          <div className="select-group">
+            <select className="action-select">
+              <option value="edit">Edit</option>
+              <option value="ask">Ask</option>
+            </select>
+            <select className="action-select">
+              <option value="edit">GPT-5</option>
+              <option value="ask">Grok</option>
+            </select>
+          </div>
+          <button 
+            onClick={handleSendMessage} 
+            className="send-button"
+            disabled={!inputValue.trim()}
+            title="Send message"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffffff">
+              <path d="M12.7 5.3l4.6 4.6c.4.4.4 1 0 1.4s-1 .4-1.4 0L13 8.4V19c0 .6-.4 1-1 1s-1-.4-1-1V8.4l-2.9 2.9c-.4.4-1 .4-1.4 0-.2-.2-.3-.5-.3-.7 0-.2.1-.5.3-.7l4.6-4.6c.4-.4 1-.4 1.4 0z"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
