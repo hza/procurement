@@ -18,6 +18,9 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   // Sort state
   const [sortBy, setSortBy] = useState('date');
 
+  // Status filter state - now supports multiple selections
+  const [statusFilter, setStatusFilter] = useState(['all']);
+
   // Status filter dropdown state
   const [isStatusDropdownOpen, setIsStatusDropdownOpen] = useState(false);
 
@@ -177,7 +180,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 onChange={(e) => setSortBy(e.target.value)}
                 className="sort-select"
               >
-                <option value="date">Newest first</option>
+                <option value="date">Newest First</option>
                 <option value="name">Sort by Name</option>
               </select>
             </div>
