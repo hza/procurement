@@ -33,7 +33,7 @@
 
 .comments-sidebar {
   width: 280px;
-  padding: 24px;
+  padding: 16px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(9, 30, 66, 0.08), 0 0 0 1px rgba(9, 30, 66, 0.08);
@@ -61,7 +61,8 @@
 }
 
 .comments-sidebar p {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   flex-shrink: 0;
   color: #5e6c84;
   font-size: 13px;
