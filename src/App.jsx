@@ -21,7 +21,6 @@ function App() {
   const editorRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [content, setContent] = React.useState(`
-  const handleFileUpload = (event) => {
       <h1>Procurement Contract Agreement</h1>
       <p><strong>Contract Number:</strong> PC-2025-001</p>
       <p><strong>Effective Date:</strong> September 9, 2025</p>
