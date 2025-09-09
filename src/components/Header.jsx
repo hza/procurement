@@ -67,13 +67,13 @@ const Header = ({ onFileUpload }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <div className="logo-container">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="6" width="24" height="20" rx="2" fill="#0052cc" stroke="#0052cc" strokeWidth="1"/>
-            <rect x="8" y="10" width="16" height="2" fill="#ffffff"/>
-            <rect x="8" y="14" width="12" height="2" fill="#ffffff"/>
-            <rect x="8" y="18" width="16" height="2" fill="#ffffff"/>
-            <rect x="8" y="22" width="8" height="2" fill="#ffffff"/>
-            <circle cx="20" cy="20" r="3" fill="#4c9aff"/>
-            <path d="M18 20L19.5 21.5L22 19" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <rect x="4" y="6" width="24" height="20" rx="2" fill="#0052cc" stroke="#0052cc" strokeWidth="1" />
+            <rect x="8" y="10" width="16" height="2" fill="#ffffff" />
+            <rect x="8" y="14" width="12" height="2" fill="#ffffff" />
+            <rect x="8" y="18" width="16" height="2" fill="#ffffff" />
+            <rect x="8" y="22" width="8" height="2" fill="#ffffff" />
+            <circle cx="20" cy="20" r="3" fill="#4c9aff" />
+            <path d="M18 20L19.5 21.5L22 19" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
           <span className="logo-text">Procurement Assistant</span>
         </div>
@@ -84,7 +84,7 @@ const Header = ({ onFileUpload }) => {
         </nav>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <button
+        <button
           onClick={handleUploadClick}
           className="upload-button"
         >
@@ -100,55 +100,55 @@ const Header = ({ onFileUpload }) => {
         />
       </div>
 
-    {showContractsModal && (
-      <div className="modal-overlay" onClick={handleCloseModal}>
-        <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
-          <div className="modal-header">
-            <h2>Contract Files</h2>
-            <button className="modal-close" onClick={handleCloseModal}>
-              <FaTimes />
-            </button>
-          </div>
-          <div className="modal-body">
-            <div className="files-list">
-              {contractFiles.map(file => (
-                <div key={file.id} className="file-item">
-                  <div className="file-icon">
-                    <FaFileAlt />
-                  </div>
-                  <div className="file-info">
-                    <div className="file-name">{file.name}</div>
-                    <div className="file-details">
-                      {file.size} • {file.date} • 
-                      <span className={`status ${file.status.toLowerCase().replace(' ', '-')}`}>
-                        {file.status}
-                      </span>
+      {showContractsModal && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Contract Files</h2>
+              <button className="modal-close" onClick={handleCloseModal}>
+                <FaTimes />
+              </button>
+            </div>
+            <div className="modal-body">
+              <div className="files-list">
+                {contractFiles.map(file => (
+                  <div key={file.id} className="file-item">
+                    <div className="file-icon">
+                      <FaFileAlt />
+                    </div>
+                    <div className="file-info">
+                      <div className="file-name">{file.name}</div>
+                      <div className="file-details">
+                        {file.size} • {file.date} •
+                        <span className={`status ${file.status.toLowerCase().replace(' ', '-')}`}>
+                          {file.status}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="file-actions">
+                      <button
+                        className="file-action-btn download"
+                        onClick={() => handleDownloadFile(file.id)}
+                        title="Download"
+                      >
+                        <FaDownload />
+                      </button>
+                      <button
+                        className="file-action-btn delete"
+                        onClick={() => handleDeleteFile(file.id)}
+                        title="Delete"
+                      >
+                        <FaTrash />
+                      </button>
                     </div>
                   </div>
-                  <div className="file-actions">
-                    <button 
-                      className="file-action-btn download" 
-                      onClick={() => handleDownloadFile(file.id)}
-                      title="Download"
-                    >
-                      <FaDownload />
-                    </button>
-                    <button 
-                      className="file-action-btn delete" 
-                      onClick={() => handleDeleteFile(file.id)}
-                      title="Delete"
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    )}
-        </header>
+      )}
+    </header>
 
   );
 };
