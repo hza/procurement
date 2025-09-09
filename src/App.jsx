@@ -1,13 +1,37 @@
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import Heading from '@tiptap/extension-heading'
 import 'prosemirror-view/style/prosemirror.css'
 import './App.css'
 import Header from './components/Header'
 
+const CustomHeading = Heading.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      id: {
+        default: null,
+        parseHTML: element => element.getAttribute('id'),
+        renderHTML: attributes => {
+          if (!attributes.id) {
+            return {}
+          }
+          return { id: attributes.id }
+        },
+      },
+    }
+  },
+})
+
 function App() {
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        heading: false,
+      }),
+      CustomHeading.configure({
+        levels: [1, 2, 3],
+      }),
     ],
     content: `
       <h1>Procurement Contract Agreement</h1>
