@@ -120,7 +120,7 @@ function App() {
     // Find the review item and set it in the chat input
     const reviewItem = reviewItems.find(item => item.id === reviewId);
     if (reviewItem && chatInputRef.current) {
-      const fixText = `Fix this: ${reviewItem.title} - ${reviewItem.description}`;
+      const fixText = `Fix this issue: ${reviewItem.title} - ${reviewItem.description}`;
       chatInputRef.current(fixText);
     }
   }
