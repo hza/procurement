@@ -116,6 +116,8 @@ const AIChat = ({ setInputText }) => {
             </select>
             <select className="action-select">
               <option value="edit">GPT-5</option>
+              <option value="edit">GPT-4o</option>
+              <option value="edit">GPT-5 mini</option>
             </select>
           </div>
           <button 
