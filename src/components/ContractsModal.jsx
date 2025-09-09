@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus, FaSearch } from 'react-icons/fa';
+import { FaTimes, FaFileAlt, FaDownload, FaTrash, FaPlus, FaSearch, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract }) => {
+const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewContract, onSelectContract }) => {
   // Sample contract files data
   const contractFiles = [
     { id: 1, name: 'Office Supply Contract', date: '2025-09-08', status: 'Done' },
@@ -15,11 +15,26 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   // Search state
   const [searchTerm, setSearchTerm] = useState('');
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4; // Show 4 contracts per page
+
   // Filter contracts based on search term
   const filteredContracts = contractFiles.filter(contract =>
     contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     contract.status.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredContracts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentContracts = filteredContracts.slice(startIndex, endIndex);
+
+  // Reset to first page when search changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -73,8 +88,12 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
             </div>
           </div>
           <div className="files-list">
-            {filteredContracts.map(file => (
-              <div key={file.id} className="file-item">
+            {currentContracts.map(file => (
+              <div 
+                key={file.id} 
+                className="file-item clickable"
+                onClick={() => onSelectContract && onSelectContract(file)}
+              >
                 <div className="file-icon">
                   <FaFileAlt />
                 </div>
@@ -90,14 +109,20 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 <div className="file-actions">
                   <button
                     className="file-action-btn download"
-                    onClick={() => onDownloadFile(file.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDownloadFile(file.id);
+                    }}
                     title="Download"
                   >
                     <FaDownload />
                   </button>
                   <button
                     className="file-action-btn delete"
-                    onClick={() => onDeleteFile(file.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDeleteFile(file.id);
+                    }}
                     title="Delete"
                   >
                     <FaTrash />
@@ -105,12 +130,42 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 </div>
               </div>
             ))}
-            {filteredContracts.length === 0 && searchTerm && (
+            {currentContracts.length === 0 && searchTerm && (
               <div className="no-results">
                 <p>No contracts found matching "{searchTerm}"</p>
               </div>
             )}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 1 && (
+            <div className="pagination-container">
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                <FaChevronLeft style={{ marginRight: '6px' }} />
+                Previous
+              </button>
+
+              <div className="pagination-info">
+                <span>Page {currentPage} of {totalPages}</span>
+                <span className="pagination-count">
+                  ({filteredContracts.length} contracts)
+                </span>
+              </div>
+
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Next
+                <FaChevronRight style={{ marginLeft: '6px' }} />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

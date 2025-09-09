@@ -76,6 +76,13 @@ const Header = ({ onFileUpload }) => {
     setShowContractsModal(false);
   };
 
+  const handleSelectContract = (contract) => {
+    console.log('Selected contract:', contract);
+    // Add contract selection logic here
+    // For example, open contract details or load contract content
+    setShowContractsModal(false);
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -133,6 +140,7 @@ const Header = ({ onFileUpload }) => {
         onDownloadFile={handleDownloadFile}
         onDeleteFile={handleDeleteFile}
         onNewContract={handleNewContract}
+        onSelectContract={handleSelectContract}
       />
     </header>
   );
