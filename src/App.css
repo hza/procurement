@@ -869,6 +869,19 @@
   }
 }
 
+/* Header Styles */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 16px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dfe1e6;
+  height: 48px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(9, 30, 66, 0.06);
+}
+
 /* AI Chat Thinking Indicator */
 .thinking-indicator {
   display: flex;

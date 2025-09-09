@@ -44,17 +44,7 @@ const Header = ({ onFileUpload }) => {
   };
 
   return (
-    <header style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: '6px 16px',
-      backgroundColor: '#ffffff',
-      borderBottom: '1px solid #dfe1e6',
-      height: '48px',
-      boxSizing: 'border-box',
-      boxShadow: '0 2px 4px rgba(9, 30, 66, 0.06)'
-    }}>
+    <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
         <div className="logo-container">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
