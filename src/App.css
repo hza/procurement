@@ -43,6 +43,13 @@
   background-color: #e9ecef !important;
 }
 
+.highlight-section {
+  background-color: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
 .ProseMirror {
   height: 100%;
   padding: 20px;

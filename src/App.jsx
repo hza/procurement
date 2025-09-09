@@ -82,9 +82,18 @@ function App() {
   })
 
   const scrollToSection = (id) => {
+    // Remove previous highlights
+    const allHighlighted = document.querySelectorAll('.highlight-section');
+    allHighlighted.forEach(el => el.classList.remove('highlight-section'));
+
     const element = document.getElementById(id);
     if (element) {
+      element.classList.add('highlight-section');
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Remove highlight after 3 seconds
+      setTimeout(() => {
+        element.classList.remove('highlight-section');
+      }, 3000);
     }
   }
 
