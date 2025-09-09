@@ -701,7 +701,7 @@
   border: 1px solid #e9ecef;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(9, 30, 66, 0.08);
-  transition: all 0.2s ease;
+  transition: all 1s ease-out;
 }
 
 .recommendation-box:hover {
@@ -1557,4 +1557,103 @@
   border-radius: 3px;
   font-style: italic;
   border: 1px dashed #2196f3;
+}
+
+/* Header Notifications */
+.notifications-container {
+  position: relative;
+}
+
+.notifications-button {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.notifications-button:hover {
+  background-color: rgba(9, 30, 66, 0.08);
+}
+
+.notification-dot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff5630;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.notifications-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background-color: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(9, 30, 66, 0.15);
+  z-index: 1000;
+  margin-top: 8px;
+  transition: all 1s ease-out;
+}
+
+.notifications-dropdown.fading {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.notification-item {
+  position: relative;
+  padding: 16px;
+  border-bottom: 1px solid #f4f5f7;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #5e6c84;
+  transition: background-color 0.2s ease;
+}
+
+.notification-close:hover {
+  background-color: rgba(9, 30, 66, 0.08);
+}
+
+.notification-content p {
+  margin: 0;
+  color: #495057;
+  font-style: italic;
+  line-height: 1.4;
 }

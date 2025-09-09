@@ -1,16 +1,18 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { FaUserCircle, FaUpload, FaBars, FaChevronDown } from 'react-icons/fa';
+import { FaUserCircle, FaUpload, FaBars, FaChevronDown, FaBell } from 'react-icons/fa';
 import ContractsModal from './OpenContract';
 import NewContract from './NewContract';
 
-const Header = ({ onFileUpload, onContractCreate }) => {
+const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommendationFading, onCloseRecommendation }) => {
   const fileInputRef = useRef(null);
   const [showContractsModal, setShowContractsModal] = useState(false);
   const [showWorkflowMenu, setShowWorkflowMenu] = useState(false);
   const [showContractsMenu, setShowContractsMenu] = useState(false);
   const [showNewContractModal, setShowNewContractModal] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const workflowMenuRef = useRef(null);
   const contractsMenuRef = useRef(null);
+  const notificationsRef = useRef(null);
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -60,6 +62,11 @@ const Header = ({ onFileUpload, onContractCreate }) => {
       // Check if click is outside contracts menu
       if (contractsMenuRef.current && !contractsMenuRef.current.contains(event.target)) {
         setShowContractsMenu(false);
+      }
+
+      // Check if click is outside notifications
+      if (notificationsRef.current && !notificationsRef.current.contains(event.target)) {
+        setShowNotifications(false);
       }
     };
 
@@ -131,6 +138,15 @@ const Header = ({ onFileUpload, onContractCreate }) => {
     }
   };
 
+  const handleNotificationsToggle = () => {
+    setShowNotifications(!showNotifications);
+    // Close other menus when opening notifications
+    if (!showNotifications) {
+      setShowWorkflowMenu(false);
+      setShowContractsMenu(false);
+    }
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -193,6 +209,35 @@ const Header = ({ onFileUpload, onContractCreate }) => {
               <button onClick={handleCloseContract} className="workflow-option">
                 Close Contract
               </button>
+            </div>
+          )}
+        </div>
+        <div className="notifications-container" ref={notificationsRef}>
+          <button
+            onClick={handleNotificationsToggle}
+            className="notifications-button"
+            title="Notifications"
+          >
+            <FaBell size={20} color="#5e6c84" />
+            {showRecommendation && <span className="notification-dot"></span>}
+          </button>
+          {showNotifications && showRecommendation && (
+            <div className={`notifications-dropdown ${recommendationFading ? 'fading' : ''}`}>
+              <div className="notification-item">
+                <button 
+                  onClick={onCloseRecommendation}
+                  className="notification-close"
+                  title="Dismiss"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                  </svg>
+                </button>
+                <div className="notification-content">
+                  <p><em>⚠️ Warning: This contract contains numerous one-sided provisions that heavily favor the seller. We strongly recommend consulting with legal counsel before signing.</em></p>
+                </div>
+              </div>
             </div>
           )}
         </div>

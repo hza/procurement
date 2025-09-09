@@ -213,23 +213,6 @@ function App() {
     }
   }, [content]);
 
-  // Auto-hide recommendation after 3 seconds with fade effect
-  useEffect(() => {
-    if (showRecommendation && !recommendationFading) {
-      const fadeTimer = setTimeout(() => {
-        setRecommendationFading(true);
-        // Hide completely after fade animation (1 second)
-        setTimeout(() => {
-          setShowRecommendation(false);
-          setRecommendationFading(false);
-        }, 1000);
-      }, 3000); // Start fade after 3 seconds
-
-      // Cleanup timer if component unmounts or showRecommendation changes
-      return () => clearTimeout(fadeTimer);
-    }
-  }, [showRecommendation, recommendationFading]);
-
   const handleFix = (reviewId) => {
     // Find the review item and set it in the chat input
     const reviewItem = reviewItems.find(item => item.id === reviewId);
@@ -443,7 +426,13 @@ function App() {
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header onFileUpload={handleFileUpload} onContractCreate={handleContractCreate} />
+      <Header 
+        onFileUpload={handleFileUpload} 
+        onContractCreate={handleContractCreate}
+        showRecommendation={showRecommendation}
+        recommendationFading={recommendationFading}
+        onCloseRecommendation={handleCloseRecommendation}
+      />
       <div className="editor-container">
         <div className="comments-sidebar">
           <div className="ai-review-header">
@@ -510,21 +499,6 @@ function App() {
               ))
             )}
           </ul>
-          {showRecommendation && (
-            <div className={`recommendation-box ${recommendationFading ? 'fading' : ''}`}>
-              <button 
-                onClick={handleCloseRecommendation}
-                className="close-button"
-                title="Dismiss recommendation"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="18" y1="6" x2="6" y2="18"/>
-                  <line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-              </button>
-              <p><em>⚠️ Warning: This contract contains numerous one-sided provisions that heavily favor the seller. We strongly recommend consulting with legal counsel before signing.</em></p>
-            </div>
-          )}
         </div>
         <div className="editor-main">
           <div className="editor-toolbar confluence-like" role="toolbar" aria-label="Document formatting tools">
