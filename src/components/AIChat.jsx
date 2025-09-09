@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const AIChat = ({ setInputText }) => {
+const AIChat = ({ setInputText, setResetChat }) => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
   ]);
@@ -16,16 +16,21 @@ const AIChat = ({ setInputText }) => {
     }
   };
 
-  // Effect to handle external input setting
+  // Effect to handle external reset function setting
   useEffect(() => {
-    if (setInputText) {
-      setInputText((text) => {
-        setInputValue(text);
-        // Auto-resize after setting text
-        setTimeout(autoResize, 0);
+    if (setResetChat) {
+      setResetChat(() => {
+        // Reset messages to initial state
+        setMessages([
+          { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
+        ]);
+        // Clear input
+        setInputValue('');
+        // Stop thinking if active
+        setIsThinking(false);
       });
     }
-  }, [setInputText]);
+  }, [setResetChat]);
 
   // Auto-resize when input value changes
   useEffect(() => {

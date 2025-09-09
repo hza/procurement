@@ -6,6 +6,7 @@ import AIChat from './components/AIChat'
 function App() {
   const editorRef = useRef(null)
   const chatInputRef = useRef(null)
+  const chatResetRef = useRef(null)
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [showRecommendation, setShowRecommendation] = React.useState(true)
   const [reviewItems, setReviewItems] = React.useState([
@@ -120,6 +121,10 @@ function App() {
         setSelectedSection(null);
         setShowRecommendation(false);
         setReviewItems([]);
+        // Reset AI assistant chat
+        if (chatResetRef.current) {
+          chatResetRef.current();
+        }
       };
       reader.readAsText(file);
     }
@@ -136,6 +141,10 @@ function App() {
     setSelectedSection(null);
     setShowRecommendation(false);
     setReviewItems([]);
+    // Reset AI assistant chat
+    if (chatResetRef.current) {
+      chatResetRef.current();
+    }
     console.log('Created new contract:', newContract);
   }
 
@@ -508,7 +517,10 @@ function App() {
             }}
           />
         </div>
-        <AIChat setInputText={(fn) => { chatInputRef.current = fn; }} />
+        <AIChat 
+          setInputText={(fn) => { chatInputRef.current = fn; }} 
+          setResetChat={(fn) => { chatResetRef.current = fn; }}
+        />
       </div>
     </div>
   )
