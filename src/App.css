@@ -1101,7 +1101,7 @@
 .workflow-option {
   display: block;
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 16px;
   background: none;
   border: none;
   text-align: left;
@@ -1173,10 +1173,10 @@
   margin-top: 4px;
 }
 
-.contracts-option {
+.contracts-menu-container .contracts-option {
   display: block;
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 16px;
   background: none;
   border: none;
   text-align: left;
