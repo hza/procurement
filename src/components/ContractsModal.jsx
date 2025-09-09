@@ -18,15 +18,20 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
   // Sort state
   const [sortBy, setSortBy] = useState('date');
 
+  // Status filter state
+  const [statusFilter, setStatusFilter] = useState('all');
+
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Show 4 contracts per page
 
-  // Filter contracts based on search term
-  const filteredContracts = contractFiles.filter(contract =>
-    contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    contract.status.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filter contracts based on search term and status
+  const filteredContracts = contractFiles.filter(contract => {
+    const matchesSearch = contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         contract.status.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || contract.status.toLowerCase() === statusFilter.toLowerCase();
+    return matchesSearch && matchesStatus;
+  });
 
   // Sort filtered contracts
   const sortedContracts = [...filteredContracts].sort((a, b) => {
@@ -88,6 +93,18 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="search-input"
               />
+            </div>
+            <div className="status-filter-wrapper">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="status-filter-select"
+              >
+                <option value="all">All Status</option>
+                <option value="done">Done</option>
+                <option value="negotiations">Negotiations</option>
+                <option value="review">Review</option>
+              </select>
             </div>
             <div className="sort-wrapper">
               <select
