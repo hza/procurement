@@ -50,7 +50,7 @@ const AIChat = ({ setInputText }) => {
       setTimeout(() => {
         const aiResponse = {
           id: messages.length + 2,
-          text: "I understand your question about the contract. Let me analyze this for you...",
+          text: "The system is not connected to an AI backend yet. This requires buying credits from OpenAI.",
           sender: 'ai',
           timestamp: new Date()
         };
@@ -101,7 +101,6 @@ const AIChat = ({ setInputText }) => {
             </select>
             <select className="action-select">
               <option value="edit">GPT-5</option>
-              <option value="ask">Grok</option>
             </select>
           </div>
           <button 
