@@ -1129,6 +1129,81 @@
   border-radius: 4px;
 }
 
+/* Contracts Menu Styles */
+.contracts-menu-container {
+  position: relative;
+}
+
+.contracts-button {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #42526e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  gap: 4px;
+}
+
+.contracts-button:hover {
+  background: #f4f5f7;
+  border-color: #0052cc;
+  color: #172b4d;
+}
+
+.contracts-button:focus-visible {
+  outline: 2px solid #4c9aff;
+  outline-offset: 2px;
+}
+
+.contracts-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #dfe1e6;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+  min-width: 140px;
+  z-index: 1000;
+  margin-top: 4px;
+}
+
+.contracts-option {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 500;
+  color: #42526e;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.contracts-option:hover {
+  background-color: #f4f5f7;
+  color: #172b4d;
+}
+
+.contracts-option:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+.contracts-option:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+.contracts-option:only-child {
+  border-radius: 4px;
+}
+
 /* AI Chat Thinking Indicator */
 .thinking-indicator {
   display: flex;

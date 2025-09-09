@@ -6,7 +6,9 @@ const Header = ({ onFileUpload }) => {
   const fileInputRef = useRef(null);
   const [showContractsModal, setShowContractsModal] = useState(false);
   const [showWorkflowMenu, setShowWorkflowMenu] = useState(false);
+  const [showContractsMenu, setShowContractsMenu] = useState(false);
   const workflowMenuRef = useRef(null);
+  const contractsMenuRef = useRef(null);
 
   const handleUploadClick = () => {
     fileInputRef.current.click();
@@ -45,16 +47,28 @@ const Header = ({ onFileUpload }) => {
     // In a real app, this would show a confirmation and delete
   };
 
-  // Close workflow menu when clicking outside
+  // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if click is outside workflow menu
       if (workflowMenuRef.current && !workflowMenuRef.current.contains(event.target)) {
         setShowWorkflowMenu(false);
       }
+      
+      // Check if click is outside contracts menu
+      if (contractsMenuRef.current && !contractsMenuRef.current.contains(event.target)) {
+        setShowContractsMenu(false);
+      }
     };
 
+    // Add both mouse and touch event listeners for better mobile support
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
   }, []);
 
   const handleStartNegotiation = () => {
@@ -83,6 +97,34 @@ const Header = ({ onFileUpload }) => {
     setShowContractsModal(false);
   };
 
+  const handleNewContractFromMenu = () => {
+    console.log('Creating new contract from menu...');
+    setShowContractsMenu(false);
+    // Add new contract creation logic here
+  };
+
+  const handleOpenContractFromMenu = () => {
+    console.log('Opening contracts modal from menu...');
+    setShowContractsMenu(false);
+    setShowContractsModal(true);
+  };
+
+  const handleContractsMenuToggle = () => {
+    setShowContractsMenu(!showContractsMenu);
+    // Close workflow menu when opening contracts menu
+    if (!showContractsMenu) {
+      setShowWorkflowMenu(false);
+    }
+  };
+
+  const handleWorkflowMenuToggle = () => {
+    setShowWorkflowMenu(!showWorkflowMenu);
+    // Close contracts menu when opening workflow menu
+    if (!showWorkflowMenu) {
+      setShowContractsMenu(false);
+    }
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -99,7 +141,25 @@ const Header = ({ onFileUpload }) => {
           <span className="logo-text">Procurement Assistant</span>
         </div>
         <nav className="main-nav">
-          <button onClick={() => handleNav('contracts')}>Contracts</button>
+          <div className="contracts-menu-container" ref={contractsMenuRef}>
+            <button
+              onClick={handleContractsMenuToggle}
+              className="contracts-button"
+            >
+              Contracts
+              <FaChevronDown size={12} style={{ marginLeft: '6px' }} />
+            </button>
+            {showContractsMenu && (
+              <div className="contracts-dropdown">
+                <button onClick={handleNewContractFromMenu} className="contracts-option">
+                  New Contract
+                </button>
+                <button onClick={handleOpenContractFromMenu} className="contracts-option">
+                  Open Contract
+                </button>
+              </div>
+            )}
+          </div>
           <button onClick={() => handleNav('administration')}>Administration</button>
           <button onClick={() => handleNav('settings')}>Settings</button>
         </nav>
@@ -107,7 +167,7 @@ const Header = ({ onFileUpload }) => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <div className="workflow-menu-container" ref={workflowMenuRef}>
           <button
-            onClick={() => setShowWorkflowMenu(!showWorkflowMenu)}
+            onClick={handleWorkflowMenuToggle}
             className="workflow-button"
           >
             Workflow
