@@ -133,6 +133,17 @@ function App() {
             behavior: 'smooth'
           });
         }
+        // Focus the editor for immediate typing
+        if (editorRef.current) {
+          editorRef.current.focus();
+          // Place cursor at the end of the content
+          const range = document.createRange();
+          const selection = window.getSelection();
+          range.selectNodeContents(editorRef.current);
+          range.collapse(false);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
       };
       reader.readAsText(file);
     }
@@ -160,6 +171,17 @@ function App() {
         top: 0,
         behavior: 'smooth'
       });
+    }
+    // Focus the editor for immediate typing
+    if (editorRef.current) {
+      editorRef.current.focus();
+      // Place cursor at the end of the content
+      const range = document.createRange();
+      const selection = window.getSelection();
+      range.selectNodeContents(editorRef.current);
+      range.collapse(false);
+      selection.removeAllRanges();
+      selection.addRange(range);
     }
     console.log('Created new contract:', newContract);
   }
