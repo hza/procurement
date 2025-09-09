@@ -136,11 +136,11 @@ function App() {
         // Focus the editor for immediate typing
         if (editorRef.current) {
           editorRef.current.focus();
-          // Place cursor at the end of the content
+          // Place cursor at the beginning of the content
           const range = document.createRange();
           const selection = window.getSelection();
           range.selectNodeContents(editorRef.current);
-          range.collapse(false);
+          range.collapse(true);
           selection.removeAllRanges();
           selection.addRange(range);
         }
@@ -175,11 +175,11 @@ function App() {
     // Focus the editor for immediate typing
     if (editorRef.current) {
       editorRef.current.focus();
-      // Place cursor at the end of the content
+      // Place cursor at the beginning of the content
       const range = document.createRange();
       const selection = window.getSelection();
       range.selectNodeContents(editorRef.current);
-      range.collapse(false);
+      range.collapse(true);
       selection.removeAllRanges();
       selection.addRange(range);
     }
