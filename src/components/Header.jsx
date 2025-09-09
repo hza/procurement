@@ -163,10 +163,10 @@ const Header = ({ onFileUpload, onContractCreate }) => {
                 <button onClick={handleOpenContractFromMenu} className="contracts-option">
                   Open Contract ...
                 </button>
-                <button onClick={handleNewContractFromMenu} className="contracts-option">
-                  Export Contract ...
+                <button onClick={()=>alert('Not impl')} className="contracts-option">
+                  Export to PDF ...
                 </button>
-                <button onClick={handleNewContractFromMenu} className="contracts-option">
+                <button onClick={()=>alert('Not impl')} className="contracts-option">
                   Manage Contracts ...
                 </button>
               </div>
