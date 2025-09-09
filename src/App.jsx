@@ -86,13 +86,32 @@ function App() {
     const allHighlighted = document.querySelectorAll('.highlight-section');
     allHighlighted.forEach(el => el.classList.remove('highlight-section'));
 
-    const element = document.getElementById(id);
-    if (element) {
-      element.classList.add('highlight-section');
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Find the element in the editor
+    const editorElement = document.querySelector('.ProseMirror');
+    const targetElement = editorElement?.querySelector(`#${id}`);
+    
+    if (targetElement && editorElement) {
+      // Add highlight
+      targetElement.classList.add('highlight-section');
+      
+      // Get the editor main container for scrolling
+      const editorContainer = document.querySelector('.editor-main');
+      if (editorContainer) {
+        // Calculate scroll position relative to the editor container
+        const containerRect = editorContainer.getBoundingClientRect();
+        const targetRect = targetElement.getBoundingClientRect();
+        const scrollTop = editorContainer.scrollTop + targetRect.top - containerRect.top - 20;
+        
+        // Scroll to the element
+        editorContainer.scrollTo({
+          top: scrollTop,
+          behavior: 'smooth'
+        });
+      }
+      
       // Remove highlight after 3 seconds
       setTimeout(() => {
-        element.classList.remove('highlight-section');
+        targetElement.classList.remove('highlight-section');
       }, 3000);
     }
   }
