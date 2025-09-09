@@ -1,39 +1,10 @@
-import { useEditor, EditorContent } from '@tiptap/react'
-import StarterKit from '@tiptap/starter-kit'
-import Heading from '@tiptap/extension-heading'
-import 'prosemirror-view/style/prosemirror.css'
+import React, { useRef, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
 
-const CustomHeading = Heading.extend({
-  addAttributes() {
-    return {
-      ...this.parent?.(),
-      id: {
-        default: null,
-        parseHTML: element => element.getAttribute('id'),
-        renderHTML: attributes => {
-          if (!attributes.id) {
-            return {}
-          }
-          return { id: attributes.id }
-        },
-      },
-    }
-  },
-})
-
 function App() {
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: false,
-      }),
-      CustomHeading.configure({
-        levels: [1, 2, 3],
-      }),
-    ],
-    content: `
+  const editorRef = useRef(null)
+  const [content, setContent] = React.useState(`
       <h1>Procurement Contract Agreement</h1>
       <p><strong>Contract Number:</strong> PC-2025-001</p>
       <p><strong>Effective Date:</strong> September 9, 2025</p>
@@ -102,8 +73,30 @@ function App() {
       <p>Buyer: ___________________________ Date: _______________</p>
       <p>Seller: ___________________________ Date: _______________</p>
       <p><em>Warning: This contract contains numerous one-sided provisions that heavily favor the Seller. Buyer should seek legal counsel before signing.</em></p>
-    `,
-  })
+    `)
+
+    const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const newContent = e.target.result;
+        setContent(newContent);
+        // Update the contentEditable div directly
+        if (editorRef.current) {
+          editorRef.current.innerHTML = newContent;
+        }
+      };
+      reader.readAsText(file);
+    }
+  }
+
+  // Initialize contentEditable with content on mount
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.innerHTML = content;
+    }
+  }, [])
 
   const scrollToSection = (id) => {
     // Remove previous highlights
@@ -111,7 +104,7 @@ function App() {
     allHighlighted.forEach(el => el.classList.remove('highlight-section'));
 
     // Find the element in the editor
-    const editorElement = document.querySelector('.ProseMirror');
+    const editorElement = editorRef.current;
     const targetElement = editorElement?.querySelector(`#${id}`);
     
     if (targetElement && editorElement) {
@@ -141,18 +134,12 @@ function App() {
           behavior: 'smooth'
         });
       }
-      
-      // Remove highlight after 3 seconds
-      setTimeout(() => {
-        const highlightedElements = document.querySelectorAll('.highlight-section');
-        highlightedElements.forEach(el => el.classList.remove('highlight-section'));
-      }, 3000);
     }
   }
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      <Header />
+      <Header onFileUpload={handleFileUpload} />
       <div className="editor-container">
         <div className="comments-sidebar">
           <h3>Contract Review</h3>
@@ -197,7 +184,12 @@ function App() {
           <p><em>Recommendation: This contract heavily favors the seller and contains multiple red flags. Consult legal counsel before proceeding.</em></p>
         </div>
         <div className="editor-main">
-          <EditorContent editor={editor} />
+          <div 
+            ref={editorRef}
+            contentEditable
+            className="content-editable"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
         </div>
       </div>
     </div>
