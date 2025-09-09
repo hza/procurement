@@ -136,37 +136,37 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
               </div>
             )}
           </div>
-
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="pagination-container">
-              <button
-                className="pagination-btn"
-                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                disabled={currentPage === 1}
-              >
-                <FaChevronLeft style={{ marginRight: '6px' }} />
-                Previous
-              </button>
-
-              <div className="pagination-info">
-                <span>Page {currentPage} of {totalPages}</span>
-                <span className="pagination-count">
-                  ({filteredContracts.length} contracts)
-                </span>
-              </div>
-
-              <button
-                className="pagination-btn"
-                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                disabled={currentPage === totalPages}
-              >
-                Next
-                <FaChevronRight style={{ marginLeft: '6px' }} />
-              </button>
-            </div>
-          )}
         </div>
+
+        {/* Pagination Controls - Fixed at bottom */}
+        {totalPages > 1 && (
+          <div className="pagination-container">
+            <button
+              className="pagination-btn"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              <FaChevronLeft style={{ marginRight: '6px' }} />
+              Previous
+            </button>
+
+            <div className="pagination-info">
+              <span>Page {currentPage} of {totalPages}</span>
+              <span className="pagination-count">
+                ({filteredContracts.length} contracts)
+              </span>
+            </div>
+
+            <button
+              className="pagination-btn"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+              <FaChevronRight style={{ marginLeft: '6px' }} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
