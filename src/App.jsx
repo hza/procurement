@@ -169,7 +169,7 @@ function App() {
     if (editorContainer) {
       editorContainer.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'instant'
       });
     }
     // Focus the editor for immediate typing
