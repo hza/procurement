@@ -158,10 +158,10 @@ const Header = ({ onFileUpload }) => {
                   Open Contract ...
                 </button>
                 <button onClick={handleNewContractFromMenu} className="contracts-option">
-                  Download Contract
+                  Export Contract ...
                 </button>
                 <button onClick={handleNewContractFromMenu} className="contracts-option">
-                  Manage Contracts
+                  Manage Contracts ...
                 </button>
               </div>
             )}
