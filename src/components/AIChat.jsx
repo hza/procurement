@@ -1,19 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const AIChat = ({ setInputText }) => {
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const textareaRef = useRef(null);
+
+  // Auto-resize textarea function
+  const autoResize = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    }
+  };
 
   // Effect to handle external input setting
   useEffect(() => {
     if (setInputText) {
       setInputText((text) => {
         setInputValue(text);
+        // Auto-resize after setting text
+        setTimeout(autoResize, 0);
       });
     }
   }, [setInputText]);
+
+  // Auto-resize when input value changes
+  useEffect(() => {
+    autoResize();
+  }, [inputValue]);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   const handleSendMessage = () => {
     if (inputValue.trim()) {
@@ -64,8 +84,9 @@ const AIChat = ({ setInputText }) => {
       <div className="chat-input-container">
         <div className="input-wrapper">
           <textarea
+            ref={textareaRef}
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             placeholder="Ask me anything about ..."
             className="chat-input"
