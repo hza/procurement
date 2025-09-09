@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaTimes, FaFileAlt, FaDownload, FaTrash } from 'react-icons/fa';
 
 const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
@@ -12,13 +12,30 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile }) => {
     { id: 6, name: 'Consulting_Services_Agreement.pdf', size: '2.1 MB', date: '2025-08-20', status: 'Under Review' }
   ];
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Contract Files</h2>
+          <h2>Contracts</h2>
           <button className="modal-close" onClick={onClose}>
             <FaTimes />
           </button>
