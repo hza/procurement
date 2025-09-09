@@ -144,40 +144,40 @@ function App() {
         <div className="comments-sidebar">
           <h3>Contract Review</h3>
           <ul>
-            <li onClick={() => scrollToSection('scope-of-work')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('scope-of-work')} className="review-item">
               <strong>Hidden Fees:</strong> Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.
             </li>
-            <li onClick={() => scrollToSection('pricing')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('pricing')} className="review-item">
               <strong>Non-refundable Deposits:</strong> 30% payment upon signing is non-refundable, even if contract is terminated.
             </li>
-            <li onClick={() => scrollToSection('renewal')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('renewal')} className="review-item">
               <strong>Automatic Renewal:</strong> Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.
             </li>
-            <li onClick={() => scrollToSection('quality')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('quality')} className="review-item">
               <strong>Vague Quality Standards:</strong> Quality "may vary based on market availability" - no guaranteed standards.
             </li>
-            <li onClick={() => scrollToSection('quality')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('quality')} className="review-item">
               <strong>Waived Inspection Rights:</strong> Buyer cannot inspect goods before acceptance, must accept whatever is delivered.
             </li>
-            <li onClick={() => scrollToSection('force-majeure')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('force-majeure')} className="review-item">
               <strong>Broad Force Majeure:</strong> Defined to include minor inconveniences, allowing seller to delay indefinitely.
             </li>
-            <li onClick={() => scrollToSection('termination')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('termination')} className="review-item">
               <strong>Unilateral Termination:</strong> Seller can terminate anytime for any reason, keeping all payments.
             </li>
-            <li onClick={() => scrollToSection('dispute')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('dispute')} className="review-item">
               <strong>Arbitration Clause:</strong> Disputes resolved in seller's chosen location, costs borne by buyer if seller wins.
             </li>
-            <li onClick={() => scrollToSection('confidentiality')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('confidentiality')} className="review-item">
               <strong>Data Sharing:</strong> Seller can use buyer's proprietary information for marketing without consent.
             </li>
-            <li onClick={() => scrollToSection('ip')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('ip')} className="review-item">
               <strong>IP Transfer:</strong> All intellectual property developed during contract becomes seller's property.
             </li>
-            <li onClick={() => scrollToSection('misc')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('misc')} className="review-item">
               <strong>Assignment Rights:</strong> Seller can assign contract to any third party without buyer's approval.
             </li>
-            <li onClick={() => scrollToSection('misc')} style={{ cursor: 'pointer', padding: '8px', border: '1px solid #ddd', marginBottom: '5px', borderRadius: '4px', backgroundColor: '#f9f9f9' }}>
+            <li onClick={() => scrollToSection('misc')} className="review-item">
               <strong>Amendment Power:</strong> Only seller can amend terms with 30 days notice.
             </li>
           </ul>

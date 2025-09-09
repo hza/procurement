@@ -91,3 +91,12 @@
 .content-editable li {
   margin-bottom: 0.5em;
 }
+
+.review-item {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
