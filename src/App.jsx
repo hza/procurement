@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header'
+import AIChat from './components/AIChat'
 
 const reviewItems = [
   { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.' },
@@ -212,6 +213,7 @@ function App() {
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </div>
+        <AIChat />
       </div>
     </div>
   )
