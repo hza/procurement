@@ -125,6 +125,14 @@ function App() {
         if (chatResetRef.current) {
           chatResetRef.current();
         }
+        // Scroll to top of editor
+        const editorContainer = document.querySelector('.editor-main');
+        if (editorContainer) {
+          editorContainer.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
       };
       reader.readAsText(file);
     }
@@ -144,6 +152,14 @@ function App() {
     // Reset AI assistant chat
     if (chatResetRef.current) {
       chatResetRef.current();
+    }
+    // Scroll to top of editor
+    const editorContainer = document.querySelector('.editor-main');
+    if (editorContainer) {
+      editorContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
     console.log('Created new contract:', newContract);
   }
