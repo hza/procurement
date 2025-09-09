@@ -41,7 +41,7 @@ function App() {
       <p><strong>Parties Involved:</strong></p>
       <ul>
         <li><strong>Buyer:</strong> ABC Corporation, 123 Business St, City, State, ZIP</li>
-        <li><strong>Seller:</strong> XYZ Suppliers Inc., 456 Supply Ave, City, State, ZIP (Note: Seller may subcontract to undisclosed third parties without prior approval)</li>
+        <li><strong>Seller:</strong> CCP Suppliers Inc., 456 Supply Ave, City, State, ZIP (Note: Seller may subcontract to undisclosed third parties without prior approval)</li>
       </ul>
       <h2 id="scope-of-work">1. Scope of Work</h2>
       <p>The Seller agrees to provide the following goods and services to the Buyer, subject to change at Seller's discretion:</p>
@@ -309,6 +309,12 @@ function App() {
       // Find the element in the editor
       const editorElement = editorRef.current;
       const targetElement = editorElement?.querySelector(`#${sectionId}`);
+      // Remove previous highlights
+      if (editorElement) {
+        editorElement.querySelectorAll('.highlight-section').forEach(el => {
+          el.classList.remove('highlight-section');
+        });
+      }
       
       if (targetElement && editorElement) {
         // Add highlight to the heading
@@ -329,7 +335,11 @@ function App() {
           // Calculate scroll position relative to the editor container
           const containerRect = editorContainer.getBoundingClientRect();
           const targetRect = targetElement.getBoundingClientRect();
-          const scrollTop = editorContainer.scrollTop + targetRect.top - containerRect.top - 20;
+          // Account for sticky toolbar height so heading isn't hidden
+          const toolbar = editorContainer.querySelector('.editor-toolbar');
+          const toolbarHeight = toolbar ? toolbar.getBoundingClientRect().height : 0;
+          const extraPadding = 12; // small visual breathing space
+          const scrollTop = editorContainer.scrollTop + targetRect.top - containerRect.top - toolbarHeight - extraPadding;
           
           // Scroll to the element
           editorContainer.scrollTo({
