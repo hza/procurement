@@ -799,6 +799,7 @@
 
 .sort-wrapper {
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 .sort-select {
