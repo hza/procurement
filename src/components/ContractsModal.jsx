@@ -59,7 +59,7 @@ const ContractsModal = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCo
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content contracts-modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Contracts</h2>
+          <h2>Open Contract</h2>
           <button className="modal-close" onClick={onClose}>
             <FaTimes />
           </button>
