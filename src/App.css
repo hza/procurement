@@ -1689,8 +1689,9 @@
 
 /* Feedback Modal Styles */
 .feedback-modal {
-  max-width: 500px;
+  max-width: 550px;
   width: 100%;
+  min-width: 400px;
 }
 
 .feedback-modal .modal-header {
@@ -1704,7 +1705,7 @@
 }
 
 .feedback-form {
-  padding: 24px;
+  padding: 20px 24px;
 }
 
 .feedback-section {
@@ -1766,6 +1767,9 @@
   min-height: 100px;
   background-color: #ffffff;
   color: #172b4d;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .feedback-textarea:focus {
