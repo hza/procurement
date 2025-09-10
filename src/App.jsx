@@ -10,6 +10,7 @@ function App() {
   const [selectedSection, setSelectedSection] = React.useState(null)
   const [showRecommendation, setShowRecommendation] = React.useState(true)
   const [recommendationFading, setRecommendationFading] = React.useState(false)
+  const [analyzerType, setAnalyzerType] = React.useState('contract')
   const [reviewItems, setReviewItems] = React.useState([
     { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.' },
     { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.' },
@@ -436,7 +437,16 @@ function App() {
       <div className="editor-container">
         <div className="comments-sidebar">
           <div className="ai-review-header">
-            <h3>Smart Contract Analyzer</h3>
+            <div className="analyzer-selector">
+              <select 
+                value={analyzerType} 
+                onChange={(e) => setAnalyzerType(e.target.value)}
+                className="analyzer-select"
+              >
+                <option value="contract">Smart Contract Analyzer</option>
+                <option value="negotiation">Negotiation Assistant</option>
+              </select>
+            </div>
             <button 
               onClick={handleRefreshReview}
               className="refresh-button"

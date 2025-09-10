@@ -5,10 +5,8 @@
   align-items: center;
   padding: 6px 16px;
   background-color: #ffffff;
-  border-bottom: 1px solid #dfe1e6;
   height: 48px;
   box-sizing: border-box;
-  box-shadow: 0 2px 4px rgba(9, 30, 66, 0.06);
 }
 
 /* Modal Styles */
@@ -42,7 +40,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px 24px 0 24px;
-  border-bottom: 1px solid #dfe1e6;
   margin-bottom: 0;
 }
 
@@ -216,7 +213,6 @@
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(9, 30, 66, 0.08), 0 0 0 1px rgba(9, 30, 66, 0.08);
-  border: 1px solid #dfe1e6;
 }
 
 .comments-sidebar {
@@ -1658,6 +1654,47 @@
   line-height: 1.4;
 }
 
+/* Analyzer Selector Styles */
+.analyzer-selector {
+  flex: 1;
+  margin-right: 12px;
+}
+
+.ai-review-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #ffffff;
+}
+
+.analyzer-select {
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #172b4d;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23172b4d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px;
+  padding-right: 32px;
+}
+
+.analyzer-select:hover {
+  background-color: #f8f9fa;
+}
+
+.analyzer-select:focus {
+  outline: none;
+  background-color: #f8f9fa;
+}
+
 /* Feedback Button Styles */
 .feedback-button {
   background-color: #0066cc;
@@ -1759,7 +1796,7 @@
 .feedback-textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #dfe1e6;
+  border: none;
   border-radius: 4px;
   font-size: 14px;
   font-family: inherit;
@@ -1774,8 +1811,7 @@
 
 .feedback-textarea:focus {
   outline: none;
-  border-color: #0066cc;
-  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2);
+  background-color: #f8f9fa;
 }
 
 .feedback-textarea::placeholder {
