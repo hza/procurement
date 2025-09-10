@@ -436,7 +436,7 @@ function App() {
       <div className="editor-container">
         <div className="comments-sidebar">
           <div className="ai-review-header">
-            <h3>AI Analysis</h3>
+            <h3>Smart Contract Analyzer</h3>
             <button 
               onClick={handleRefreshReview}
               className="refresh-button"
