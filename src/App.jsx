@@ -25,6 +25,20 @@ function App() {
     { id: 'assignment-rights', sectionId: 'misc', title: 'Assignment Rights', description: 'Seller can assign contract to any third party without buyer\'s approval.' },
     { id: 'amendment-power', sectionId: 'misc', title: 'Amendment Power', description: 'Only seller can amend terms with 30 days notice.' }
   ])
+
+  const [negotiationItems, setNegotiationItems] = React.useState([
+    { id: 'cost-reduction', sectionId: 'pricing', title: 'Cost Reduction Opportunity', description: 'Negotiate 15-20% reduction in base price by leveraging competitive bids and volume commitments.' },
+    { id: 'payment-terms', sectionId: 'pricing', title: 'Payment Terms Improvement', description: 'Extend payment terms from 30 days to 60-90 days to improve cash flow and reduce financing costs.' },
+    { id: 'volume-discounts', sectionId: 'pricing', title: 'Volume Discount Negotiation', description: 'Secure 5-10% additional discount by committing to 20% higher volume over 3-year period.' },
+    { id: 'service-levels', sectionId: 'quality', title: 'Service Level Enhancement', description: 'Negotiate guaranteed 99.5% uptime SLA with financial penalties for non-compliance.' },
+    { id: 'warranty-extension', sectionId: 'warranties', title: 'Extended Warranty Terms', description: 'Extend warranty period from 30 days to 12 months and include on-site support.' },
+    { id: 'termination-rights', sectionId: 'termination', title: 'Termination Rights', description: 'Negotiate mutual termination rights with 60-day notice period and fair compensation terms.' },
+    { id: 'performance-bonuses', sectionId: 'pricing', title: 'Performance-Based Incentives', description: 'Add performance bonuses for early delivery and quality excellence (up to 5% of contract value).' },
+    { id: 'training-support', sectionId: 'scope-of-work', title: 'Training & Support Inclusion', description: 'Negotiate complimentary training sessions and ongoing technical support at no additional cost.' },
+    { id: 'flexibility-clause', sectionId: 'misc', title: 'Contract Flexibility', description: 'Add clauses allowing scope adjustments within 15% without price changes.' },
+    { id: 'benchmarking-rights', sectionId: 'misc', title: 'Benchmarking Rights', description: 'Secure right to benchmark pricing against market rates annually with adjustment rights.' }
+  ])
+  const currentReviewItems = analyzerType === 'negotiation' ? negotiationItems : reviewItems;
   // Formatting state
   const [boldActive, setBoldActive] = React.useState(false)
   const [italicActive, setItalicActive] = React.useState(false)
@@ -216,9 +230,11 @@ function App() {
 
   const handleFix = (reviewId) => {
     // Find the review item and set it in the chat input
-    const reviewItem = reviewItems.find(item => item.id === reviewId);
+    const reviewItem = currentReviewItems.find(item => item.id === reviewId);
     if (reviewItem && chatInputRef.current) {
-      const fixText = `Fix this issue: ${reviewItem.title} - ${reviewItem.description}`;
+      const fixText = analyzerType === 'negotiation' 
+        ? `Negotiate this: ${reviewItem.title} - ${reviewItem.description}`
+        : `Fix this issue: ${reviewItem.title} - ${reviewItem.description}`;
       chatInputRef.current(fixText);
     }
   }
@@ -460,7 +476,7 @@ function App() {
             </button>
           </div>
           <ul>
-            {reviewItems.length === 0 ? (
+            {currentReviewItems.length === 0 ? (
               <li className="no-problems" style={{ 
                 textAlign: 'center', 
                 padding: '20px', 
@@ -469,10 +485,10 @@ function App() {
                 justifyContent: 'center',
                 minHeight: '100%'
               }}>
-                <em>No issues detected in this contract</em>
+                <em>No recommendations available</em>
               </li>
             ) : (
-              reviewItems.map((item) => (
+              currentReviewItems.map((item) => (
                 <li 
                   key={item.id}
                   onClick={() => scrollToSection(item.sectionId, item.id)} 
@@ -500,9 +516,9 @@ function App() {
                         cursor: 'pointer',
                         zIndex: 10
                       }}
-                      title="Get AI assistance to fix this issue"
+                      title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to fix this issue"}
                     >
-                      Fix
+                      {analyzerType === 'negotiation' ? 'Negotiate' : 'Fix'}
                     </button>
                   </div>
                 </li>
@@ -565,6 +581,7 @@ function App() {
         <AIChat 
           setInputText={(fn) => { chatInputRef.current = fn; }} 
           setResetChat={(fn) => { chatResetRef.current = fn; }}
+          analyzerType={analyzerType}
         />
       </div>
     </div>

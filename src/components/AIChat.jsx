@@ -1,8 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const AIChat = ({ setInputText, setResetChat }) => {
+const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
+  const getInitialMessage = () => {
+    if (analyzerType === 'negotiation') {
+      return "Hello! I'm your AI Negotiation Assistant. I can help you negotiate better terms for cost savings, payment improvements, and service levels. How can I assist with your contract negotiations?";
+    }
+    return "Hello! I'm your AI assistant for contract analysis. How can I help you today?";
+  };
+
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
+    { id: 1, text: getInitialMessage(), sender: 'ai', timestamp: new Date() }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isThinking, setIsThinking] = useState(false);
@@ -28,6 +35,19 @@ const AIChat = ({ setInputText, setResetChat }) => {
       });
     }
   }, [setInputText]);
+
+  // Effect to set reset function
+  useEffect(() => {
+    if (setResetChat) {
+      setResetChat(() => {
+        setMessages([
+          { id: 1, text: getInitialMessage(), sender: 'ai', timestamp: new Date() }
+        ]);
+        setInputValue('');
+        setIsThinking(false);
+      });
+    }
+  }, [setResetChat, analyzerType]);
 
   // Auto-resize when input value changes
   useEffect(() => {
@@ -105,7 +125,7 @@ const AIChat = ({ setInputText, setResetChat }) => {
             value={inputValue}
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
-            placeholder="Ask me anything about contract ..."
+            placeholder={analyzerType === 'negotiation' ? "Ask me about negotiation strategies..." : "Ask me anything about contract ..."}
             className="chat-input"
             rows="1"
           />
