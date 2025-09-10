@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { FaUserCircle, FaUpload, FaBars, FaChevronDown, FaBell } from 'react-icons/fa';
+import { FaUserCircle, FaUpload, FaBars, FaChevronDown, FaBell, FaComment } from 'react-icons/fa';
 import ContractsModal from './OpenContract';
 import NewContract from './NewContract';
+import FeedbackModal from './FeedbackModal';
 
 const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommendationFading, onCloseRecommendation }) => {
   const fileInputRef = useRef(null);
@@ -10,6 +11,7 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
   const [showContractsMenu, setShowContractsMenu] = useState(false);
   const [showNewContractModal, setShowNewContractModal] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const workflowMenuRef = useRef(null);
   const contractsMenuRef = useRef(null);
   const notificationsRef = useRef(null);
@@ -147,6 +149,18 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
     }
   };
 
+  const handleFeedbackClick = () => {
+    setShowFeedbackModal(true);
+    // Close other menus when opening feedback
+    setShowWorkflowMenu(false);
+    setShowContractsMenu(false);
+    setShowNotifications(false);
+  };
+
+  const handleCloseFeedbackModal = () => {
+    setShowFeedbackModal(false);
+  };
+
   return (
     <header className="app-header">
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -193,6 +207,14 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
         </nav>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <button
+          onClick={handleFeedbackClick}
+          className="feedback-button"
+          title="Share Feedback"
+        >
+          <FaComment size={16} style={{ marginRight: '6px' }} />
+          Feedback
+        </button>
         <div className="workflow-menu-container" ref={workflowMenuRef}>
           <button
             onClick={handleWorkflowMenuToggle}
@@ -264,6 +286,11 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
         isOpen={showNewContractModal}
         onClose={handleCloseNewContractModal}
         onContractCreate={onContractCreate}
+      />
+
+      <FeedbackModal
+        isOpen={showFeedbackModal}
+        onClose={handleCloseFeedbackModal}
       />
     </header>
   );
