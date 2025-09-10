@@ -93,7 +93,12 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
 
   return (
     <div className="ai-chat-sidebar">
-      <h3>AI Assistant</h3>
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
+          <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z"/>
+        </svg>
+        AI Assistant
+      </h3>
       <div className="chat-messages">
         {messages.map(message => (
           <div key={message.id} className={`chat-message ${message.sender}`}>
