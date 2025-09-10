@@ -16,21 +16,18 @@ const AIChat = ({ setInputText, setResetChat }) => {
     }
   };
 
-  // Effect to handle external reset function setting
+  // Effect to handle external input text setting
   useEffect(() => {
-    if (setResetChat) {
-      setResetChat(() => {
-        // Reset messages to initial state
-        setMessages([
-          { id: 1, text: "Hello! I'm your AI assistant for contract analysis. How can I help you today?", sender: 'ai', timestamp: new Date() }
-        ]);
-        // Clear input
-        setInputValue('');
-        // Stop thinking if active
-        setIsThinking(false);
+    if (setInputText) {
+      setInputText((text) => {
+        setInputValue(text);
+        // Focus the textarea
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+        }
       });
     }
-  }, [setResetChat]);
+  }, [setInputText]);
 
   // Auto-resize when input value changes
   useEffect(() => {
