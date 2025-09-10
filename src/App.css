@@ -57,8 +57,7 @@
   color: #6c757d;
   cursor: pointer;
   padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
 .modal-close:hover {
@@ -564,14 +563,13 @@
   padding: 0 10px;
   background: #ffffff;
   border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
   line-height: 1;
   display: flex;
   align-items: center;
   color: #172b4d;
-  transition: all 0.15s ease;
   font-family: inherit;
 }
 
@@ -639,18 +637,15 @@
   padding: 12px 16px;
   border: 1px solid #dfe1e6;
   margin-bottom: 8px;
-  border-radius: 6px;
+  border-radius: 8px;
   background-color: #ffffff;
-  transition: all 0.2s ease-in-out;
   position: relative;
   min-height: 60px;
-  box-shadow: 0 1px 3px rgba(9, 30, 66, 0.12);
 }
 
 .review-item:hover {
   background-color: #f8f9fa;
   border-color: #c1c7d0;
-  box-shadow: 0 2px 8px rgba(9, 30, 66, 0.12);
 }
 
 .review-item.selected {
@@ -659,11 +654,10 @@
 }
 
 .review-item button {
-  transition: all 0.2s ease;
   background-color: #0052cc;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 4px 8px;
   font-size: 12px;
   font-weight: 500;
@@ -672,7 +666,6 @@
 
 .review-item button:hover {
   background-color: #0747a6;
-  box-shadow: 0 2px 4px rgba(240, 230, 230, 0.2);
 }
 
 .recommendation-box {
@@ -680,19 +673,11 @@
   padding: 16px;
   background-color: #f3eeee;
   border: 1px solid #e9ecef;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(9, 30, 66, 0.08);
-  transition: all 1s ease-out;
-}
-
-.recommendation-box:hover {
-  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.12);
+  border-radius: 10px;
 }
 
 .recommendation-box.fading {
   opacity: 0;
-  transform: translateY(-10px);
-  transition: all 1s ease-out;
 }
 
 .recommendation-box p {
@@ -710,20 +695,18 @@
   padding: 0;
   background-color: transparent;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #6c757d;
-  transition: all 0.2s ease;
   opacity: 0.7;
 }
 
 .close-button:hover {
   background-color: rgba(108, 117, 125, 0.1);
   opacity: 1;
-  transform: scale(1.1);
 }
 
 .close-button svg {
@@ -744,18 +727,14 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  transition: background-color .2s ease, box-shadow .2s ease, transform .15s ease;
 }
 
 .upload-button:hover {
   background-color: #0747a6;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
 .upload-button:active {
   background-color: #053f88;
-  transform: translateY(1px);
 }
 
 .upload-button:focus-visible {
