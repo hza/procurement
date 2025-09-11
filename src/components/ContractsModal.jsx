@@ -28,6 +28,23 @@ const OpenContract = ({ isOpen, onClose, onDownloadFile, onDeleteFile, onNewCont
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // Show 4 contracts per page
 
+  // Add ESC key support
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   // Filter contracts based on search term and status
   const filteredContracts = contractFiles.filter(contract => {
     const matchesSearch = contract.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

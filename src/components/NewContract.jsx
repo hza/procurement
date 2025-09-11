@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs, FaBrain, FaUpload } from 'react-icons/fa';
 
 const NewContract = ({ isOpen, onClose, onContractCreate }) => {
@@ -9,6 +9,23 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
   React.useEffect(() => {
     setShowModal(isOpen);
   }, [isOpen]);
+
+  // Add ESC key support
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && showModal) {
+        handleClose();
+      }
+    };
+
+    if (showModal) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showModal]);
 
   const handleClose = () => {
     setShowModal(false);

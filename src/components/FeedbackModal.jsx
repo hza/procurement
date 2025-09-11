@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaTimes, FaStar } from 'react-icons/fa';
 
 const FeedbackModal = ({ isOpen, onClose }) => {
@@ -6,6 +6,23 @@ const FeedbackModal = ({ isOpen, onClose }) => {
   const [hoverRating, setHoverRating] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [feedbackType, setFeedbackType] = useState('general');
+
+  // Add ESC key support
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
