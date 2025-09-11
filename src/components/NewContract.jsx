@@ -413,31 +413,33 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
               </div>
             </button>
 
-            <button
-              className="contract-option ai-generate"
-              onClick={handleGenerateWithAI}
-            >
-              <div className="option-icon">
-                <FaBrain />
-              </div>
-              <div className="option-content">
-                <h3>Generate Using AI</h3>
-                <p>Let AI create a customized contract based on your requirements</p>
-              </div>
-            </button>
+            <div className="contract-options-row">
+              <button
+                className="contract-option ai-generate"
+                onClick={handleGenerateWithAI}
+              >
+                <div className="option-icon">
+                  <FaBrain />
+                </div>
+                <div className="option-content">
+                  <h3>Generate Using AI</h3>
+                  <p>Let AI create a customized contract based on your requirements</p>
+                </div>
+              </button>
 
-            <button
-              className="contract-option import-file"
-              onClick={handleImportFromFile}
-            >
-              <div className="option-icon">
-                <FaUpload />
-              </div>
-              <div className="option-content">
-                <h3>Import from File</h3>
-                <p>Upload and import an existing contract file</p>
-              </div>
-            </button>
+              <button
+                className="contract-option import-file"
+                onClick={handleImportFromFile}
+              >
+                <div className="option-icon">
+                  <FaUpload />
+                </div>
+                <div className="option-content">
+                  <h3>Import from File</h3>
+                  <p>Upload and import an existing contract file</p>
+                </div>
+              </button>
+            </div>
 
             <div className="templates-section">
               <h3>Choose from Template</h3>

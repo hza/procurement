@@ -152,6 +152,17 @@
   line-height: 1.4;
 }
 
+.contract-options-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.contract-options-row .contract-option {
+  flex: 1;
+  margin-bottom: 0;
+}
+
 .templates-section {
   margin-top: 32px;
 }
