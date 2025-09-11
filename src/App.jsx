@@ -130,8 +130,8 @@ function App() {
     const reviewItem = currentReviewItems.find(item => item.id === reviewId);
     if (reviewItem && chatInputRef.current) {
       const fixText = analyzerType === 'negotiation' 
-        ? `Negotiate this: ${reviewItem.title} - ${reviewItem.description}`
-        : `Fix this issue: ${reviewItem.title} - ${reviewItem.description}`;
+        ? `Negotiate the issue:\n${reviewItem.title} - ${reviewItem.description}`
+        : `Analyze risks for this issue, propose solution: \n${reviewItem.title} - ${reviewItem.description}`;
       chatInputRef.current(fixText);
     }
   }
@@ -340,9 +340,9 @@ function App() {
                         height: '18px',
                         lineHeight: '16px'
                       }}
-                      title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to fix this issue"}
+                      title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to analyze this issue"}
                     >
-                      {analyzerType === 'negotiation' ? 'Negotiate' : 'Fix'}
+                      {analyzerType === 'negotiation' ? 'Negotiate' : 'Analyze'}
                     </button>
                   </div>
                 </li>
