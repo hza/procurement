@@ -13,6 +13,7 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isThinking, setIsThinking] = useState(false);
+  const [tokenCount, setTokenCount] = useState(0);
   const textareaRef = useRef(null);
 
   // Auto-resize textarea function
@@ -45,6 +46,7 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
         ]);
         setInputValue('');
         setIsThinking(false);
+        setTokenCount(0);
       });
     }
   }, [setResetChat, analyzerType]);
@@ -53,6 +55,18 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
   useEffect(() => {
     autoResize();
   }, [inputValue]);
+
+  // Calculate token count
+  const calculateTokenCount = (messages) => {
+    // Simple approximation: roughly 4 characters per token
+    const totalText = messages.map(msg => msg.text).join(' ');
+    return Math.ceil(totalText.length / 4);
+  };
+
+  // Update token count when messages change
+  useEffect(() => {
+    setTokenCount(200); // calculateTokenCount(messages)
+  }, [messages]);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -93,11 +107,29 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
 
   return (
     <div className="ai-chat-sidebar">
-      <h3>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a73e8" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
-          <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z"/>
-        </svg>
-        AI Assistant
+      <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a73e8" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
+            <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z"/>
+          </svg>
+          AI Assistant
+        </div>
+        <div style={{ 
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: '10px', 
+          color: '#666', 
+          fontWeight: 'normal'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffd700" style={{ verticalAlign: 'middle' }}>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              <circle cx="12" cy="12" r="8" fill="none" stroke="#ffd700" strokeWidth="2"/>
+              <circle cx="12" cy="12" r="3" fill="#ffd700"/>
+            </svg>
+            AI used: {tokenCount} / 200
+          </div>
+        </div>
       </h3>
       <div className="chat-messages">
         {messages.map(message => (
