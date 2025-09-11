@@ -140,8 +140,8 @@ function App() {
     const reviewItem = currentReviewItems.find(item => item.id === reviewId);
     if (reviewItem && chatInputRef.current) {
       const fixText = analyzerType === 'negotiation' 
-        ? `As a negotiation assistant, help me negotiate better terms for: \n\n${reviewItem.title}. \nDescription: \n${reviewItem.description}. \n\nProvide specific negotiation strategies, counterarguments, and suggested language for the contract.`
-        : `As a contract analyzer, analyze this issue: \n${reviewItem.title}. \n\nDescription: \n${reviewItem.description}. \n\nExplain the risks, suggest improvements, and provide revised contract language to address it.`;
+        ? `As a negotiation assistant, help me negotiate better terms for: \n\n${reviewItem.title}. \n\nDescription: \n${reviewItem.description}. \n\nProvide specific negotiation strategies, counterarguments, and suggested language for the contract.`
+        : `As a contract analyzer, analyze this issue: \n\n${reviewItem.title}. \n\nDescription: \n${reviewItem.description}. \n\nExplain the risks, suggest improvements, and provide revised contract language to address it.`;
       chatInputRef.current(fixText);
     }
   }
