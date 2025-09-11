@@ -97,6 +97,7 @@ function App() {
     setSelectedSection(null);
     setShowRecommendation(false);
     setReviewItems([]);
+    setNegotiationItems([]);
     // Reset AI assistant chat
     if (chatResetRef.current) {
       chatResetRef.current();
