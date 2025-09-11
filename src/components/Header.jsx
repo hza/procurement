@@ -193,11 +193,14 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
                 <button onClick={handleOpenContractFromMenu} className="contracts-option">
                   Open Contract ...
                 </button>
-                <button onClick={()=>alert('Not impl')} className="contracts-option">
+                <button onClick={() => alert('Not impl')} className="contracts-option">
                   Export to PDF ...
                 </button>
-                <button onClick={()=>alert('Not impl')} className="contracts-option">
+                <button onClick={() => alert('Not impl')} className="contracts-option">
                   Manage Contracts ...
+                </button>
+                <button onClick={() => alert('Not impl')} className="contracts-option">
+                  View Feedbacks ...
                 </button>
               </div>
             )}
@@ -207,7 +210,7 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
         </nav>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <button
+        <button
           onClick={handleFeedbackClick}
           className="feedback-button"
           title="Share Feedback"
@@ -246,14 +249,14 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
           {showNotifications && showRecommendation && (
             <div className={`notifications-dropdown ${recommendationFading ? 'fading' : ''}`}>
               <div className="notification-item">
-                <button 
+                <button
                   onClick={onCloseRecommendation}
                   className="notification-close"
                   title="Dismiss"
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18"/>
-                    <line x1="6" y1="6" x2="18" y2="18"/>
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
                 <div className="notification-content">
