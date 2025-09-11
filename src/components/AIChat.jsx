@@ -138,8 +138,8 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
         <div className="button-row">
           <div className="select-group">
             <select className="action-select">
-              <option value="edit">Edit</option>
               <option value="ask">Ask</option>
+              <option value="edit">Edit</option>
             </select>
             <select className="action-select">
               <option value="edit">GPT-5</option>
