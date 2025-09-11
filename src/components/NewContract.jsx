@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs, FaBrain } from 'react-icons/fa';
+import React, { useState, useRef } from 'react';
+import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs, FaBrain, FaUpload } from 'react-icons/fa';
 
 const NewContract = ({ isOpen, onClose, onContractCreate }) => {
   const [showModal, setShowModal] = useState(isOpen);
+  const fileInputRef = useRef(null);
 
   // Update internal state when prop changes
   React.useEffect(() => {
@@ -65,6 +66,37 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
     };
     if (onContractCreate) {
       onContractCreate(newContract);
+    }
+  };
+
+  const handleImportFromFile = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target.result;
+        handleClose();
+        
+        // Create contract from imported file
+        const newContract = {
+          id: Date.now().toString(),
+          title: file.name.replace(/\.[^/.]+$/, ''), // Remove file extension
+          content: content,
+          status: 'draft',
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          type: 'imported'
+        };
+        
+        if (onContractCreate) {
+          onContractCreate(newContract);
+        }
+      };
+      reader.readAsText(file);
     }
   };
 
@@ -394,6 +426,19 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
               </div>
             </button>
 
+            <button
+              className="contract-option import-file"
+              onClick={handleImportFromFile}
+            >
+              <div className="option-icon">
+                <FaUpload />
+              </div>
+              <div className="option-content">
+                <h3>Import from File</h3>
+                <p>Upload and import an existing contract file</p>
+              </div>
+            </button>
+
             <div className="templates-section">
               <h3>Choose from Template</h3>
               <div className="templates-grid">
@@ -453,6 +498,14 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
           </div>
         </div>
       </div>
+
+      <input
+        type="file"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+        accept=".html,.txt,.md,.doc,.docx"
+        style={{ display: 'none' }}
+      />
     </div>
   );
 };
