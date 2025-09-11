@@ -110,25 +110,42 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
       <h3 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a73e8" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
-            <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z"/>
+            <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z" />
           </svg>
           AI Assistant
         </div>
-        <div style={{ 
+                <div style={{ 
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
           fontSize: '10px', 
           color: '#666', 
           fontWeight: 'normal'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffd700" style={{ verticalAlign: 'middle' }}>
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              <circle cx="12" cy="12" r="8" fill="none" stroke="#ffd700" strokeWidth="2"/>
-              <circle cx="12" cy="12" r="3" fill="#ffd700"/>
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+              <circle cx="12" cy="12" r="8" fill="none" stroke="#ffd700" strokeWidth="2" />
+              <circle cx="12" cy="12" r="3" fill="#ffd700" />
             </svg>
             AI used: {tokenCount} / 200
           </div>
+          <a 
+            href="#" 
+            style={{ 
+              fontSize: '9px', 
+              color: '#1a73e8', 
+              textDecoration: 'underline',
+              cursor: 'pointer',
+              marginTop: '0px'
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              alert('Token purchase feature coming soon!');
+            }}
+          >
+            Add more tokens
+          </a>
         </div>
       </h3>
       <div className="chat-messages">
@@ -179,14 +196,14 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
               <option value="edit">GPT-5 mini</option>
             </select>
           </div>
-          <button 
-            onClick={handleSendMessage} 
+          <button
+            onClick={handleSendMessage}
             className="send-button"
             disabled={!inputValue.trim()}
             title="Send message"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffffff">
-              <path d="M12.7 5.3l4.6 4.6c.4.4.4 1 0 1.4s-1 .4-1.4 0L13 8.4V19c0 .6-.4 1-1 1s-1-.4-1-1V8.4l-2.9 2.9c-.4.4-1 .4-1.4 0-.2-.2-.3-.5-.3-.7 0-.2.1-.5.3-.7l4.6-4.6c.4-.4 1-.4 1.4 0z"/>
+              <path d="M12.7 5.3l4.6 4.6c.4.4.4 1 0 1.4s-1 .4-1.4 0L13 8.4V19c0 .6-.4 1-1 1s-1-.4-1-1V8.4l-2.9 2.9c-.4.4-1 .4-1.4 0-.2-.2-.3-.5-.3-.7 0-.2.1-.5.3-.7l4.6-4.6c.4-.4 1-.4 1.4 0z" />
             </svg>
           </button>
         </div>
