@@ -411,7 +411,7 @@
   background-color: transparent;
   line-height: 1.4;
   min-height: 20px;
-  max-height: 120px;
+  max-height: 200px;
   overflow-y: auto;
   transition: height 0.1s ease;
 }
