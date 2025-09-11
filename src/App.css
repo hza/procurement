@@ -827,26 +827,28 @@
 .main-nav button {
   background: #ffffff;
   border: 1px solid transparent;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 13px;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
   font-weight: 500;
-  color: #42526e;
+  color: #3c4043;
   cursor: pointer;
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  transition: all 0.2s ease;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .main-nav button:hover {
-  background: #f4f5f7;
-  color: #172b4d;
+  background: #f8f9fa;
+  color: #202124;
+  border-color: #dadce0;
 }
 
 .main-nav button:active {
-  background: #e9ecef;
+  background: #e8eaed;
 }
 
 .main-nav button:focus-visible {
-  outline: 2px solid #4c9aff;
+  outline: 2px solid #1a73e8;
   outline-offset: 2px;
 }
 
@@ -858,10 +860,12 @@
 }
 
 .logo-text {
-  font-size: 16px;
-  font-weight: 600;
-  color: #172b4d;
+  font-size: 18px;
+  font-weight: 500;
+  color: #202124;
   white-space: nowrap;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.25px;
 }
 
 /* Modal Styles */
@@ -1365,25 +1369,26 @@
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
   padding: 6px 12px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: #42526e;
+  color: #3c4043;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   gap: 4px;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .workflow-button:hover {
-  background: #f4f5f7;
-  border-color: #0052cc;
-  color: #172b4d;
+  background: #f8f9fa;
+  border-color: #1a73e8;
+  color: #202124;
 }
 
 .workflow-button:focus-visible {
-  outline: 2px solid #4c9aff;
+  outline: 2px solid #1a73e8;
   outline-offset: 2px;
 }
 
@@ -1392,9 +1397,9 @@
   top: 100%;
   right: 0;
   background: #ffffff;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(60, 64, 67, 0.1);
   min-width: 160px;
   z-index: 1000;
   margin-top: 4px;
@@ -1403,20 +1408,21 @@
 .workflow-option {
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: 12px 16px;
   background: none;
   border: none;
   text-align: left;
-  font-size: 13px;
-  font-weight: 500;
-  color: #42526e;
+  font-size: 14px;
+  font-weight: 400;
+  color: #3c4043;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s ease;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .workflow-option:hover {
-  background-color: #f4f5f7;
-  color: #172b4d;
+  background-color: #f8f9fa;
+  color: #202124;
 }
 
 .workflow-option:first-child {
@@ -1440,25 +1446,26 @@
   display: flex;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
   padding: 6px 12px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  color: #42526e;
+  color: #3c4043;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.2s ease;
   gap: 4px;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .contracts-button:hover {
-  background: #f4f5f7;
-  border-color: #0052cc;
-  color: #172b4d;
+  background: #f8f9fa;
+  border-color: #1a73e8;
+  color: #202124;
 }
 
 .contracts-button:focus-visible {
-  outline: 2px solid #4c9aff;
+  outline: 2px solid #1a73e8;
   outline-offset: 2px;
 }
 
@@ -1467,9 +1474,9 @@
   top: 100%;
   left: 0;
   background: #ffffff;
-  border: 1px solid #dfe1e6;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.15);
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(60, 64, 67, 0.1);
   min-width: 200px;
   z-index: 1000;
   margin-top: 4px;
@@ -1478,32 +1485,33 @@
 .contracts-menu-container .contracts-option {
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: 12px 16px;
   background: none;
   border: none;
   text-align: left;
-  font-size: 13px;
-  font-weight: 500;
-  color: #42526e;
+  font-size: 14px;
+  font-weight: 400;
+  color: #3c4043;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.2s ease;
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .contracts-option:hover {
-  background-color: #f4f5f7;
-  color: #172b4d;
+  background-color: #f8f9fa;
+  color: #202124;
 }
 
 .contracts-option:first-child {
-  border-radius: 4px 4px 0 0;
+  border-radius: 8px 8px 0 0;
 }
 
 .contracts-option:last-child {
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 8px 8px;
 }
 
 .contracts-option:only-child {
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 /* AI Chat Thinking Indicator */
@@ -1704,12 +1712,12 @@
 
 /* Feedback Button Styles */
 .feedback-button {
-  background-color: #0066cc;
+  background-color: #1a73e8;
   color: #ffffff;
   border: none;
   cursor: pointer;
-  padding: 10px 16px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -1717,18 +1725,19 @@
   align-items: center;
   justify-content: center;
   min-width: 100px;
-  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.3);
+  font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .feedback-button:hover {
-  background-color: #0052a3;
-  box-shadow: 0 4px 8px rgba(0, 102, 204, 0.3);
+  background-color: #1557b0;
+  box-shadow: 0 2px 6px rgba(26, 115, 232, 0.4);
   transform: translateY(-1px);
 }
 
 .feedback-button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.3);
 }
 
 /* Feedback Modal Styles */
