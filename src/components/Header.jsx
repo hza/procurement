@@ -103,8 +103,8 @@ const Header = ({ onFileUpload, onContractCreate, showRecommendation, recommenda
 
   const handleSelectContract = (contract) => {
     console.log('Selected contract:', contract);
-    // Add contract selection logic here
-    // For example, open contract details or load contract content
+    // Show not implemented alert
+    alert('Not implemented');
     setShowContractsModal(false);
   };
 
