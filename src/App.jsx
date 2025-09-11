@@ -309,7 +309,7 @@ function App() {
                           padding: '1px 4px',
                           border: '1px solid #ccc',
                           borderRadius: '3px',
-                          backgroundColor: item.status === 'resolved' ? '#e8f5e8' : item.status === 'closed' ? '#f5f5f5' : item.status === 'new' ? '#e3f2fd' : '#fff3cd',
+                          backgroundColor: item.status === 'resolved' ? '#e8f5e8' : item.status === 'closed' ? '#f5f5f5' : item.status === 'new' ? '#f2f9feff' : '#fff3cd',
                           color: item.status === 'resolved' ? '#2e7d32' : item.status === 'closed' ? '#666' : item.status === 'new' ? '#1565c0' : '#856404',
                           height: '19px',
                           lineHeight: '14px'
@@ -317,7 +317,7 @@ function App() {
                       >
                         <option value="new">New</option>
                         <option value="resolved">Resolved</option>
-                        <option value="closed">Closed</option>
+                        <option value="closed">Won't fix</option>
                       </select>
                     </div>
                     <button 
