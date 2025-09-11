@@ -75,7 +75,7 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
         setIsThinking(false);
         const aiResponse = {
           id: messages.length + 2,
-          text: "The system is not connected to an AI backend yet. This requires buying credits from OpenAI.",
+          text: "It looks like we've run out of tokens for this session. To continue chatting, please purchase additional credits from OpenAI.",
           sender: 'ai',
           timestamp: new Date()
         };

@@ -459,7 +459,7 @@ function App() {
                 onChange={(e) => setAnalyzerType(e.target.value)}
                 className="analyzer-select"
               >
-                <option value="contract">Smart Contract Analyzer</option>
+                <option value="contract">Contract Analyzer</option>
                 <option value="negotiation">Negotiation Assistant</option>
               </select>
             </div>
@@ -507,14 +507,16 @@ function App() {
                         position: 'absolute',
                         bottom: '2px',
                         right: '2px',
-                        padding: '2px 6px',
-                        fontSize: '10px',
+                        padding: '1px 4px',
+                        fontSize: '9px',
                         backgroundColor: '#0066cc',
                         color: 'white',
                         border: 'none',
                         borderRadius: '3px',
                         cursor: 'pointer',
-                        zIndex: 10
+                        zIndex: 10,
+                        height: '18px',
+                        lineHeight: '16px'
                       }}
                       title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to fix this issue"}
                     >
