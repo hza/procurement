@@ -94,7 +94,7 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
   return (
     <div className="ai-chat-sidebar">
       <h3>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#1a73e8" style={{ marginRight: '8px', verticalAlign: 'middle' }}>
           <path d="M12 2l4 10-4 10-4-10L12 2z M2 12l10-4 10 4-10 4L2 12z"/>
         </svg>
         AI Assistant
