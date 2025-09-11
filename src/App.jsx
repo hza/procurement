@@ -107,8 +107,9 @@ function App() {
     // Reset AI review state for new contract
     setSelectedSection(null);
     setShowRecommendation(false);
-    setReviewItems(prev => prev.map(item => ({ ...item, status: 'new' })));
-    setNegotiationItems(prev => prev.map(item => ({ ...item, status: 'new' })));
+    // Clear review items and negotiation items for fresh start
+    setReviewItems([]);
+    setNegotiationItems([]);
     // Reset AI assistant chat
     if (chatResetRef.current) {
       chatResetRef.current();
