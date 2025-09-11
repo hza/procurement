@@ -282,72 +282,70 @@ function App() {
                     <div>
                       <strong>{item.title}:</strong> {item.description}
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '6px', marginBottom: '2px' }}>
-                      <span 
-                        style={{
-                          padding: '1px 4px',
-                          borderRadius: '3px',
-                          fontSize: '9px',
-                          fontWeight: 'bold',
-                          textTransform: 'uppercase',
-                          backgroundColor: item.severity === 'high' ? '#ff4444' : item.severity === 'medium' ? '#ffaa00' : '#44aa44',
-                          color: 'white',
-                          marginRight: '6px',
-                          height: '16px',
-                          lineHeight: '14px',
-                          display: 'inline-flex',
-                          alignItems: 'center'
-                        }}
-                      >
-                        {item.severity}
-                      </span>
-                      <select
-                        value={item.status}
-                        onChange={(e) => {
+                    <div style={{ display: 'flex', alignItems: 'center', marginTop: '6px', marginBottom: '2px', justifyContent: 'space-between' }}>
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <span 
+                          style={{
+                            padding: '1px 4px',
+                            borderRadius: '3px',
+                            fontSize: '9px',
+                            fontWeight: 'bold',
+                            textTransform: 'uppercase',
+                            backgroundColor: item.severity === 'high' ? '#ff4444' : item.severity === 'medium' ? '#ffaa00' : '#44aa44',
+                            color: 'white',
+                            marginRight: '6px',
+                            height: '16px',
+                            lineHeight: '14px',
+                            display: 'inline-flex',
+                            alignItems: 'center'
+                          }}
+                        >
+                          {item.severity}
+                        </span>
+                        <select
+                          value={item.status}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleStatusChange(item.id, e.target.value);
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                          style={{
+                            fontSize: '9px',
+                            padding: '1px 4px',
+                            border: '1px solid #ccc',
+                            borderRadius: '3px',
+                            backgroundColor: item.status === 'resolved' ? '#e8f5e8' : item.status === 'closed' ? '#f5f5f5' : item.status === 'new' ? '#f2f9feff' : '#fff3cd',
+                            color: item.status === 'resolved' ? '#2e7d32' : item.status === 'closed' ? '#666' : item.status === 'new' ? '#1565c0' : '#856404',
+                            height: '19px',
+                            lineHeight: '14px'
+                          }}
+                        >
+                          <option value="new">New</option>
+                          <option value="resolved">Resolved</option>
+                          <option value="closed">Won't fix</option>
+                        </select>
+                      </div>
+                      <button 
+                        onClick={(e) => {
                           e.stopPropagation();
-                          handleStatusChange(item.id, e.target.value);
+                          handleFix(item.id);
                         }}
-                        onClick={(e) => e.stopPropagation()}
                         style={{
-                          fontSize: '9px',
                           padding: '1px 4px',
-                          border: '1px solid #ccc',
+                          fontSize: '9px',
+                          backgroundColor: '#0066cc',
+                          color: 'white',
+                          border: 'none',
                           borderRadius: '3px',
-                          backgroundColor: item.status === 'resolved' ? '#e8f5e8' : item.status === 'closed' ? '#f5f5f5' : item.status === 'new' ? '#f2f9feff' : '#fff3cd',
-                          color: item.status === 'resolved' ? '#2e7d32' : item.status === 'closed' ? '#666' : item.status === 'new' ? '#1565c0' : '#856404',
-                          height: '19px',
-                          lineHeight: '14px'
+                          cursor: 'pointer',
+                          height: '18px',
+                          lineHeight: '16px'
                         }}
+                        title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to analyze this issue"}
                       >
-                        <option value="new">New</option>
-                        <option value="resolved">Resolved</option>
-                        <option value="closed">Won't fix</option>
-                      </select>
+                        {analyzerType === 'negotiation' ? 'Negotiate' : 'Analyze'}
+                      </button>
                     </div>
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleFix(item.id);
-                      }}
-                      style={{
-                        position: 'absolute',
-                        bottom: '2px',
-                        right: '2px',
-                        padding: '1px 4px',
-                        fontSize: '9px',
-                        backgroundColor: '#0066cc',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '3px',
-                        cursor: 'pointer',
-                        zIndex: 10,
-                        height: '18px',
-                        lineHeight: '16px'
-                      }}
-                      title={analyzerType === 'negotiation' ? "Get AI assistance to negotiate this" : "Get AI assistance to analyze this issue"}
-                    >
-                      {analyzerType === 'negotiation' ? 'Negotiate' : 'Analyze'}
-                    </button>
                   </div>
                 </li>
               ))
