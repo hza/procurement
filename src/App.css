@@ -161,6 +161,9 @@
 .contract-options-row .contract-option {
   flex: 1;
   margin-bottom: 0;
+  min-height: 88px; /* Match the height of other contract options */
+  display: flex;
+  align-items: center;
 }
 
 .templates-section {
