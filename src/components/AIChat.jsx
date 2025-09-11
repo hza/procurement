@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
   const getInitialMessage = () => {
     if (analyzerType === 'negotiation') {
-      return "Hello! I'm your AI Negotiation Assistant. I can help you negotiate better terms for cost savings, payment improvements, and service levels. How can I assist with your contract negotiations?";
+      return "Hello! I'm your AI Assistant. I can help you negotiate better terms for cost savings, payment improvements, and service levels. How can I assist with your contract negotiations?";
     }
     return "Hello! I'm your AI assistant for contract analysis. How can I help you today?";
   };

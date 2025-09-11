@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs } from 'react-icons/fa';
+import { FaTimes, FaFileContract, FaFileAlt, FaLaptop, FaHardHat, FaUserTie, FaCogs, FaBrain } from 'react-icons/fa';
 
 const NewContract = ({ isOpen, onClose, onContractCreate }) => {
   const [showModal, setShowModal] = useState(isOpen);
@@ -25,6 +25,43 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       type: 'blank'
+    };
+    if (onContractCreate) {
+      onContractCreate(newContract);
+    }
+  };
+
+  const handleGenerateWithAI = () => {
+    handleClose();
+    // Create a contract with AI-generated content placeholder
+    const newContract = {
+      id: Date.now().toString(),
+      title: 'AI-Generated Contract',
+      content: `<h1>AI-Generated Contract</h1>
+<h2>Contract Parties</h2>
+<ul>
+<li><strong>Party A:</strong> <span class="placeholder">[Organization Name]</span></li>
+<li><strong>Party B:</strong> <span class="placeholder">[Vendor/Supplier Name]</span></li>
+<li><strong>Effective Date:</strong> <span class="placeholder">[Date]</span></li>
+</ul>
+
+<h2>Scope of Work</h2>
+<p><span class="placeholder">[Describe the goods, services, or work to be provided]</span></p>
+
+<h2>Terms and Conditions</h2>
+<ul>
+<li><strong>Payment Terms:</strong> <span class="placeholder">[Payment schedule and conditions]</span></li>
+<li><strong>Delivery Timeline:</strong> <span class="placeholder">[Delivery or completion dates]</span></li>
+<li><strong>Quality Standards:</strong> <span class="placeholder">[Quality requirements and specifications]</span></li>
+</ul>
+
+<h2>Signatures</h2>
+<p><strong>Party A:</strong> ___________________________ <strong>Date:</strong> __________</p>
+<p><strong>Party B:</strong> ___________________________ <strong>Date:</strong> __________</p>`,
+      status: 'draft',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      type: 'ai-generated'
     };
     if (onContractCreate) {
       onContractCreate(newContract);
@@ -341,6 +378,19 @@ const NewContract = ({ isOpen, onClose, onContractCreate }) => {
               <div className="option-content">
                 <h3>Blank Contract</h3>
                 <p>Start with a clean slate and build your contract from scratch</p>
+              </div>
+            </button>
+
+            <button
+              className="contract-option ai-generate"
+              onClick={handleGenerateWithAI}
+            >
+              <div className="option-icon">
+                <FaBrain />
+              </div>
+              <div className="option-content">
+                <h3>Generate Using AI</h3>
+                <p>Let AI create a customized contract based on your requirements</p>
               </div>
             </button>
 
