@@ -13,31 +13,31 @@ function App() {
   const [recommendationFading, setRecommendationFading] = React.useState(false)
   const [analyzerType, setAnalyzerType] = React.useState('contract')
   const [reviewItems, setReviewItems] = React.useState([
-    { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.', severity: 'high', status: 'new' },
-    { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.', severity: 'high', status: 'new' },
-    { id: 'auto-renewal', sectionId: 'renewal', title: 'Automatic Renewal', description: 'Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.', severity: 'medium', status: 'new' },
-    { id: 'vague-quality', sectionId: 'quality', title: 'Vague Quality Standards', description: 'Quality "may vary based on market availability" - no guaranteed standards.', severity: 'medium', status: 'new' },
-    { id: 'waived-inspection', sectionId: 'quality', title: 'Waived Inspection Rights', description: 'Buyer cannot inspect goods before acceptance, must accept whatever is delivered.', severity: 'high', status: 'new' },
-    { id: 'force-majeure', sectionId: 'force-majeure', title: 'Broad Force Majeure', description: 'Defined to include minor inconveniences, allowing seller to delay indefinitely.', severity: 'medium', status: 'new' },
-    { id: 'unilateral-termination', sectionId: 'termination', title: 'Unilateral Termination', description: 'Seller can terminate anytime for any reason, keeping all payments.', severity: 'high', status: 'new' },
-    { id: 'arbitration-clause', sectionId: 'dispute', title: 'Arbitration Clause', description: 'Disputes resolved in seller\'s chosen location, costs borne by buyer if seller wins.', severity: 'medium', status: 'new' },
-    { id: 'data-sharing', sectionId: 'confidentiality', title: 'Data Sharing', description: 'Seller can use buyer\'s proprietary information for marketing without consent.', severity: 'high', status: 'new' },
-    { id: 'ip-transfer', sectionId: 'ip', title: 'IP Transfer', description: 'All intellectual property developed during contract becomes seller\'s property.', severity: 'high', status: 'new' },
-    { id: 'assignment-rights', sectionId: 'misc', title: 'Assignment Rights', description: 'Seller can assign contract to any third party without buyer\'s approval.', severity: 'medium', status: 'new' },
-    { id: 'amendment-power', sectionId: 'misc', title: 'Amendment Power', description: 'Only seller can amend terms with 30 days notice.', severity: 'low', status: 'new' }
+    { id: 'hidden-fees', sectionId: 'scope-of-work', title: 'Hidden Fees', description: 'Contract mentions "undisclosed fees and surcharges" - buyer has no idea of total cost.', severity: 'high', status: 'to-be-decided' },
+    { id: 'nonrefundable-deposits', sectionId: 'pricing', title: 'Non-refundable Deposits', description: '30% payment upon signing is non-refundable, even if contract is terminated.', severity: 'high', status: 'to-be-decided' },
+    { id: 'auto-renewal', sectionId: 'renewal', title: 'Automatic Renewal', description: 'Contract renews automatically for 5 years with 15% price increases - buyer locked in long-term.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'vague-quality', sectionId: 'quality', title: 'Vague Quality Standards', description: 'Quality "may vary based on market availability" - no guaranteed standards.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'waived-inspection', sectionId: 'quality', title: 'Waived Inspection Rights', description: 'Buyer cannot inspect goods before acceptance, must accept whatever is delivered.', severity: 'high', status: 'to-be-decided' },
+    { id: 'force-majeure', sectionId: 'force-majeure', title: 'Broad Force Majeure', description: 'Defined to include minor inconveniences, allowing seller to delay indefinitely.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'unilateral-termination', sectionId: 'termination', title: 'Unilateral Termination', description: 'Seller can terminate anytime for any reason, keeping all payments.', severity: 'high', status: 'to-be-decided' },
+    { id: 'arbitration-clause', sectionId: 'dispute', title: 'Arbitration Clause', description: 'Disputes resolved in seller\'s chosen location, costs borne by buyer if seller wins.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'data-sharing', sectionId: 'confidentiality', title: 'Data Sharing', description: 'Seller can use buyer\'s proprietary information for marketing without consent.', severity: 'high', status: 'to-be-decided' },
+    { id: 'ip-transfer', sectionId: 'ip', title: 'IP Transfer', description: 'All intellectual property developed during contract becomes seller\'s property.', severity: 'high', status: 'to-be-decided' },
+    { id: 'assignment-rights', sectionId: 'misc', title: 'Assignment Rights', description: 'Seller can assign contract to any third party without buyer\'s approval.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'amendment-power', sectionId: 'misc', title: 'Amendment Power', description: 'Only seller can amend terms with 30 days notice.', severity: 'low', status: 'to-be-decided' }
   ])
 
   const [negotiationItems, setNegotiationItems] = React.useState([
-    { id: 'cost-reduction', sectionId: 'pricing', title: 'Cost Reduction Opportunity', description: 'Negotiate 15-20% reduction in base price by leveraging competitive bids and volume commitments.', severity: 'high', status: 'new' },
-    { id: 'payment-terms', sectionId: 'pricing', title: 'Payment Terms Improvement', description: 'Extend payment terms from 30 days to 60-90 days to improve cash flow and reduce financing costs.', severity: 'medium', status: 'new' },
-    { id: 'volume-discounts', sectionId: 'pricing', title: 'Volume Discount Negotiation', description: 'Secure 5-10% additional discount by committing to 20% higher volume over 3-year period.', severity: 'medium', status: 'new' },
-    { id: 'service-levels', sectionId: 'quality', title: 'Service Level Enhancement', description: 'Negotiate guaranteed 99.5% uptime SLA with financial penalties for non-compliance.', severity: 'high', status: 'new' },
-    { id: 'warranty-extension', sectionId: 'warranties', title: 'Extended Warranty Terms', description: 'Extend warranty period from 30 days to 12 months and include on-site support.', severity: 'medium', status: 'new' },
-    { id: 'termination-rights', sectionId: 'termination', title: 'Termination Rights', description: 'Negotiate mutual termination rights with 60-day notice period and fair compensation terms.', severity: 'high', status: 'new' },
-    { id: 'performance-bonuses', sectionId: 'pricing', title: 'Performance-Based Incentives', description: 'Add performance bonuses for early delivery and quality excellence (up to 5% of contract value).', severity: 'low', status: 'new' },
-    { id: 'training-support', sectionId: 'scope-of-work', title: 'Training & Support Inclusion', description: 'Negotiate complimentary training sessions and ongoing technical support at no additional cost.', severity: 'low', status: 'new' },
-    { id: 'flexibility-clause', sectionId: 'misc', title: 'Contract Flexibility', description: 'Add clauses allowing scope adjustments within 15% without price changes.', severity: 'medium', status: 'new' },
-    { id: 'benchmarking-rights', sectionId: 'misc', title: 'Benchmarking Rights', description: 'Secure right to benchmark pricing against market rates annually with adjustment rights.', severity: 'low', status: 'new' }
+    { id: 'cost-reduction', sectionId: 'pricing', title: 'Cost Reduction Opportunity', description: 'Negotiate 15-20% reduction in base price by leveraging competitive bids and volume commitments.', severity: 'high', status: 'to-be-decided' },
+    { id: 'payment-terms', sectionId: 'pricing', title: 'Payment Terms Improvement', description: 'Extend payment terms from 30 days to 60-90 days to improve cash flow and reduce financing costs.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'volume-discounts', sectionId: 'pricing', title: 'Volume Discount Negotiation', description: 'Secure 5-10% additional discount by committing to 20% higher volume over 3-year period.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'service-levels', sectionId: 'quality', title: 'Service Level Enhancement', description: 'Negotiate guaranteed 99.5% uptime SLA with financial penalties for non-compliance.', severity: 'high', status: 'to-be-decided' },
+    { id: 'warranty-extension', sectionId: 'warranties', title: 'Extended Warranty Terms', description: 'Extend warranty period from 30 days to 12 months and include on-site support.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'termination-rights', sectionId: 'termination', title: 'Termination Rights', description: 'Negotiate mutual termination rights with 60-day notice period and fair compensation terms.', severity: 'high', status: 'to-be-decided' },
+    { id: 'performance-bonuses', sectionId: 'pricing', title: 'Performance-Based Incentives', description: 'Add performance bonuses for early delivery and quality excellence (up to 5% of contract value).', severity: 'low', status: 'to-be-decided' },
+    { id: 'training-support', sectionId: 'scope-of-work', title: 'Training & Support Inclusion', description: 'Negotiate complimentary training sessions and ongoing technical support at no additional cost.', severity: 'low', status: 'to-be-decided' },
+    { id: 'flexibility-clause', sectionId: 'misc', title: 'Contract Flexibility', description: 'Add clauses allowing scope adjustments within 15% without price changes.', severity: 'medium', status: 'to-be-decided' },
+    { id: 'benchmarking-rights', sectionId: 'misc', title: 'Benchmarking Rights', description: 'Secure right to benchmark pricing against market rates annually with adjustment rights.', severity: 'low', status: 'to-be-decided' }
   ])
   const currentReviewItems = analyzerType === 'negotiation' ? negotiationItems : reviewItems;
   
@@ -67,8 +67,8 @@ function App() {
         // Reset AI review state for uploaded contract
         setSelectedSection(null);
         setShowRecommendation(false);
-        setReviewItems(prev => prev.map(item => ({ ...item, status: 'new' })));
-        setNegotiationItems(prev => prev.map(item => ({ ...item, status: 'new' })));
+        setReviewItems(prev => prev.map(item => ({ ...item, status: 'to-be-decided' })));
+        setNegotiationItems(prev => prev.map(item => ({ ...item, status: 'to-be-decided' })));
         // Reset AI assistant chat
         if (chatResetRef.current) {
           chatResetRef.current();
@@ -315,15 +315,15 @@ function App() {
                             padding: '1px 4px',
                             border: '1px solid #ccc',
                             borderRadius: '3px',
-                            backgroundColor: item.status === 'resolved' ? '#e8f5e8' : item.status === 'closed' ? '#f5f5f5' : item.status === 'new' ? '#f2f9feff' : '#fff3cd',
-                            color: item.status === 'resolved' ? '#2e7d32' : item.status === 'closed' ? '#666' : item.status === 'new' ? '#1565c0' : '#856404',
+                            backgroundColor: item.status === 'accepted' ? '#e8f5e8' : item.status === 'red-line' ? '#ffebee' : item.status === 'to-be-decided' ? '#f2f9feff' : '#fff3cd',
+                            color: item.status === 'accepted' ? '#2e7d32' : item.status === 'red-line' ? '#c62828' : item.status === 'to-be-decided' ? '#1565c0' : '#856404',
                             height: '19px',
                             lineHeight: '14px'
                           }}
                         >
-                          <option value="new">New</option>
-                          <option value="resolved">Resolved</option>
-                          <option value="closed">Won't fix</option>
+                          <option value="to-be-decided">To Be Decided</option>
+                          <option value="red-line">Red Line</option>
+                          <option value="accepted">Accepted</option>
                         </select>
                       </div>
                       <button 
