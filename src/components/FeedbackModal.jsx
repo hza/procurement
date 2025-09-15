@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { FaTimes, FaStar } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 
 const FeedbackModal = ({ isOpen, onClose }) => {
-  const [rating, setRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
-  const [feedback, setFeedback] = useState('');
-  const [feedbackType, setFeedbackType] = useState('general');
+  const [feedback, setFeedback] = useState(`Please help us improve the contract analysis tool by answering these questions:
+
+1. What type of contracts do you most frequently analyze?
+   
+2. Which features do you find most useful?
+   
+3. What features would you like to see added?
+   
+4. Did you encounter any issues or bugs?
+   
+5. Any other suggestions or feedback?
+
+Thank you for your input!`);
 
   // Add ESC key support
   useEffect(() => {
@@ -28,16 +37,24 @@ const FeedbackModal = ({ isOpen, onClose }) => {
     e.preventDefault();
     // Here you would typically send the feedback to your backend
     console.log('Feedback submitted:', {
-      rating,
-      feedbackType,
       feedback,
       timestamp: new Date().toISOString()
     });
 
     // Reset form and close modal
-    setRating(0);
-    setFeedback('');
-    setFeedbackType('general');
+    setFeedback(`Please help us improve the contract analysis tool by answering these questions:
+
+1. What type of contracts do you most frequently analyze?
+   
+2. Which features do you find most useful?
+   
+3. What features would you like to see added?
+   
+4. Did you encounter any issues or bugs?
+   
+5. Any other suggestions or feedback?
+
+Thank you for your input!`);
     onClose();
 
     // Show success message (you could replace this with a proper toast notification)
@@ -58,44 +75,13 @@ const FeedbackModal = ({ isOpen, onClose }) => {
 
         <form onSubmit={handleSubmit} className="feedback-form">
           <div className="feedback-section">
-            <label>How would you rate your experience?</label>
-            <div className="rating-stars">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <FaStar
-                  key={star}
-                  className={`star ${star <= (hoverRating || rating) ? 'active' : ''}`}
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHoverRating(star)}
-                  onMouseLeave={() => setHoverRating(0)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="feedback-section">
-            <label htmlFor="feedback-type">Feedback Type</label>
-            <select
-              id="feedback-type"
-              value={feedbackType}
-              onChange={(e) => setFeedbackType(e.target.value)}
-              className="feedback-select"
-            >
-              <option value="general">General Feedback</option>
-              <option value="bug">Bug Report</option>
-              <option value="feature">Feature Request</option>
-              <option value="usability">Usability Issue</option>
-              <option value="performance">Performance Issue</option>
-            </select>
-          </div>
-
-          <div className="feedback-section">
             <label htmlFor="feedback-text">Your Feedback</label>
             <textarea
               id="feedback-text"
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              placeholder="Tell us what you think... What worked well? What could be improved?"
-              rows={4}
+              placeholder="Please answer the questions below..."
+              rows={8}
               className="feedback-textarea"
               required
             />
