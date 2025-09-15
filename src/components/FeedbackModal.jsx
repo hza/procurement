@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 const FeedbackModal = ({ isOpen, onClose }) => {
@@ -16,6 +16,8 @@ const FeedbackModal = ({ isOpen, onClose }) => {
 
 Thank you for your input!`);
 
+  const textareaRef = useRef(null);
+
   // Add ESC key support
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -32,6 +34,16 @@ Thank you for your input!`);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
+
+  // Auto-focus textarea when modal opens
+  useEffect(() => {
+    if (isOpen && textareaRef.current) {
+      // Small delay to ensure the modal is fully rendered
+      setTimeout(() => {
+        textareaRef.current.focus();
+      }, 100);
+    }
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,6 +117,7 @@ Thank you for your input!`);
           >
             <label htmlFor="feedback-text">Your Feedback</label>
             <textarea
+              ref={textareaRef}
               id="feedback-text"
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}

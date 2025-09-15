@@ -66,5 +66,4 @@ export const defaultContractContent = `
       <h2>14. Signatures</h2>
       <p>Buyer: ___________________________ Date: _______________</p>
       <p>Seller: ___________________________ Date: _______________</p>
-      <p><em>Warning: This contract contains numerous one-sided provisions that heavily favor the Seller. Buyer should seek legal counsel before signing.</em></p>
     `;
