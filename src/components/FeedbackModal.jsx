@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { FaTimes } from 'react-icons/fa';
 
 const FeedbackModal = ({ isOpen, onClose }) => {
-  const [feedback, setFeedback] = useState(`Please help us improve the contract analysis tool by answering these questions:
+  const [feedback, setFeedback] = useState(`Please help us improve the application by answering these questions:
 
 1. What type of contracts do you most frequently analyze?
-   
+
 2. Which features do you find most useful?
-   
+
 3. What features would you like to see added?
-   
+
 4. Did you encounter any issues or bugs?
-   
+
 5. Any other suggestions or feedback?
 
 Thank you for your input!`);
@@ -42,16 +42,16 @@ Thank you for your input!`);
     });
 
     // Reset form and close modal
-    setFeedback(`Please help us improve the contract analysis tool by answering these questions:
+    setFeedback(`Please help us improve the application by answering these questions:
 
 1. What type of contracts do you most frequently analyze?
-   
+
 2. Which features do you find most useful?
-   
+
 3. What features would you like to see added?
-   
+
 4. Did you encounter any issues or bugs?
-   
+
 5. Any other suggestions or feedback?
 
 Thank you for your input!`);
@@ -65,7 +65,18 @@ Thank you for your input!`);
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content feedback-modal" onClick={(e) => e.stopPropagation()}>
+      <div 
+        className="modal-content feedback-modal" 
+        onClick={(e) => e.stopPropagation()}
+        style={{ 
+          width: '600px', 
+          maxWidth: '90vw', 
+          minHeight: '500px',
+          maxHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         <div className="modal-header">
           <h2>Share Your Feedback</h2>
           <button onClick={onClose} className="modal-close">
@@ -73,8 +84,25 @@ Thank you for your input!`);
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="feedback-form">
-          <div className="feedback-section">
+        <form 
+          onSubmit={handleSubmit} 
+          className="feedback-form"
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '20px',
+            gap: '20px'
+          }}
+        >
+          <div 
+            className="feedback-section"
+            style={{
+              flex: 1,
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
             <label htmlFor="feedback-text">Your Feedback</label>
             <textarea
               id="feedback-text"
@@ -83,11 +111,30 @@ Thank you for your input!`);
               placeholder="Please answer the questions below..."
               rows={8}
               className="feedback-textarea"
+              style={{
+                border: '2px solid #ddd',
+                borderRadius: '6px',
+                padding: '12px',
+                fontSize: '14px',
+                lineHeight: '1.5',
+                width: '100%',
+                resize: 'vertical',
+                flex: 1,
+                minHeight: '300px'
+              }}
               required
             />
           </div>
 
-          <div className="modal-actions">
+          <div 
+            className="modal-actions"
+            style={{
+              display: 'flex',
+              gap: '12px',
+              justifyContent: 'flex-end',
+              marginTop: 'auto'
+            }}
+          >
             <button type="button" onClick={onClose} className="btn-secondary">
               Cancel
             </button>
