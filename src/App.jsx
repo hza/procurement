@@ -212,15 +212,10 @@ function App() {
     console.log('Refreshing AI review...');
   }
 
-  const handleStatusChange = (itemId, newStatus) => {
-    if (analyzerType === 'negotiation') {
-      setNegotiationItems(prev => prev.map(item => 
-        item.id === itemId ? { ...item, status: newStatus } : item
-      ));
-    } else {
-      setReviewItems(prev => prev.map(item => 
-        item.id === itemId ? { ...item, status: newStatus } : item
-      ));
+  const handleSeverityClick = (severity, item) => {
+    if (chatInputRef.current) {
+      const explainText = `Please explain why this issue "${item.title}" has a ${severity} severity level. What makes it ${severity} priority?`;
+      chatInputRef.current(explainText);
     }
   }
 
@@ -286,6 +281,7 @@ function App() {
                     <div style={{ display: 'flex', alignItems: 'center', marginTop: '6px', marginBottom: '2px', justifyContent: 'space-between' }}>
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <span 
+                          onClick={() => handleSeverityClick(item.severity, item)}
                           style={{
                             padding: '1px 4px',
                             borderRadius: '3px',
@@ -298,7 +294,8 @@ function App() {
                             height: '16px',
                             lineHeight: '14px',
                             display: 'inline-flex',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            cursor: 'pointer'
                           }}
                         >
                           {item.severity}
