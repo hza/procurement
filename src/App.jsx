@@ -219,6 +219,18 @@ function App() {
     }
   }
 
+  const handleStatusChange = (itemId, newStatus) => {
+    if (analyzerType === 'negotiation') {
+      setNegotiationItems(prev => prev.map(item => 
+        item.id === itemId ? { ...item, status: newStatus } : item
+      ));
+    } else {
+      setReviewItems(prev => prev.map(item => 
+        item.id === itemId ? { ...item, status: newStatus } : item
+      ));
+    }
+  }
+
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header 
