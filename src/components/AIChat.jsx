@@ -89,7 +89,7 @@ const AIChat = ({ setInputText, setResetChat, analyzerType }) => {
         setIsThinking(false);
         const aiResponse = {
           id: messages.length + 2,
-          text: "It looks like we've run out of tokens for this session. To continue chatting, please purchase additional credits from OpenAI.",
+          text: "It looks like we've run out of tokens. To continue chatting, please purchase additional credits.",
           sender: 'ai',
           timestamp: new Date()
         };

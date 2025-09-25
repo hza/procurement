@@ -282,6 +282,7 @@ function App() {
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <span 
                           onClick={() => handleSeverityClick(item.severity, item)}
+                          className="severity-label"
                           style={{
                             padding: '1px 4px',
                             borderRadius: '3px',
@@ -328,6 +329,7 @@ function App() {
                           e.stopPropagation();
                           handleFix(item.id);
                         }}
+                        className="analyze-button"
                         style={{
                           padding: '1px 4px',
                           fontSize: '9px',

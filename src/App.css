@@ -1910,3 +1910,25 @@
 .modal-close:hover {
   background-color: rgba(9, 30, 66, 0.08);
 }
+
+/* Severity label hover effect */
+.severity-label {
+  transition: all 0.2s ease;
+}
+
+.severity-label:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* Analyze button hover effect */
+.analyze-button {
+  transition: all 0.2s ease;
+}
+
+.analyze-button:hover {
+  background-color: #0052a3 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.3);
+}
